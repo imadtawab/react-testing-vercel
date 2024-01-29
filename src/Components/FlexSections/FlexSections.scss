@@ -1,0 +1,16 @@
+.FlexSections{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    &.wrap{
+        flex-wrap: wrap;
+    }
+    &.column{
+        flex-direction: column;
+    }
+    &.alignItems-end{
+        align-items: end !important;
+    }
+}

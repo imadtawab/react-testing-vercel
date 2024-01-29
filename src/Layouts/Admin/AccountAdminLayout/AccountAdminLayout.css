@@ -1,0 +1,65 @@
+.AccountAdminLayout {
+  background-color: #f5f5f5;
+}
+.AccountAdminLayout .header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px var(--pd);
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  background-color: #fff;
+}
+.AccountAdminLayout .header .logo {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+.AccountAdminLayout .header .logo svg {
+  width: 30px;
+  height: auto;
+}
+.AccountAdminLayout .header .logo h1 {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--main-color);
+}
+.AccountAdminLayout .header ul.navbar {
+  display: flex;
+  gap: 20px;
+}
+.AccountAdminLayout .header ul.navbar li {
+  color: red;
+}
+.AccountAdminLayout .header ul.navbar li a {
+  font-weight: bold;
+  color: var(--main-color);
+}
+.AccountAdminLayout > .unique-content {
+  min-height: calc(100vh - 150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+}
+.AccountAdminLayout > .unique-content .content-parent {
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 6px 12px 60px rgba(0, 0, 0, 0.2);
+  min-width: 450px;
+}
+@media (max-width: 500px) {
+  .AccountAdminLayout > .unique-content .content-parent {
+    width: 88%;
+    min-width: initial;
+    padding: 30px;
+  }
+}
+.AccountAdminLayout .footer {
+  padding: var(--pd);
+  color: #666;
+  border-top: 2px solid #e3e2e2;
+  text-align: center;
+}/*# sourceMappingURL=AccountAdminLayout.css.map */

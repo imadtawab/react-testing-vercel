@@ -1,0 +1,6 @@
+.Dashboard .parent-dashboard {
+  display: flex;
+  gap: var(--pd);
+  flex-wrap: wrap;
+  max-width: 100%;
+}/*# sourceMappingURL=Dashboard.css.map */

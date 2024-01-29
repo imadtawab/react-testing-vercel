@@ -1,0 +1,61 @@
+.InputBox, .TextAreaBox, .SelectBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  width: 100%;
+  flex: 1;
+}
+.InputBox label, .TextAreaBox label, .SelectBox label {
+  color: #6b7280;
+  font-weight: bold;
+  font-size: 15px;
+}
+.InputBox label .required, .TextAreaBox label .required, .SelectBox label .required {
+  display: inline;
+  color: red;
+  font-size: 18px;
+}
+.InputBox.error input, .InputBox.error textarea, .InputBox.error select, .TextAreaBox.error input, .TextAreaBox.error textarea, .TextAreaBox.error select, .SelectBox.error input, .SelectBox.error textarea, .SelectBox.error select {
+  box-shadow: 0px 0px 0px 3px rgba(255, 57, 53, 0.6392156863) !important;
+  border-color: rgba(239, 83, 80, 0.5411764706);
+}
+.InputBox.mx_width, .TextAreaBox.mx_width, .SelectBox.mx_width {
+  max-width: 500px;
+  margin: auto;
+}
+.InputBox input, .InputBox textarea, .InputBox select, .TextAreaBox input, .TextAreaBox textarea, .TextAreaBox select, .SelectBox input, .SelectBox textarea, .SelectBox select {
+  outline: none;
+  border: 1px solid #c9cccf;
+  padding: 10px;
+  color: #222;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.InputBox input::-moz-placeholder, .InputBox textarea::-moz-placeholder, .InputBox select::-moz-placeholder, .TextAreaBox input::-moz-placeholder, .TextAreaBox textarea::-moz-placeholder, .TextAreaBox select::-moz-placeholder, .SelectBox input::-moz-placeholder, .SelectBox textarea::-moz-placeholder, .SelectBox select::-moz-placeholder {
+  color: rgba(113, 113, 113, 0.7803921569);
+}
+.InputBox input::placeholder, .InputBox textarea::placeholder, .InputBox select::placeholder, .TextAreaBox input::placeholder, .TextAreaBox textarea::placeholder, .TextAreaBox select::placeholder, .SelectBox input::placeholder, .SelectBox textarea::placeholder, .SelectBox select::placeholder {
+  color: rgba(113, 113, 113, 0.7803921569);
+}
+.InputBox input:focus, .InputBox textarea:focus, .InputBox select:focus, .TextAreaBox input:focus, .TextAreaBox textarea:focus, .TextAreaBox select:focus, .SelectBox input:focus, .SelectBox textarea:focus, .SelectBox select:focus {
+  box-shadow: 0px 0px 0px 3px rgba(69, 143, 255, 0.7294117647);
+}
+.InputBox .error-span, .TextAreaBox .error-span, .SelectBox .error-span {
+  color: #EF5350;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  position: relative;
+  top: -5px;
+}
+.InputBox textarea, .TextAreaBox textarea, .SelectBox textarea {
+  resize: vertical;
+  height: 100px;
+}
+.InputBox select option, .TextAreaBox select option, .SelectBox select option {
+  padding: 1px;
+}/*# sourceMappingURL=InputBox.css.map */

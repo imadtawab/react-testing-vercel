@@ -1,0 +1,123 @@
+.SecondCard{
+    // .box-card{
+    background: #fff;
+    box-shadow: 0 0 10px #b7b7b7;
+    border-radius: 5px;
+    position: fixed;
+    z-index: 100000000000000;
+    right: 20px;
+    top: 100px;
+    padding: 5px 20px;
+    width: 350px;
+    transform: translateX(1000px);
+    animation: secondCard .5s ease 1 forwards;
+    @keyframes secondCard {
+        0%{
+            transform: translateX(1000px);
+        }
+        40%{
+            transform: translateX(-30px);
+        }
+        60%{
+            transform: translateX(30px);
+        }
+        100%{
+            transform: translateX(0);
+        }
+    }
+    &.close-card{
+        animation: closeSecondCard .5s ease 1 forwards;
+        @keyframes closeSecondCard {
+            0%{
+                transform: translateX(0);
+            }
+            40%{
+                transform: translateX(-30px);
+            }
+            100%{
+                transform: translateX(1000px);
+            }
+        }
+    }
+        .head-card{
+            color: #3f3f3f;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    align-items: center;
+            .title{
+                text-transform: uppercase;
+                font-size: 13px;
+            }
+            .close{
+                font-size: 30px;
+                display: grid;
+                place-content: center;
+            }
+        }
+        .content-card{
+            .product{
+                display: flex;
+                justify-content: space-between;
+                gap: 15px;
+                margin-top: 10px;
+                .info{
+                    display: flex;
+                    gap: 2px;
+                    .image{
+                        width: 45px;
+                        height: 45px;
+                        display: grid;
+                        place-content: center;
+                        img{
+                            max-height: 45px;
+                        }
+                    }
+                    .info-text{
+                        .name{
+                            font-size: 15px;
+                            font-weight: 600;
+                            color: #444;
+                            text-transform: capitalize;
+                        }
+                        .variant{
+                            color: var(--danger-color);
+                            text-transform: uppercase;
+                            font-size: 12px;
+                            padding-top: 5px;
+                        }
+                    }
+                }
+                .quantite{
+                    font-size: 14px;
+                    text-wrap: nowrap;
+                }
+            }
+        }
+        .bottom-card{
+            .view-card{
+                margin-top: 15px;
+                padding: 12px;
+                text-align: center;
+                color: #3a3a3a;
+                background-color: #fff;
+                border: 1px solid #3a3a3a;
+                border-radius: 2px;
+                font-size: 14px;
+                cursor: pointer;
+                text-transform: uppercase;
+                display: block;
+            }
+            .continue-shopping{
+                margin: 15px;
+                text-align: center;
+                color: #4b494b;
+                font-size: 14px;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    // }
+}

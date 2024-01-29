@@ -1,0 +1,31 @@
+.Settings {
+  opacity: 1;
+}
+.Settings .header-settings {
+  margin-bottom: 30px;
+}
+.Settings .header-settings ul {
+  display: flex;
+  justify-content: start;
+  border-bottom: 1px solid #ddd;
+  overflow: auto;
+}
+.Settings .header-settings ul::-webkit-scrollbar {
+  height: 0;
+}
+.Settings .header-settings ul li {
+  color: #6b7280;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+}
+.Settings .header-settings ul li a {
+  color: inherit;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 15px 20px;
+  display: block;
+}
+.Settings .header-settings ul li:has(a.active) {
+  border-color: #0284c7;
+  color: #0284c7;
+}/*# sourceMappingURL=Settings.css.map */

@@ -1,0 +1,18 @@
+.AdminLayout {
+  display: flex;
+}
+.AdminLayout .main-container {
+  flex: 1;
+  transition: margin 0.3s;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+@media (min-width: 650px) {
+  .AdminLayout .main-container {
+    margin-left: 70px;
+  }
+  .AdminLayout .main-container.sideBarShow {
+    margin-left: 250px;
+  }
+}/*# sourceMappingURL=AdminLayout.css.map */

@@ -1,0 +1,258 @@
+.OrderDetails {
+  display: flex;
+  -moz-column-gap: var(--pd);
+       column-gap: var(--pd);
+  flex-wrap: wrap;
+}
+@media (max-width: 950px) {
+  .OrderDetails {
+    flex-direction: column;
+  }
+}
+.OrderDetails .left-section {
+  flex: 5;
+  max-width: 100%;
+}
+.OrderDetails .right-section {
+  flex: 2;
+  min-width: 250px;
+}
+.OrderDetails .SectionStructure {
+  border: none;
+}
+.OrderDetails .order-variant-table {
+  overflow: auto;
+}
+.OrderDetails .order-variant-table table tr {
+  border: none;
+}
+.OrderDetails .order-variant-table table tr .product-name .img {
+  width: 70px;
+}
+.OrderDetails .order-variant-table table tr .product-name .img img {
+  max-width: 70px;
+  max-height: 70px;
+}
+.OrderDetails .order-variant-table table tr .product-name .info .variants {
+  color: var(--danger-color);
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.OrderDetails .order-variant-table table tr.sub-product-head .product-name .img {
+  place-content: flex-start;
+  height: 20px;
+}
+.OrderDetails .order-variant-table table tr.sub-product-head td:first-child {
+  padding-bottom: 0;
+}
+.OrderDetails .order-variant-table table tr.sub-product td {
+  padding: 0;
+}
+.OrderDetails .order-variant-table table tr.sub-product td:first-child {
+  padding: 0;
+  padding-left: 90px;
+}
+.OrderDetails .order-variant-table table tr.sub-product td:first-child .sub-variants {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.OrderDetails .order-variant-table table tr.sub-product td:first-child .sub-variants .sub-image {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+}
+.OrderDetails .order-variant-table table tr.sub-product td:first-child .sub-variants .sub-image img {
+  max-width: 40px;
+  max-height: 40px;
+}
+.OrderDetails .order-variant-table table tr.sub-product td:first-child .sub-variants .variants {
+  color: var(--danger-color);
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.OrderDetails .order-variant-table table tr:not(.sub-product) {
+  border-top: 1px solid #dddddd;
+}
+.OrderDetails .order-variant-table table tr:first-child {
+  border: none;
+}
+.OrderDetails .order-variant-table table tr th {
+  text-align: inherit;
+  font-size: 12px;
+  color: var(--secondary-color);
+  text-transform: uppercase;
+}
+.OrderDetails .order-variant-table table tr th:first-child {
+  text-align: initial !important;
+}
+.OrderDetails .order-variant-table table tr th, .OrderDetails .order-variant-table table tr td {
+  padding: 16px 10px;
+  text-align: center;
+}
+.OrderDetails .payment-summary .box {
+  display: flex;
+  justify-content: space-between;
+}
+.OrderDetails .payment-summary .box:not(:last-child) {
+  margin-bottom: 10px;
+}
+.OrderDetails .payment-summary .box .price {
+  font-family: monospace;
+  font-weight: bold;
+  color: #1c9521;
+  font-size: 16px;
+}
+.OrderDetails .payment-summary .box .price span {
+  text-transform: uppercase;
+  color: initial;
+  margin-left: 4px;
+  font-size: 13px;
+}
+.OrderDetails .payment-summary .box.last {
+  border-top: 2px solid #eee;
+  padding-top: 15px;
+}
+.OrderDetails .customer-notes p {
+  color: #555;
+}
+.OrderDetails .customer-information .box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: flex-start;
+  padding: 13px 10px;
+}
+.OrderDetails .customer-information .box:not(:last-child) {
+  border-bottom: 2px solid #eee;
+}
+.OrderDetails .customer-information .box:last-child {
+  padding-bottom: 0;
+}
+.OrderDetails .customer-information .box div, .OrderDetails .customer-information .box a {
+  color: #555;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.OrderDetails .status-timeline .timeline {
+  border-left: 2px solid #eee;
+  padding-left: 20px;
+  margin-left: 20px;
+}
+.OrderDetails .status-timeline .timeline .status {
+  position: relative;
+  text-transform: capitalize;
+  margin-bottom: 15px;
+}
+.OrderDetails .status-timeline .timeline .status:hover .delete {
+  visibility: visible;
+  opacity: 1;
+}
+.OrderDetails .status-timeline .timeline .status:before {
+  content: "";
+  background: var(--status-color);
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -28px;
+}
+.OrderDetails .status-timeline .timeline .status h6 {
+  color: var(--status-color);
+  font-size: 15px;
+}
+.OrderDetails .status-timeline .timeline .status p {
+  color: #555;
+  font-size: 13px;
+  font-weight: 600;
+}
+.OrderDetails .status-timeline .timeline .status .delete {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-content: center;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.OrderDetails .status-timeline .status-select {
+  width: 100%;
+  text-align: end;
+  padding-top: 10px;
+}
+.OrderDetails .status-timeline .status-select select {
+  background: var(--main-color);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  padding: 8px;
+  border-radius: 4px;
+  /* background: none; */
+  /* border: 2px solid var(--main-color); */
+}
+.OrderDetails .status-timeline .status-select select option {
+  background-color: #f5f5f5;
+  color: #222;
+}
+.OrderDetails .status-controlls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 22px;
+  color: var(--main-color);
+}
+.OrderDetails .status-controlls .back, .OrderDetails .status-controlls .next {
+  position: relative;
+}
+.OrderDetails .status-controlls .back:not(.disabled):hover::before, .OrderDetails .status-controlls .back:not(.disabled):hover::after, .OrderDetails .status-controlls .next:not(.disabled):hover::before, .OrderDetails .status-controlls .next:not(.disabled):hover::after {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.OrderDetails .status-controlls .back::before, .OrderDetails .status-controlls .back::after, .OrderDetails .status-controlls .next::before, .OrderDetails .status-controlls .next::after {
+  position: absolute;
+  z-index: 1111;
+  transform: translateX(-50%);
+  left: 50%;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  text-transform: capitalize;
+}
+.OrderDetails .status-controlls .back::before, .OrderDetails .status-controlls .next::before {
+  content: attr(data-status_name);
+  background: var(--main-color);
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  top: -35px;
+}
+.OrderDetails .status-controlls .back::after, .OrderDetails .status-controlls .next::after {
+  content: "";
+  top: -9px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--main-color) transparent transparent;
+}
+.OrderDetails .status-controlls svg {
+  cursor: pointer;
+}
+.OrderDetails .status-controlls svg.disabled {
+  opacity: 0.5;
+  cursor: no-drop;
+}
+.OrderDetails .personal-notes ul {
+  margin-left: var(--pd);
+}
+.OrderDetails .personal-notes ul li {
+  list-style: initial;
+}/*# sourceMappingURL=OrderDetails.css.map */

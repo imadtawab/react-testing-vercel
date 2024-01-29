@@ -1,0 +1,22 @@
+.UserProfile .couverture-picture {
+  background-image: url("https://i.pinimg.com/736x/87/e9/65/87e965b3d0ea4b004d9d89463622fe25.jpg");
+  height: 250px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin-bottom: 500px;
+}
+.UserProfile .couverture-picture .avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  bottom: -100px;
+  left: 40px;
+}
+.UserProfile .couverture-picture .avatar img {
+  width: 200px;
+  height: 200px;
+}/*# sourceMappingURL=UserProfile.css.map */

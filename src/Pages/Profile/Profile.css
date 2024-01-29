@@ -1,0 +1,41 @@
+.Profile .avatar {
+  margin: auto;
+  position: relative;
+}
+.Profile .avatar .avatar-container {
+  width: 200px;
+  height: 200px;
+  box-shadow: 0px 0px 8px 5px rgba(147, 146, 146, 0.7411764706);
+  border-radius: 50%;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.Profile .avatar .avatar-container img {
+  width: inherit;
+  height: inherit;
+}
+.Profile .avatar .add-avatar, .Profile .avatar .delete-avatar {
+  position: absolute;
+  bottom: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 30px;
+  display: grid;
+  place-content: center;
+  color: #fff;
+  box-shadow: 0px 0px 0px 3px #ffffff;
+}
+.Profile .avatar .add-avatar {
+  background-color: #01796F;
+  right: -12px;
+}
+.Profile .avatar .add-avatar input {
+  display: none;
+}
+.Profile .avatar .delete-avatar {
+  background-color: #ef4444;
+  left: -12px;
+}/*# sourceMappingURL=Profile.css.map */

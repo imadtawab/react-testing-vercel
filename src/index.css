@@ -1,0 +1,310 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+svg {
+  height: auto;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+:root {
+  --main-color:#6366f1;
+  --third-color:#75815b;
+  --second-color:#dbc0a4;
+  --main-color:#414141;
+  --pd: 20px;
+  --primary-color: #0d6efd!important;
+  --secondary-color: #6c757d!important;
+  --success-color: #198754!important;
+  --danger-color: #dc3545!important;
+  --warning-color: #ffc107!important;
+  --info-color: #0dcaf0!important;
+  --light-color: #f8f9fa!important;
+  --dark-color: #212529!important;
+  --white-color: #fff!important;
+}
+@media (max-width: 500px) {
+  :root {
+    --pd: 10px;
+  }
+}
+
+/* hhhhhhhhhhhhhhhhh */
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table thead {
+  background: #f5f3f3;
+}
+table tr {
+  border: 1px solid #dddddd;
+}
+table th {
+  opacity: 1;
+}
+table td {
+  height: 50px;
+  padding: 10px 15px;
+  text-wrap: nowrap;
+  color: #6b7290;
+  text-transform: capitalize;
+}
+table td .product-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+table td .product-name .img {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-content: center;
+}
+table td .product-name .img img {
+  max-width: 100%;
+  max-height: 50px;
+}
+table td .product-name h4 {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+table td .product-name .info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+table td .product-name .info h4 {
+  margin-bottom: 5px;
+  color: #222;
+}
+table td .product-name .info .variant {
+  font-size: 13px;
+}
+table td .product-name .info .variant span {
+  font-weight: bold;
+}
+table td .price {
+  font-family: monospace;
+  font-weight: bold;
+  color: #1c9521;
+  font-size: 16px;
+}
+table td .price span {
+  text-transform: uppercase;
+  color: initial;
+  margin-left: 4px;
+  font-size: 13px;
+}
+table td .status {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 10px;
+}
+table td .status.inStock {
+  --main-cl:#10b981 ;
+}
+table td .status.outOfStock {
+  --main-cl:#ef4444 ;
+}
+table td .status.limited {
+  --main-cl:#f5a03a;
+}
+table td .status .circle {
+  width: 10px;
+  height: 10px;
+  background: var(--main-cl);
+  border-radius: 50%;
+}
+table td .status .status-name {
+  color: var(--main-cl);
+  font-weight: 600;
+}
+table td .view {
+  font-size: 23px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+table td .published {
+  width: 50px;
+  height: 20px;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  margin: auto;
+}
+table td .published:hover {
+  opacity: 0.8;
+}
+table td .published.checked {
+  background: #10b981;
+}
+table td .published.checked .btnForClick {
+  left: 31px;
+  right: 1px;
+}
+table td .published.notChecked {
+  background: #ef4444;
+}
+table td .published.notChecked .btnForClick {
+  left: 1px;
+  right: 31px;
+}
+table td .published .btnForClick {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  background: #fff;
+  transition: all 0.3s;
+  border: 2px solid #fff;
+}
+table td .published .btnForClick.loading {
+  background: none;
+  border-left-color: transparent;
+  animation: loadingCheck 0.4s infinite linear;
+}
+@keyframes loadingCheck {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+table td .actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 20px;
+}
+table td .actions a {
+  color: inherit;
+}
+table td .actions div {
+  cursor: pointer;
+}
+table td .input input {
+  width: 70px;
+  padding: 5px 10px;
+  border: 2px solid #ddd;
+  outline: none;
+  border-radius: 5px;
+  background: #eee;
+  color: #222;
+}
+table td .input input:disabled {
+  background-color: #ddd;
+  opacity: 0.7;
+}
+
+.footer-buttons {
+  border-top: 2px solid #ddd;
+  padding-top: var(--pd);
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: var(--pd);
+  margin-top: 20px;
+}
+.footer-buttons .box {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.main-color {
+  --status-color: var(--main-color) ;
+}
+
+.pending {
+  --status-color: #20a4f3 ;
+}
+
+.confirmed {
+  --status-color: #2ec4b6 ;
+}
+
+.shipped {
+  --status-color: #ffe66d ;
+}
+
+.delivered {
+  --status-color: #F653A6 ;
+}
+
+.cancelled {
+  --status-color: #EE204E ;
+}
+
+.on_hold {
+  --status-color: #BEBFC5 ;
+}
+
+.delayed {
+  --status-color: #FF7538 ;
+}
+
+.returned {
+  --status-color: #9966CC ;
+}
+
+.actions-head {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: end;
+  flex-wrap: wrap;
+}
+@media (max-width: 500px) {
+  .actions-head {
+    justify-content: space-between;
+  }
+}
+.actions-head button select {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1111111111111111100000;
+  opacity: 0;
+  cursor: pointer;
+}
+.actions-head button select option {
+  color: #626161;
+  font-size: 15px;
+  text-align: center;
+}
+.actions-head button:disabled select {
+  cursor: no-drop;
+}/*# sourceMappingURL=index.css.map */

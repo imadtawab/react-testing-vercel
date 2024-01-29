@@ -1,0 +1,14 @@
+.AddVariants .variants {
+  display: flex;
+  flex-wrap: wrap;
+}
+.AddVariants .variants .SectionStructure {
+  flex: 1;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.AddVariants .controlls {
+  margin-bottom: var(--pd);
+  display: flex;
+  justify-content: end;
+}/*# sourceMappingURL=AddVariants.css.map */

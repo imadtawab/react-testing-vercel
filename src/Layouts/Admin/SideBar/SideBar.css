@@ -1,0 +1,124 @@
+.SideBar {
+  background: #fff;
+  max-width: 100%;
+  width: 250px;
+  transition: width 0.3s;
+  position: fixed;
+  border-right: 2px solid #eee;
+  z-index: 20;
+}
+@media (min-width: 650px) {
+  .SideBar.closed {
+    position: absolute;
+    width: 70px;
+  }
+  .SideBar.closed .logo h1 {
+    display: none;
+  }
+  .SideBar.closed .navbar-parent {
+    height: auto;
+    overflow: visible;
+  }
+  .SideBar.closed .navbar-parent:hover::-webkit-scrollbar {
+    width: 0;
+  }
+  .SideBar.closed .navbar-parent .navBar {
+    padding: 0;
+  }
+  .SideBar.closed .navbar-parent .navBar .NavSection {
+    padding: 0;
+  }
+  .SideBar.closed .navbar-parent .navBar .NavSection h5 {
+    display: none;
+  }
+  .SideBar.closed .navbar-parent .navBar .NavSection ul {
+    padding: 0;
+  }
+  .SideBar.closed .navbar-parent .navBar .NavSection ul a {
+    width: 70px;
+    height: 50px;
+    display: grid;
+    place-content: center;
+    font-size: 21px;
+    padding: 0;
+  }
+  .SideBar.closed .navbar-parent .navBar .NavSection ul a:hover::after, .SideBar.closed .navbar-parent .navBar .NavSection ul a:hover::before {
+    transform: scale(1);
+  }
+  .SideBar.closed .navbar-parent .navBar .NavSection ul a:hover::before {
+    left: 63px;
+  }
+  .SideBar.closed .navbar-parent .navBar .NavSection ul a h4 {
+    display: none;
+  }
+}
+@media (max-width: 650px) {
+  .SideBar {
+    width: 0;
+    position: fixed;
+    overflow: hidden;
+  }
+  .SideBar.closed {
+    width: 100vw;
+  }
+  .SideBar .logo-parent .close {
+    display: block !important;
+  }
+}
+.SideBar .logo-parent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--pd);
+  font-size: 30px;
+}
+.SideBar .logo-parent .close {
+  cursor: pointer;
+  display: none;
+}
+.SideBar .logo {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  padding-bottom: 5px;
+}
+.SideBar .logo svg {
+  width: 30px;
+  height: auto;
+}
+.SideBar .logo h1 {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--main-color);
+}
+.SideBar .navbar-parent {
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+.SideBar .navbar-parent:hover::-webkit-scrollbar {
+  width: 8px;
+}
+.SideBar .navbar-parent::-webkit-scrollbar {
+  width: 0px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.SideBar .navbar-parent::-webkit-scrollbar-track {
+  width: 8px;
+}
+.SideBar .navbar-parent::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 16px;
+}
+.SideBar .navbar-parent::-webkit-scrollbar-thumb:hover {
+  background: #337b58;
+}
+.SideBar .navbar-parent .navBar {
+  padding: var(--pd);
+}/*# sourceMappingURL=SideBar.css.map */

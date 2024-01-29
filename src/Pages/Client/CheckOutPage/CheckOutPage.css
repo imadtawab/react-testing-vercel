@@ -1,0 +1,310 @@
+.CheckOutPage {
+  margin-top: 15px;
+  padding: 30px 0;
+  display: flex;
+  box-shadow: 0px 5px 5px 1px #e1e1e1;
+  margin: 40px;
+  flex-wrap: wrap-reverse;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 40px;
+  position: relative;
+}
+@media (max-width: 620px) {
+  .CheckOutPage {
+    margin: 0;
+  }
+}
+.CheckOutPage .go-to-back {
+  color: #5b87d7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  padding-left: 20px;
+  cursor: pointer;
+}
+.CheckOutPage .shopping-cart, .CheckOutPage .order-summary {
+  padding: 20px;
+}
+.CheckOutPage .shopping-cart > .head, .CheckOutPage .order-summary > .head {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 23px;
+  color: var(--main-color);
+  padding: 0 0 10px;
+  margin-bottom: 14px;
+}
+.CheckOutPage .shopping-cart {
+  flex: 6;
+  border-right: 2px solid #eee;
+  overflow: auto;
+  min-width: 500px;
+}
+@media (max-width: 620px) {
+  .CheckOutPage .shopping-cart {
+    border: none;
+  }
+}
+@media (max-width: 420px) {
+  .CheckOutPage .shopping-cart {
+    min-width: 220px;
+  }
+}
+.CheckOutPage .shopping-cart .content .information-user {
+  opacity: 1;
+}
+.CheckOutPage .shopping-cart .content .information-user .box {
+  display: flex;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+.CheckOutPage .shopping-cart .content .information-user .buyOrder {
+  color: #fff;
+  background: #01796F;
+  text-align: center;
+  font-weight: 550;
+  padding: 13px;
+  text-transform: uppercase;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 20px;
+}
+.CheckOutPage .shopping-cart .content .information-user .buyOrder:hover {
+  background: #02675e;
+}
+.CheckOutPage .shopping-cart .content .information-user .buyOrder .loadingBtn {
+  align-items: center;
+  display: inline-flex;
+  text-transform: initial;
+  text-wrap: nowrap;
+  gap: 15px;
+  color: #cfcfcf;
+}
+.CheckOutPage .shopping-cart .content .information-user .buyOrder1 {
+  outline: none;
+  color: #fff;
+  background: #40c11f;
+  width: 100%;
+  padding: 18px;
+  font-size: 24px;
+  margin-top: 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.CheckOutPage .shopping-cart .content .information-user .buyOrder1:hover {
+  background: #34a019;
+}
+.CheckOutPage .shopping-cart .content table tr {
+  border: none;
+}
+.CheckOutPage .shopping-cart .content table tr.sub-product-head .product-details .image {
+  place-content: flex-start;
+  height: 20px;
+}
+.CheckOutPage .shopping-cart .content table tr.sub-product-head td:first-child {
+  padding-bottom: 0;
+}
+.CheckOutPage .shopping-cart .content table tr.sub-product td {
+  padding: 0;
+}
+.CheckOutPage .shopping-cart .content table tr.sub-product td:first-child {
+  padding: 0;
+  padding-left: 90px;
+}
+.CheckOutPage .shopping-cart .content table tr.sub-product td:first-child .sub-variants {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.CheckOutPage .shopping-cart .content table tr.sub-product td:first-child .sub-variants .sub-image {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+}
+.CheckOutPage .shopping-cart .content table tr.sub-product td:first-child .sub-variants .sub-image img {
+  max-width: 40px;
+  max-height: 40px;
+}
+.CheckOutPage .shopping-cart .content table tr:not(.sub-product) {
+  border-top: 1px solid #dddddd;
+}
+.CheckOutPage .shopping-cart .content table tr:first-child {
+  border: none;
+}
+.CheckOutPage .shopping-cart .content table tr th {
+  text-align: inherit;
+  font-size: 12px;
+  color: var(--secondary-color);
+  text-transform: uppercase;
+}
+.CheckOutPage .shopping-cart .content table tr th:first-child {
+  text-align: initial !important;
+}
+.CheckOutPage .shopping-cart .content table tr th, .CheckOutPage .shopping-cart .content table tr td {
+  padding: 16px 10px;
+  text-align: center;
+}
+.CheckOutPage .shopping-cart .content table tr td .product-details {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.CheckOutPage .shopping-cart .content table tr td .product-details .image {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-content: center;
+}
+.CheckOutPage .shopping-cart .content table tr td .product-details .image img {
+  max-height: 70px;
+  max-width: 70px;
+}
+.CheckOutPage .shopping-cart .content table tr td .product-details .info {
+  text-align: initial;
+}
+.CheckOutPage .shopping-cart .content table tr td .product-details .info .title {
+  text-wrap: wrap;
+  min-width: 140px;
+  color: var(--main-color);
+  font-weight: 500;
+}
+.CheckOutPage .shopping-cart .content table tr td .product-details .info .categorie {
+  color: var(--third-color);
+  margin: 3px 0;
+  font-weight: 500;
+  font-size: 13px;
+}
+.CheckOutPage .shopping-cart .content table tr td .product-details .info .variants {
+  color: var(--danger-color);
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.CheckOutPage .shopping-cart .content table tr td .quantite {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+.CheckOutPage .shopping-cart .content table tr td .quantite .minus, .CheckOutPage .shopping-cart .content table tr td .quantite .plus {
+  color: var(--main-color);
+  /* background: #ff8542; */
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-content: center;
+}
+.CheckOutPage .shopping-cart .content table tr td .quantite input {
+  width: 60px;
+  text-align: center;
+  padding: 5px;
+}
+.CheckOutPage .order-summary {
+  flex: 4;
+  min-width: 290px;
+}
+.CheckOutPage .order-summary .content {
+  opacity: 1;
+}
+.CheckOutPage .order-summary .content .content-head {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+.CheckOutPage .order-summary .content .content-head .box-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+.CheckOutPage .order-summary .content .content-head .box-head .title {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--main-color);
+}
+.CheckOutPage .order-summary .content .content-head .box-head .total {
+  font-family: monospace;
+  font-weight: bold;
+  color: #1c9521;
+  font-size: 16px;
+}
+.CheckOutPage .order-summary .content .content-head .box-head .total span {
+  text-transform: uppercase;
+  color: initial;
+  margin-left: 4px;
+  font-size: 13px;
+}
+.CheckOutPage .order-summary .content .product-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.CheckOutPage .order-summary .content .product-box .product-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  flex: 1;
+}
+.CheckOutPage .order-summary .content .product-box .product-info .info-image {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #eee;
+  border-radius: 3px;
+  background: rgba(238, 238, 238, 0.6196078431);
+  display: grid;
+  place-content: center;
+}
+.CheckOutPage .order-summary .content .product-box .product-info .info-image img {
+  max-height: 60px;
+}
+.CheckOutPage .order-summary .content .product-box .product-info .info-image .quantite {
+  position: absolute;
+  background: var(--main-color);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  color: #fff;
+  right: -10px;
+  top: -10px;
+}
+.CheckOutPage .order-summary .content .product-box .product-info .info-text {
+  flex: 1;
+}
+.CheckOutPage .order-summary .content .product-box .product-info .info-text h3 {
+  text-transform: capitalize;
+  color: var(--main-color);
+  font-weight: 600;
+  font-size: 15px;
+}
+.CheckOutPage .order-summary .content .product-box .product-info .info-text p {
+  color: grey;
+  text-transform: uppercase;
+  margin-top: 4px;
+  font-size: 13px;
+}
+.CheckOutPage .order-summary .content .product-box .total-price .price {
+  font-family: monospace;
+  font-weight: bold;
+  color: #1c9521;
+  font-size: 16px;
+}
+.CheckOutPage .order-summary .content .product-box .total-price .price span {
+  text-transform: uppercase;
+  color: initial;
+  margin-left: 4px;
+  font-size: 13px;
+}/*# sourceMappingURL=CheckOutPage.css.map */

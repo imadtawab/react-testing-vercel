@@ -1,0 +1,55 @@
+
+.PaginationTable {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    position: sticky;
+    left: 0;
+    .result{
+        color: #8f8f8f;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        select{
+            border: 2px solid #29a5a7;
+            color: #3b3b3b;
+            padding: 5px;
+            font-weight: bold;
+            border-radius: 7px;
+            outline: none;
+        }
+    }
+    .pagination{
+        display: flex;
+        justify-content: end;
+        gap: 10px;
+        align-items: center;
+        background: #fff;
+        .pager{
+            color: #878787;
+            width: 35px;
+            display: grid;
+            place-content: center;
+            height: 35px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            &.active{
+                background: #29a5a7;
+                color: #fff;
+            }
+            &:not(.active):hover{
+                background: #eee;
+            }
+            &.previous,&.next{
+                font-size: 25px;
+                background: #eee;
+            }
+            &.disabled{
+                opacity: .5;
+            }
+        }
+    }
+}

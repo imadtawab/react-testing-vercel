@@ -1,0 +1,22 @@
+.MasterCleanse {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 20px;
+}
+.MasterCleanse .box-master {
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+}
+.MasterCleanse .box-master .icon {
+  color: var(--main-color);
+  font-size: 40px;
+}
+.MasterCleanse .box-master .number {
+  font-size: 30px;
+  font-weight: 600;
+}
+.MasterCleanse .box-master p {
+  color: #4b5563;
+}/*# sourceMappingURL=MasterCleanse.css.map */

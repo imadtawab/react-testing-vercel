@@ -1,0 +1,18 @@
+.PageStructure {
+  min-height: calc(100vh - 72px);
+  background: rgba(245, 245, 245, 0.4705882353);
+  padding: var(--pd) calc(var(--pd) * 2);
+}
+.PageStructure .head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--pd);
+  flex-wrap: wrap;
+  gap: var(--pd);
+}
+.PageStructure .head h1 {
+  text-transform: capitalize;
+  font-size: 23px;
+  color: #222;
+}/*# sourceMappingURL=PageStructure.css.map */

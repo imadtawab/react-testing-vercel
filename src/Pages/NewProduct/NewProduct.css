@@ -1,0 +1,120 @@
+.NewProduct .left-sections-parent {
+  display: flex;
+  gap: var(--pd);
+  flex-wrap: wrap;
+}
+@media (max-width: 950px) {
+  .NewProduct .left-sections-parent {
+    flex-direction: column;
+  }
+}
+.NewProduct .left-sections {
+  flex: 5;
+}
+.NewProduct .right-sections {
+  flex: 2;
+  min-width: 250px;
+}
+.NewProduct .media label.image-manager {
+  border: 3px dashed #aaa;
+  /* padding: var(--pd); */
+  min-height: 120px;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  /* width: 200px; */
+  height: 120px;
+  position: relative;
+  margin-bottom: 30px;
+}
+.NewProduct .media label.image-manager:hover, .NewProduct .media label.image-manager:focus {
+  border-color: var(--main-color);
+}
+.NewProduct .media label.image-manager input {
+  /* display: none; */
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  opacity: 0;
+  cursor: pointer;
+}
+.NewProduct .media label.image-manager .icon {
+  text-align: center;
+  font-size: 25px;
+  color: var(--main-color);
+}
+.NewProduct .media .catalogue {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.NewProduct .media .catalogue .img {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #eee;
+  display: grid;
+  place-content: center;
+  background: #f7f7f7;
+  position: relative;
+}
+.NewProduct .media .catalogue .img .delete {
+  position: absolute;
+  right: -2px;
+  top: -2px;
+  background: red;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 0px;
+  cursor: pointer;
+}
+.NewProduct .media .catalogue .img .delete span {
+  position: relative;
+  top: -2px;
+}
+.NewProduct .media .catalogue .img .delete:hover {
+  opacity: 0.8;
+}
+.NewProduct .media .catalogue .img img {
+  max-height: 96px;
+}
+.NewProduct .right-styles .min-section {
+  width: calc(100% + var(--pd) * 2);
+  margin-left: calc(-1 * var(--pd));
+  padding: var(--pd);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.NewProduct .right-styles .min-section:not(:last-child) {
+  border-bottom: 2px solid #eee;
+}
+.NewProduct .right-styles .min-section:first-child {
+  padding-top: 0;
+}
+.NewProduct .right-styles .min-section:last-child {
+  padding-bottom: 0;
+}
+.NewProduct .right-styles .min-section h6 {
+  font-weight: normal;
+  font-size: 15px;
+}
+.NewProduct .right-styles .min-section .box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: flex-start;
+  margin-left: var(--pd);
+}
+.NewProduct .right-styles .min-section .box label, .NewProduct .right-styles .min-section .box input {
+  cursor: pointer;
+}
+.NewProduct .right-styles .min-section .box input {
+  transform: scale(1.4);
+}/*# sourceMappingURL=NewProduct.css.map */
