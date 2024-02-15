@@ -1,0 +1,69 @@
+.FilterProductsSection{
+    flex: 1 1;
+    min-width: 250px;
+    .one-section{
+        margin-bottom: 40px;
+        &.row{
+            opacity: 1;
+            ul{
+                opacity: 1;
+                li{
+                    margin-bottom: 15px;
+                    color: #7d7d7d;
+                    text-transform: uppercase;
+                    font-size: 13px;
+                    &.active{
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+        &.box{
+            opacity: 1;
+            ul{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                text-align: center;
+                gap: 5px;
+                li{
+                    border: 2px solid #d7d7d7;
+    padding: 7px 5px;
+    color: var(--dark-color);
+    border-radius: 5px;
+    &.active{
+        background: var(--dark-color);
+        color: #fff;
+        border-color: var(--dark-color);
+    }
+                }
+            }
+        }
+        &.drop-down{
+            select{
+                width: 100%;
+                border: 2px solid #d7d7d7;
+                padding: 10px 5px;
+                color: var(--dark-color);
+                border-radius: 5px;
+                font-size: 15px;
+                text-transform: capitalize;
+                outline: none;
+            }
+        }
+        h4{
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            color: var(--dark-color);
+            background: var(--dark-color);
+            background: var(--second-color);
+            padding: 12px;
+            // color: #fff;
+        }
+        ul{
+            margin: 20px;
+            li{
+                cursor: pointer;
+            }
+        }
+    }
+}

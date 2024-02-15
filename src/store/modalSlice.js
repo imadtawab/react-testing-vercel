@@ -1,5 +1,6 @@
 import { createSlice , createAsyncThunk } from "@reduxjs/toolkit"
 import { adminAPI } from "../API/axios-global"
+import ClearStates from "../utils/ClearStates"
 
 
 
@@ -34,12 +35,23 @@ const modalReducer = ( state = initState , action ) => {
     return state
 }
 
+// const clearStatesReducer = (state=initState , action) => {
+//     if(action.type === "modal/states"){
+//         console.log(state , "aaaaaaaaaaaa111" , action);
+//         return initState
+//     }
+// }
+
 // const stores = legacy_createStore(modal) ;
+const clearStatesReducer = (state=initState , action) => {
+    return ClearStates(state , initState , action)
+}
 const modalSlice = createSlice({
     name: "modal",
     initialState: initState,
     reducers: {
-        show: modalReducer
+        show: modalReducer,
+        states: clearStatesReducer
     },
 
 })

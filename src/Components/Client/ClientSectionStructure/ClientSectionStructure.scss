@@ -25,6 +25,8 @@
     > .content{
         margin-top: 40px;
         padding: 18px 40px;
-        // padding: 18px 10px;
+        @media (max-width: 800px) {
+            padding: 0px 10px;
+        }
     }
 }

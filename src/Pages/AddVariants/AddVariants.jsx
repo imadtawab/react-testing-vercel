@@ -12,6 +12,8 @@ import { addVariants } from "../../store/productsSlice";
 import { useNavigate } from "react-router";
 import { getAttributes } from "../../store/attributesSlice";
 import { current } from "@reduxjs/toolkit";
+import { GrRefresh } from "react-icons/gr";
+import CercleLoading from "../../Components/CercleLoading/CercleLoading";
 
 export default function AddVariants({
   showAddVariants,
@@ -104,6 +106,7 @@ export default function AddVariants({
     nestedLoops(arrayAttributesCheckedId, (result) => {
       output.push(result);
     });
+    console.log(productForVariants)
     function attObjectHandle(array, current = []) {
       array.forEach(attArr => {
         let variantObj = {}
@@ -363,7 +366,9 @@ export default function AddVariants({
       setArrayForChecked(type);
     }
   }, [btnIsAddVariants, productForVariants.variants]);
-
+  useEffect(() => {
+    dispatch({type: "products/states" , payload: ["addVariantsStatus"]}) 
+  }, [])
   return (
     <>
       {newProductStatus.success && (
@@ -381,29 +386,40 @@ export default function AddVariants({
       {(newProductStatus.isLoading || updateProductStatus.isLoading) && (
         <ShadowLoading />
       )}
-      <PageStructure title={"Add Variants"}>
+      <PageStructure title={"Add Variants"} personelButton={<div onClick={()=> dispatch(getAttributes())} className="refresh-attributes"><GrRefresh /></div>}>
         <div className="AddVariants">
-          <div className="variants">
-          {console.log(getAttributesStatus ,"attributes")}
-            {(getAttributesStatus.success || []).map((att) =>
-              att.publish === "true" ? (
-                <SectionStructure title={`${att.unique_name} : (${att.public_name})`}>
-                  {/* ref={colors} className="colors box-select" */}
-                  <div data-id={att._id} className="box-select">
-                    <DropDown
-                      position="relative"
-                      name="Select ..."
-                      checkboxName={att.uniqueName}
-                      array={att.values.map((a) => a)}
-                      // arrayForChecked={arrayForChecked}
-                    ></DropDown>
-                  </div>
-                </SectionStructure>
-              ) : (
-                false
-              )
-            )}
-          </div>
+        {getAttributesStatus.isLoading ? 
+                    (
+                      <CercleLoading size="l"/>
+                    ) : !getAttributesStatus.error ? (
+                      <>
+                      <div className="variants">
+                      {(getAttributesStatus.success || []).map((att) =>
+                        att.publish === "true" ? (
+                          <SectionStructure title={`${att.unique_name} : (${att.public_name})`}>
+                            {/* ref={colors} className="colors box-select" */}
+                            <div data-id={att._id} className="box-select">
+                              <DropDown
+                                position="relative"
+                                name="Select ..."
+                                checkboxName={att.uniqueName}
+                                array={att.values.map((a) => a)}
+                                // arrayForChecked={arrayForChecked}
+                              ></DropDown>
+                            </div>
+                          </SectionStructure>
+                        ) : (
+                          false
+                        )
+                      )}
+                    </div>
+                                <a target="_blank" className="add-categories" href="http://localhost:3000/admin/attributes" rel="noreferrer">+ Add Attributes</a>
+</>
+                    ) : (
+                      <>
+                      try again
+                      </>
+                    )}
           <div className="controlls">
             <Btn
               onClick={generateVariantsFunc}

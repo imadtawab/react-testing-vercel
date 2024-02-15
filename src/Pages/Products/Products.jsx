@@ -1,7 +1,7 @@
 import PageStructure from "../../Components/PageStructure/PageStructure";
 import SectionStructure from "../../Components/SectionStructure/SectionStructure";
 import "./Products.scss";
-import { BiEdit, BiLogoZoom, BiPlusCircle, BiSolidZoomIn, BiZoomIn } from "react-icons/bi";
+import { BiEdit, BiFilterAlt, BiLogoZoom, BiPlusCircle, BiSolidZoomIn, BiZoomIn } from "react-icons/bi";
 import productImg from "../../assets/profile.jpg";
 import { BsCheckLg, BsTrash, BsTrash2, BsTrash3 } from "react-icons/bs";
 import CheckBox from "../../Components/CheckBox/CheckBox";
@@ -17,12 +17,17 @@ import Btn from "../../Components/Btn/Btn";
 import EmptyErrorSection from "../../Components/EmptyErrorSection/EmptyErrorSection";
 import ModalValidation from '../../Components/ModalValidation/ModalValidation'
 import PaginationTable from "../../Components/PaginationTable/PaginationTable";
+import FlexSections from "../../Components/FlexSections/FlexSections";
+import InputBox, { SelectBox } from "../../Components/InputBox/InputBox";
+import { getCategories } from "../../store/categoriesSlice";
 
 export default function Products() {
   const dispatch = useDispatch();
   const { newProductStatus, allProducts, productsStatus ,deleteProductStatus , changeProductVisibilityStatus , updateProductStatus , addVariantsStatus , updateManyStatus_products_Status , deleteManyStatus_products_Status} = useSelector(
     (state) => state.products
   );
+  const {getCategoriesStatus} = useSelector(s => s.categories)
+  const [categories , setCategories] = useState([])
   const [itemDeletedId, setItemDeletedId] = useState([])
   
   const [itemsSelected , setItemsSelected] = useState([])
@@ -95,9 +100,21 @@ export default function Products() {
     })
   }
   useEffect(() => {
-    dispatch(products({count: 1, step: 5}));
+    dispatch(products({count: 1, step: 5})).then((docs) => {
+      if(docs.type === "products/fulfilled") {
+        setDateFilter({from:docs.payload.filterValues?.from, to:docs.payload.filterValues?.to})
+        setStatusFilter(docs.payload.filterValues?.status)
+        setVisibilityFilter(docs.payload.filterValues?.visibility)
+        setCategoryFilter(docs.payload.filterValues?.category)
+        setSearchFilter(docs.payload.filterValues?.search)
+      }
+  })
+  dispatch(getCategories())
   }, [dispatch]);
-
+  useEffect(() => {
+    console.log(getCategoriesStatus.success,55555555555555);
+    setCategories(getCategoriesStatus.success)
+  }, [getCategoriesStatus])
   const showModal = (show , nextFunc,modalInfo) => {
     const action = {
       type : "modal/show" ,
@@ -119,6 +136,74 @@ export default function Products() {
     updateManyStatus_products_Status,
     deleteManyStatus_products_Status,
      ]
+    //  filtering
+    const [activeFilter , setActiveFilter] = useState(false)
+    const [dateFilter , setDateFilter] = useState({
+      from: null,
+      to: null
+  })
+  const [statusFilter , setStatusFilter] = useState("all")
+  const [visibilityFilter , setVisibilityFilter] = useState("all")
+  const [categoryFilter , setCategoryFilter] = useState("all")
+  const [searchFilter , setSearchFilter] = useState("")
+  const filteringHandle = (e) => {
+    e.preventDefault();
+
+    let filterObject = {}
+    if(searchFilter) filterObject.search = searchFilter
+    if(statusFilter !== "all" && statusFilter) filterObject.status = statusFilter
+    if(visibilityFilter !== "all" && visibilityFilter) filterObject.visibility = visibilityFilter
+    if(categoryFilter !== "all" && categoryFilter) filterObject.category = categoryFilter
+    if(dateFilter.from) filterObject.from = dateFilter.from
+    if(dateFilter.to) filterObject.to = dateFilter.to
+    
+    let filters = ""
+    if(Object.keys(filterObject).length === 0) window.history.replaceState(null, null, window.location.pathname);
+    Object.keys(filterObject).forEach((f , i) => {
+      filters = filters + (i === 0 ? "?" : "&") + f + "=" + filterObject[f]
+  })
+    window.history.pushState(null, null, filters);
+    // return filterObject
+    // setFilterProps(filterObject)
+    console.log(productsStatus)
+    dispatch(products({count: 1, step: productsStatus.success.pagination?.step}))
+}
+  const resetForm = () => {
+    
+    let filterObject = {}
+    if(searchFilter) filterObject.search = searchFilter
+    if(statusFilter !== "all" && statusFilter) filterObject.status = statusFilter
+    if(visibilityFilter !== "all" && visibilityFilter) filterObject.visibility = visibilityFilter
+    if(categoryFilter !== "all" && categoryFilter) filterObject.category = categoryFilter
+    if(dateFilter.from) filterObject.from = dateFilter.from
+    if(dateFilter.to) filterObject.to = dateFilter.to
+
+    if(Object.keys(filterObject).length !== 0){
+      window.history.replaceState(null, null, window.location.pathname);
+      dispatch(products({count: 1, step: productsStatus.success.pagination?.step})).then((docs) => {
+        if(docs.type === "products/fulfilled") {
+        setDateFilter({from: "", to: ""})
+        setStatusFilter("all")
+        setVisibilityFilter("all")
+        setCategoryFilter("all")
+        setSearchFilter("")
+        setActiveFilter(false)
+      }
+      })
+    }
+  }
+  useEffect(() => {
+    // "newProductStatus", "allProducts", "productsStatus" ,
+    dispatch({type: "products/states" , payload: [
+      "newProductStatus",
+      "deleteProductStatus",
+      "changeProductVisibilityStatus",
+      "updateProductStatus",
+      "addVariantsStatus",
+      "updateManyStatus_products_Status",
+      "deleteManyStatus_products_Status",
+       ]}) 
+  }, [])
   return (
     <>
 
@@ -133,7 +218,7 @@ export default function Products() {
         <ShadowLoading/>
       )}
       {newProductStatus.success && (
-        <Alert type="success">{newProductStatus.success.mss}</Alert>
+        <Alert type="success">{newProductStatus.success}</Alert>
       )}
           {updateProductStatus.success && (
         <Alert type="success">{updateProductStatus.success.mss}</Alert>
@@ -167,7 +252,7 @@ export default function Products() {
                             {deleteManyStatus_products_Status.isLoading && (
         <ShadowLoading/>
       )}
-      <Loading status={productsStatus}>
+
         <PageStructure
           button={{ icon: <BiPlusCircle/> , href: "/admin/new-product", name: "New Product" }}
           title="Products"
@@ -189,10 +274,57 @@ export default function Products() {
       title: "Delete Many Products",
       message: "Vous voulez vraiment supprimer les produits selectionés ?",
       type: "info"
-    })} disabled={!itemsSelected.length} element="button" btnStyle="bg" color="danger"><div className="icon"><BsTrash/></div> Delete Many</Btn>
+    })} disabled={!itemsSelected.length} element="button" btnStyle="bg" color="danger"><div className="icon"><BsTrash/></div> Delete Many
+    </Btn>
+    <Btn onClick={()=>setActiveFilter(e => !e)} element="button" btnStyle="bg" color="success"><div className="icon"><BiFilterAlt/></div>
+    {((productsStatus.success.sub_data?.numberTotal || productsStatus.success.sub_data?.numberTotal === 0) && window.location.search !== "" && !activeFilter) ? ` ( ${productsStatus.success.sub_data?.numberTotal} )` : ""}
+    </Btn>
         </div>
-
+        {activeFilter && (
+        <SectionStructure>
+            <form onSubmit={filteringHandle} method='GET' className="Filter">
+            <FlexSections direction="column">
+              <FlexSections wrap={true}>
+                <InputBox value={searchFilter} onChange={(e) => {
+                      setSearchFilter(e.target.value)
+                      filteringHandle()
+                      }} placeholder="Search ..." label="Search" pd="none" flex="1" type="search" 
+                />
+                <SelectBox flex="1" value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} pd="none" name="category" id="CategorySelect" label="Category">
+                      <option value="all">all</option>
+                      {categories.map(c => (
+                        <option value={c._id}>{c.name}</option>
+                      ))}
+              </SelectBox>
+              <SelectBox flex="1" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} pd="none" name="status" id="stautsSelect" label="Status">
+                      <option value="all">all</option>
+                      <option value="true">In Stock</option>
+                      <option value="false">Out Stock</option>
+              </SelectBox>
+              </FlexSections>
+              <FlexSections wrap={true}>
+                {/* <FlexSections flex="2" wrap={true}> */}
+                  <InputBox flex="1" value={dateFilter.from} onChange={(e) => setDateFilter(prev => {return {...prev , from: e.target.value}})} pd="none" label="from" type="date" name="from"/>
+                  <InputBox flex="1" value={dateFilter.to} onChange={(e) => setDateFilter(prev => {return {...prev , to: e.target.value}})} pd="none" label="to" type="date" name="to"/>
+                {/* </FlexSections> */}
+                <SelectBox flex="1" value={visibilityFilter} onChange={(e) => setVisibilityFilter(e.target.value)} pd="none" name="visibility" id="visibilitySelect" label="Visibility">
+                      <option value="all">all</option>
+                      <option value="true">Publish</option>
+                      <option value="false">Private</option>
+                </SelectBox>
+              </FlexSections>
+              <FlexSections justify="end" wrap={true}>
+                <Btn onClick={resetForm} flex={.3333} width="full" btnStyle= "outline" color= "danger" element="div">Reset</Btn>
+              <Btn flex={.3333} type="submit" width="full" btnStyle= "bg" color= "success" element="button">Filter
+                      {((productsStatus.success.sub_data?.numberTotal || productsStatus.success.sub_data?.numberTotal === 0) && window.location.search !== "") ? ` ( ${productsStatus.success.sub_data?.numberTotal} )` : ""}
+                </Btn>
+              </FlexSections>
+            </FlexSections>
+            </form>
+        </SectionStructure>
+        )}
           <div className="Products">
+          <Loading status={productsStatus}>
             <SectionStructure pd="none">
             {allProducts.length ? (
               <div className="products-table">
@@ -206,15 +338,15 @@ export default function Products() {
                                     </label> */}
                         <CheckBox onChange={() => selectItemHandle("selectAll")} name={"selectAll"} id="selectAll" />
                       </td>
-                      <td>PRODUCT NAME</td>
-                      <td>CATEGORY</td>
-                      <td>PRICE</td>
-                      <td>SALE PRICE</td>
-                      <td>STOCK</td>
-                      <td>STATUS</td>
+                      <td>product name</td>
+                      <td>category</td>
+                      <td>price</td>
+                      <td>sale price</td>
+                      <td>stock</td>
+                      <td>status</td>
                       {/* <td>VIEW</td> */}
-                      <td>PUBLISHED</td>
-                      <td>ACTIONS</td>
+                      <td>published</td>
+                      <td>actions</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -305,7 +437,7 @@ export default function Products() {
                   </tbody>
                 </table>
                 {console.log(productsStatus)}
-                <PaginationTable paginationStep={5} dispatchFunc={products} pagination={productsStatus.success}/>
+                <PaginationTable paginationStep={5} dispatchFunc={products} pagination={productsStatus.success.pagination}/>
                 {/* {allProducts.length ? (false
         ) : (
             <EmptyErrorSection/>
@@ -315,9 +447,10 @@ export default function Products() {
             <EmptyErrorSection/>
         )}
             </SectionStructure>
+            </Loading>
           </div>
         </PageStructure>
-      </Loading>
+
     </>
   );
 }

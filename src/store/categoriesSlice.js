@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { adminAPI } from "../API/axios-global";
+import ClearStates from "../utils/ClearStates";
 
 // CATEGORIES START
 export const createCategories = createAsyncThunk(
@@ -108,8 +109,21 @@ export const deleteManyStatus_categories = createAsyncThunk(
       .catch((err) => rejectWithValue(err));
   }
 );
+export const checkCategorySlug = createAsyncThunk("checkCategorySlug",
+async (body, thunkAPI) => {
+    const {rejectWithValue} = thunkAPI
+    return adminAPI.post("/account/categories/check-slug",body).then((docs) => {
+        if(!docs.data.success){
+            return rejectWithValue({message: docs.data.error})
+        }
+        console.log(docs.data);
+        return docs.data
+    }).catch(err => rejectWithValue(err))
+})
 // CATEGORIES END
-
+const clearStatesReducer = (state=initState , action) => {
+  return ClearStates(state , initState , action)
+}
 const initState = {
     createCategoriesStatus: { isLoading: false, error: false, success: false },
     getCategoriesStatus: { isLoading: false, error: false, success: [] },
@@ -130,12 +144,16 @@ const initState = {
         error: false,
         success: false,
     },
+    checkCategorySlug_Status:{isLoading: false , error: false , success: false},
+
 };
 
 const categoriesSlice = createSlice({
   name: "categories",
   initialState: initState,
-  reducers: {},
+  reducers: {
+    states: clearStatesReducer
+  },
   extraReducers: {
     
     // create categorie
@@ -344,6 +362,31 @@ const categoriesSlice = createSlice({
         error: action.payload.message,
       };
     },
+                    // check product url Key
+                    [checkCategorySlug.pending]: (state, action) => {
+                      console.log(action)
+                      state.checkCategorySlug_Status = {
+                          isLoading: true,
+                          error: false,
+                          success: false
+                      }
+                  },
+                  [checkCategorySlug.fulfilled]: (state, action) => {
+                      console.log(action)
+                      state.checkCategorySlug_Status = {
+                          ...state.checkCategorySlug_Status,
+                          isLoading: false,
+                          success: action.payload.data
+                      }
+                  },
+                  [checkCategorySlug.rejected]: (state, action) => {
+                      console.log(action)
+                      state.checkCategorySlug_Status = {
+                          ...state.checkCategorySlug_Status,
+                          isLoading: false,
+                          error: action.payload.message
+                      }
+                  },
 
     // ATTRIBUTES END
   },

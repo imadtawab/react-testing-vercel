@@ -1,5 +1,6 @@
 import { createSlice , createAsyncThunk } from "@reduxjs/toolkit"
 import { adminAPI } from "../API/axios-global"
+import ClearStates from "../utils/ClearStates"
 
 export const newOrder = createAsyncThunk("newOrder",
 async ({userInformation,shoppingProducts} , thunkAPI) => {
@@ -50,6 +51,16 @@ async (pagination , thunkAPI) => {
     return docs.data
   }).catch(err => rejectWithValue(err))
 })
+export const getOrdersTrackingStatus = createAsyncThunk("getOrdersTrackingStatus",
+async (_, thunkAPI) => {
+  const {rejectWithValue} = thunkAPI
+  return adminAPI.get(`/orders/orders-tracking-status`).then((docs) => {
+    if(!docs.data.success){
+      return rejectWithValue({message: docs.data.error})
+    }
+    return docs.data
+  }).catch(err => rejectWithValue(err))
+})
 export const filterOrders = createAsyncThunk("filterOrders",
 async (filterObject,thunkAPI) => {
   const {rejectWithValue} = thunkAPI
@@ -92,6 +103,17 @@ export const getOrderDetails = createAsyncThunk("getOrderDetails",
 async (id, thunkAPI) => {
   const {rejectWithValue} = thunkAPI
   return adminAPI.get("/orders/"+id).then((docs) => {
+    if(!docs.data.success){
+      return rejectWithValue({message: docs.data.error})
+    }
+    return docs.data
+  }).catch(err => rejectWithValue(err))
+})
+export const getOrderTrackingDetails = createAsyncThunk("getOrderTrackingDetails",
+async (id, thunkAPI) => {
+  const {rejectWithValue} = thunkAPI
+  return adminAPI.get("/orders/orders-tracking/details/"+id+window.location.search).then((docs) => {
+    console.log(docs);
     if(!docs.data.success){
       return rejectWithValue({message: docs.data.error})
     }
@@ -162,8 +184,16 @@ async (_, thunkAPI) => {
 const initState = {
   newOrderStatus :{isLoading: false, error:false , success:false},
   statusSelectInFilter : {status: false , time: false},
+  getOrdersTrackingStatus_Status : {status: false , time: false},
   getOrdersStatus :{isLoading: false, error:false , success:false},
-  getOrderDetailsStatus :{isLoading: false, error:false , success:false},
+  getOrderDetailsStatus : {isLoading: false, error:false , success: {
+currentIndex: null,
+currentItem: null,
+nextItem: null,
+numberOfItems: null,
+previousItem: null
+  }},
+  getOrderTrackingDetails_Status :{isLoading: false, error:false , success:false},
   changeOrderStatus_Status :{isLoading: false, error:false , success:false},
   deleteOrderStatus_Status :{isLoading: false, error:false , success:false},
   newPersonalNote_Status :{isLoading: false, error:false , success:false},
@@ -174,11 +204,21 @@ const initState = {
   filterOrders_Status:{isLoading: false , error: false , success: false},
   dashboard_OrderData_Status:{isLoading: false , error: false , success: false},
 }
-
+// const clearStatesReducer = (state=initState , action) => {
+//   if(action.type === "orders/states"){
+//       console.log(state , "aaaaaaaaaaaa" , action);
+//       return initState
+//   }
+// }
+const clearStatesReducer = (state=initState , action) => {
+  return ClearStates(state , initState , action)
+}
 const ordersSlice = createSlice({
     name: "orders",
     initialState: initState,
-    reducers: {},
+    reducers: {
+      states: clearStatesReducer
+      },
     extraReducers: {
         // newOrder
         [newOrder.pending]: (state , action) => {
@@ -233,6 +273,32 @@ const ordersSlice = createSlice({
             error : action.payload.message
           }
         },
+                // get orders
+                [getOrdersTrackingStatus.pending]: (state , action) => {
+                  console.log(action);
+                  state.getOrdersTrackingStatus_Status = {
+                    isLoading: true,
+                    error:false,
+                    success : false
+                  }
+                },
+                [getOrdersTrackingStatus.fulfilled]: (state , action) => {
+                  console.log(action);
+                  state.getOrdersTrackingStatus_Status = {
+                    ...state.getOrdersTrackingStatus_Status,
+                    isLoading: false,
+                    success : action.payload.data
+                    // success : action.payload.data
+                  }
+                  
+                },
+                [getOrdersTrackingStatus.rejected]: (state , action) => {
+                  state.getOrdersTrackingStatus_Status = {
+                    ...state.getOrdersTrackingStatus_Status,
+                    isLoading: false,
+                    error : action.payload.message
+                  }
+                },
         // Filter Order By Status
         [filterOrders.pending]: (state , action) => {
           console.log(action);
@@ -348,6 +414,31 @@ const ordersSlice = createSlice({
             error : action.payload.message
           }
         },
+              // getOrderDetails
+              [getOrderTrackingDetails.pending]: (state , action) => {
+                console.log(action);
+                state.getOrderTrackingDetails_Status = {
+                  isLoading: true,
+                  error:false,
+                  success : false
+                }
+              },
+              [getOrderTrackingDetails.fulfilled]: (state , action) => {
+                console.log(action.payload.data);
+                state.getOrderTrackingDetails_Status = {
+                  ...state.getOrderTrackingDetails_Status,
+                  isLoading: false,
+                  success : action.payload.data
+                }
+              },
+              [getOrderTrackingDetails.rejected]: (state , action) => {
+                console.error(action.payload);
+                state.getOrderTrackingDetails_Status = {
+                  ...state.getOrderTrackingDetails_Status,
+                  isLoading: false,
+                  error : action.payload.message
+                }
+              },
         // change order status
         [changeOrderStatus.pending]: (state , action) => {
           console.log(action);
@@ -359,10 +450,15 @@ const ordersSlice = createSlice({
         },
         [changeOrderStatus.fulfilled]: (state , action) => {
           console.log(action.payload,7777);
-          state.getOrdersStatus.success.data = state.getOrdersStatus.success.data.map(o => {
-            if(o._id === action.payload.data._id) o.current_status = action.payload.data.current_status
-            return o
-          })
+          if(state.getOrdersStatus.success?.data){
+            state.getOrdersStatus.success.data = state.getOrdersStatus.success.data.map(o => {
+              if(o._id === action.payload.data._id) o.current_status = action.payload.data.current_status
+              return o
+            })
+          }
+          console.log(state.getOrderTrackingDetails_Status.success , action.payload);
+          state.getOrderTrackingDetails_Status.success.currentItem = action.payload.data
+
           state.getOrderDetailsStatus = {
             ...state.getOrderDetailsStatus,
             // success : action.payload
@@ -401,6 +497,7 @@ const ordersSlice = createSlice({
             success : action.payload
             // success : action.payload.data
           }
+          state.getOrderTrackingDetails_Status.success.currentItem = action.payload.data
           state.deleteOrderStatus_Status = {
             ...state.deleteOrderStatus_Status,
             isLoading: false,
@@ -429,6 +526,7 @@ const ordersSlice = createSlice({
             ...state.getOrderDetailsStatus,
             success : action.payload.data
           }
+          state.getOrderTrackingDetails_Status.success.currentItem = action.payload.data.data
           state.newPersonalNote_Status = {
             ...state.newPersonalNote_Status,
             isLoading: false,

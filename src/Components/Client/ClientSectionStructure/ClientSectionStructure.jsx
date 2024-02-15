@@ -1,8 +1,8 @@
 import './ClientSectionStructure.scss'
 
-export default function ClientSectionStructure({subTitle, title , children, description}) {
+export default function ClientSectionStructure({keyy , subTitle, title , children, description}) {
   return (
-    <div className='ClientSectionStructure'>
+    <div key={keyy} className='ClientSectionStructure'>
         <div className="head">
             <h5>{subTitle}</h5>
             <h2>{title}</h2>

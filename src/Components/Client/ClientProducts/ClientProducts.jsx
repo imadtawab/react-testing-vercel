@@ -1,66 +1,18 @@
 import { NavLink } from 'react-router-dom'
 import ClientSectionStructure from '../ClientSectionStructure/ClientSectionStructure'
 import './ClientProducts.scss'
+import FilterProductsSection from '../../FilterProductsSection/FilterProductsSection'
+import Btn from '../../Btn/Btn'
 
-export default function ClientProducts({products}) {
-    const productss = [
-        {
-            _id: "1",
-            media : {images : ["https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"]},
-            categorie: "MEN'S CLOTHING",
-            name: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-            prices: {
-                originalPrice : 200,
-                salePrice: 109.95,
-                discount: 20
-            }
-        },        {
-            _id: "2",
-            media : {images : ["https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"]},
-            categorie: "MEN'S CLOTHING",
-            name: "Mens Cotton Jacket",
-            prices: {
-                originalPrice : 100,
-                salePrice: 55.99,
-                discount: 30
-            }
-        },        {
-            _id: "3",
-            media : {images : ["https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg"]},
-            categorie: "JEWELERY",
-            name: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-            prices: {
-                originalPrice : 1000,
-                salePrice: 695,
-                discount: 0
-            }
-        },        {
-            _id: "4",
-            media : {images : ["https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"]},
-            categorie: "MEN'S CLOTHING",
-            name: "Mens Cotton Jacket",
-            prices: {
-                originalPrice : 100,
-                salePrice: 55.99,
-                discount: 30
-            }
-        },        {
-            _id: "5",
-            media : {images : ["https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"]},
-            categorie: "MEN'S CLOTHING",
-            name: "Mens Cotton Jacket",
-            prices: {
-                originalPrice : 100,
-                salePrice: 55.99,
-                discount: 30
-            }
-        },
-    ]
+export default function ClientProducts({products , filter ,setProducts}) {
   return (
-    <ClientSectionStructure subTitle="Products" title="MOST POPULAR PRODUCTS">
-        <div className='ClientProducts'>
+    <ClientSectionStructure subTitle="Products" title="Our Popular Products">
+        <div className="ClientProducts">
+        {filter && <FilterProductsSection setProducts={setProducts}/>}
+        <div className='products-section'>
             {products.map(prod => (
-                <NavLink to={`/products/${prod._id}`} className="box-product">
+                // <NavLink to={`/products/${prod._id}`} className="box-product">
+                <NavLink to={`/products/${prod.searchEngineOptimize.urlKey}`} className="box-product">
                     {prod.prices.discount ? (
                         <>
                                             <span className='kanba'></span>
@@ -80,6 +32,7 @@ export default function ClientProducts({products}) {
                     <div className="buy">Ajouter au panier</div>
                 </NavLink>
             ))}
+        </div>
         </div>
     </ClientSectionStructure>
   )

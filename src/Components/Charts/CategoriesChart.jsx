@@ -48,7 +48,7 @@ const CategoriesChart = ({apiData=[]}) => {
         },
        
   ];
-  console.log(apiData,"//////////////////");
+  // console.log(apiData,"//////////////////");
   // let nowMonth = months[new Date(apiData.month).getMonth()] + " - " + new Date(apiData.month).getFullYear()
   const chart_data = {
     labels: Object.keys(apiData).map(a => apiData[a].name), //['January', 'February', 'March', 'April', 'May', 'June', 'July'],

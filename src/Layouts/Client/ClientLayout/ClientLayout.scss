@@ -196,23 +196,27 @@
     > .footer{
         margin-top: 60px;
         .links{
-            padding: 80px 40px;
+            // padding: 80px 40px;
+            // border-top: 2px solid #eee;
+            // display: flex;
+            // justify-content: space-between;
+            // align-items: center;
+            // flex-wrap: wrap;
+            // gap: 50px;
+            padding: 40px 20px;
             border-top: 2px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 50px;
+            background: #f3f4f6;
             > .box{
-                flex: 2;
+                // flex: 2;
+                margin-bottom: 30px;
                 .logo{
                     justify-content: center;
                 }
             }
             .parent{
-                flex: 3;
+                // flex: 3;
                 display: grid;
-                gap: 22px 10px;
+                gap: 30px 10px;
                 // grid-template-columns: repeat(auto-fit,minmax(199px,1fr));
                 grid-template-columns: repeat(auto-fit, minmax(134px, 1fr));
                 
@@ -252,7 +256,11 @@
             padding: 18px 40px;
             color: #4b5563;
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: wrap;    
+            gap: 15px;
+            @media (max-width: 500px) {
+                justify-content: center;
+            }
             p{
                 
             }

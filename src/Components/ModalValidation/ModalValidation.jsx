@@ -87,14 +87,14 @@ export default function ModalValidation({status,type}) {
     )
 }
 
-export function ModalValidationStatic({counter , type , title , message , path , validModal , status , btnContent , BtnDisabled}) {
+export function ModalValidationStatic({counter , type , title , message , path , validModal , status , btnContent , BtnDisabled , position}) {
   const [showModal , setShowModal] = useState(true)
   // const closeModal = () => {
   //   setShowModal(false)
   // }
     return (
 <>
-<div className={`ModalValidation static-modal ${showModal ? "activeModal" : ""} ${type}`}>
+<div className={`ModalValidation static-modal ${showModal ? "activeModal" : ""} ${type} ${position === "relative" ? "position-relative" : ""}`}>
 
       {
           <div className="modal-box info-modal">

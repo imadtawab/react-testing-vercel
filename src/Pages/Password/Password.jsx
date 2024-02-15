@@ -4,7 +4,7 @@ import InputBox from '../../Components/InputBox/InputBox'
 import PageStructure from '../../Components/PageStructure/PageStructure'
 import SectionStructure from '../../Components/SectionStructure/SectionStructure'
 import Btn from '../../Components/Btn/Btn'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Alert from '../../Components/Alert/Alert'
 import { updatePassword_settings } from '../../store/usersSlice'
@@ -48,6 +48,9 @@ export default function Profile() {
       }
       dispatch(action)
   }
+  useEffect(() => {
+    dispatch({type: "users/states" , payload: ["updatePassword_settings_Status"]}) 
+  }, [])
   return (
     <>
     <ModalValidation status={updatePassword_settings_Status}/>

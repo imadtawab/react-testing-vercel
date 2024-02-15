@@ -50,26 +50,27 @@ export default function Dashboard() {
     useEffect(() => {
         dispatch(dashboard_OrderData()).then((docs) => {
             if(docs.type === 'dashboard_OrderData/fulfilled'){
-                console.log(docs.payload.data,9999999999);
+                // console.log(docs.payload.data,9999999999);
                 setDefaultOrdersData(docs.payload.data)
                 
             }
         })
     }, [dispatch])
+
     
     return (
         <>
-      {loginUserStatus.success && (
+      {/* {loginUserStatus.success && (
           <Alert type="success">{loginUserStatus.success}</Alert>
-        )}
+        )} */}
     <PageStructure title="Dashboard">
 
         <div className='Dashboard'>
-            {console.log(dashboard_OrderData_Status)}
+            {/* {console.log(dashboard_OrderData_Status)} */}
             {/* <Loading status={dashboard_OrderData_Status}> */}
             <div className="revenue-data">
             <GridSections>
-                    {console.log(defaultOrdersData,"****************")}
+                    {/* {console.log(defaultOrdersData,"****************")} */}
                     <BoxSection type="BoxSection2" icon={<BiSolidLayer/>} title="Last Week" value={{type:"mad",amount: defaultOrdersData.lastWeekRevenue}} status="returned"/>
                     <BoxSection type="BoxSection2" icon={<FaShoppingCart/>} title="Last Month" value={{type:"mad",amount: defaultOrdersData.lastMonthRevenue}} status="pending"/>
                     <BoxSection type="BoxSection2" icon={<BiCreditCard/>} title="Current Year" value={{type:"mad",amount: defaultOrdersData.currentYearRevenue}} status="delivered"/>
@@ -91,7 +92,7 @@ export default function Dashboard() {
               </SectionStructure>
               <SectionStructure flex="1" title="Categories">
                   <div className="categories">
-                    {console.log(defaultOrdersData?.monthChartData?.data_for_each_items,636363)}
+                    {/* {console.log(defaultOrdersData?.monthChartData?.data_for_each_items,636363)} */}
                     {dashboard_OrderData_Status.success && <CategoriesChart apiData={defaultOrdersData?.monthChartData?.global_data?.global_categorie}/>}
 
                   </div>

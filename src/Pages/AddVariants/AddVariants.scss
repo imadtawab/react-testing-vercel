@@ -1,4 +1,7 @@
 .AddVariants{
+    .refresh-attributes{
+        font-size: 30px;
+    }
     .variants{
         display: flex;
         flex-wrap: wrap;
@@ -7,6 +10,10 @@
             flex: 1;
             height: fit-content;
         }
+    }
+    .add-categories{
+        color: #156cc1;
+        cursor: pointer;
     }
     .controlls{
         margin-bottom: var(--pd);

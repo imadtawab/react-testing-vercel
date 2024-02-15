@@ -58,16 +58,28 @@
     }
     .media{
         label.image-manager{
-            border: 3px dashed #aaa;
-            /* padding: var(--pd); */
+            // border: 3px dashed #aaa;
+            // /* padding: var(--pd); */
+            // min-height: 120px;
+            // display: grid;
+            // place-content: center;
+            // cursor: pointer;
+            // /* width: 200px; */
+            // height: 120px;
+            // position: relative;
+            // margin-bottom: 30px;
+
             min-height: 120px;
             display: grid;
             place-content: center;
             cursor: pointer;
-            /* width: 200px; */
             height: 120px;
             position: relative;
             margin-bottom: 30px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            background: #f8f8f8;
+            transition: border .3s;
             &:hover,&:focus{
                 border-color: var(--main-color);
             }

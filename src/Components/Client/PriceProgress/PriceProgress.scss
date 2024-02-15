@@ -1,0 +1,85 @@
+.PriceProgress {
+  color: var(--dark-color);
+  --color-bar: #7d7d7d;
+  .inputs-progress {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    .min,
+    .max {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      input {
+        padding: 10px;
+        width: 60px;
+        border-radius: 5px;
+        outline: none;
+        appearance: none;
+        border: none;
+        box-shadow: 0 0 3px 2px #d9d9d9;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -moz-appearance: textfield;
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .progress-bar {
+    background: #e7e7e7;
+    border-radius: 10px;
+    height: 10px;
+    position: relative;
+    margin: 25px 0;
+    .progress-truck {
+      position: absolute;
+      background: var(--color-bar);
+      // background: #009688;
+      top: 0;
+      height: 100%;
+      left: 0%;
+      right: 0%;
+      border-radius: 10px;
+    }
+    input[type="range"] {
+      position: absolute;
+      width: 100%;
+      height: 0;
+      top: 50%;
+      appearance: none;
+      margin: 0;
+      pointer-events: none;
+      &[name="min-range"] {
+        left: -10px;
+      }
+      &[name="max-range"] {
+        right: -10px;
+      }
+      &::-webkit-slider-thumb {
+        /* Styles for the thumb in WebKit browsers */
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px; /* Set the width of the thumb */
+        height: 20px; /* Set the height of the thumb */
+        background: var(--color-bar); /* Set the background color of the thumb */
+        border-radius: 50%; /* Make the thumb circular */
+        cursor: pointer; /* Set the cursor to a pointer */
+        pointer-events: auto;
+        cursor: pointer;
+      }
+      &:-moz-range-thumb {
+        /* Styles for the thumb in Firefox */
+        width: 20px;
+        height: 20px;
+        background: var(--color-bar);
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+  .result{
+    font-size: 15px;
+  }
+}

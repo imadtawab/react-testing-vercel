@@ -2,6 +2,22 @@
     margin-top: 60px;
     padding: 40px;
     padding: 15px;
+    .empty-cart{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 90px 0;
+        .title{
+            font-size: 60px;
+            color: #4a4141;
+        }
+        .message{
+            font-size: 20px;
+            color: #4a4141;
+            margin-bottom: 20px;
+        }
+    }
     .parent{
         display: flex;
         justify-content: center;

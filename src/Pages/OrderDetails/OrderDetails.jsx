@@ -2,8 +2,8 @@ import './OrderDetails.scss'
 import PageStructure from '../../Components/PageStructure/PageStructure'
 import SectionStructure from '../../Components/SectionStructure/SectionStructure'
 import productImg from "../../assets/profile.jpg"
-import { BsFillCaretLeftSquareFill, BsFillCaretRightSquareFill, BsFillPersonFill, BsFillTelephoneFill, BsMap, BsMapFill, BsPinMap, BsPinMapFill, BsX } from 'react-icons/bs'
-import { BiMapAlt, BiSolidMap } from 'react-icons/bi'
+import { BsFillCaretLeftSquareFill, BsFillCaretRightSquareFill, BsFillPersonFill, BsFillPrinterFill, BsFillTelephoneFill, BsMap, BsMapFill, BsPinMap, BsPinMapFill, BsPrinter, BsX } from 'react-icons/bs'
+import { BiMapAlt, BiPrinter, BiSolidMap } from 'react-icons/bi'
 import InputBox, { TextAreaBox } from '../../Components/InputBox/InputBox'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
@@ -13,10 +13,12 @@ import Loading from '../../Components/Loading/Loading'
 import Btn from '../../Components/Btn/Btn'
 import Alert from '../../Components/Alert/Alert'
 import { MdEmail } from 'react-icons/md'
+import Invoice from '../Invoice/Invoice'
 
 export default function OrderDetails() {
     const {getOrderDetailsStatus} = useSelector(s => s.orders)
     const params = useParams()
+
     const dispatch = useDispatch()
   
     useEffect(() => {
@@ -25,7 +27,12 @@ export default function OrderDetails() {
                 // setOrder(docs.payload.data)
             }
         })
+            dispatch({type: "orders/states" , payload: ["changeOrderStatus_Status" , "deleteOrderStatus_Status" , "newPersonalNote_Status"]}) 
     },[dispatch])
+    // useEffect(() => {
+    //     dispatch(getOrderDetails(itemId ? itemId : params.id))
+    // }, [itemId , params])
+    
 
   return (
     <>
@@ -43,6 +50,9 @@ export function OrderDetailsHandle({order}) {
     const [nowStatus , setNowStatus] = useState("")
     const {changeOrderStatus_Status , deleteOrderStatus_Status , newPersonalNote_Status} = useSelector(s => s.orders)
     const dispatch = useDispatch()
+
+    const [printActive , setPrintActive] = useState(false)
+
     const changeOrderStatusHandle = (status , orderId) => {
         dispatch(changeOrderStatus({status , orderId}))
     }
@@ -133,7 +143,7 @@ export function OrderDetailsHandle({order}) {
      {newPersonalNote_Status.error && (
         <Alert type="danger">{newPersonalNote_Status.error}</Alert>
     )}
-    <PageStructure title="Order Details">
+    <PageStructure title="Order Details" personelButton={<Btn style={{display: "inline-block"}} onClick={() => setPrintActive(true)} element="div" color="success" btnStyle="bg"><BsFillPrinterFill/> Print Invoice</Btn>}>
             <div className='OrderDetails'>
                 <div className="left-section">
                 <SectionStructure pd="none">
@@ -150,7 +160,6 @@ export function OrderDetailsHandle({order}) {
                             <tbody>
                             
                                 {/**************************/}
-                                {console.log(order)}
                                 {order.shoppingCard.map((prod , ind) => (
                                     <>
                                     {prod?.variants[0]?.variantId === prod._id ? (
@@ -455,6 +464,8 @@ export function OrderDetailsHandle({order}) {
                 </SectionStructure>
                 </div>
             </div>
+                {/* <Btn style={{display: "inline-block"}} onClick={() => setPrintActive(true)} element="div" color="success" btnStyle="bg"><BsFillPrinterFill/> Print Invoice</Btn> */}
+                <Invoice order={order} setPrintActive={setPrintActive} print={printActive}/>
             </PageStructure>
     </>
   )

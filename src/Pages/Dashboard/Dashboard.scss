@@ -4,5 +4,11 @@
         gap: var(--pd);
         flex-wrap: wrap;
         max-width: 100%;
+        .top-selling{
+            .products-table{
+                border: 1px solid #e5e5e5;
+                border-radius: 8px;
+            }
+        }
     }
 }

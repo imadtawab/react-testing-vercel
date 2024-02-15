@@ -13,7 +13,7 @@ import InputBox, { SelectBox, TextAreaBox } from '../../Components/InputBox/Inpu
 import Btn from '../../Components/Btn/Btn'
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux'
-import { changeCategorieVisibility, createCategories, deleteCategorie, deleteManyStatus_categories, getCategories, updateCategorie, updateManyStatus_categories } from '../../store/categoriesSlice'
+import { changeCategorieVisibility, checkCategorySlug, createCategories, deleteCategorie, deleteManyStatus_categories, getCategories, updateCategorie, updateManyStatus_categories } from '../../store/categoriesSlice'
 import Alert from '../../Components/Alert/Alert'
 import EmptyErrorSection from '../../Components/EmptyErrorSection/EmptyErrorSection'
 import default_product_img from "../../assets/product-default.png"
@@ -29,6 +29,8 @@ export default function Categories() {
     const [itemsSelected , setItemsSelected] = useState([])
   useEffect(() => {
     dispatch(getCategories())
+    dispatch({type: "categories/states" , payload: ["createCategoriesStatus","getCategoriesStatus","deleteCategorieStatus","changeCategorieVisibilityStatus","updateCategorieStatus" , "updateManyStatus_categories_Status" , "deleteManyStatus_categories_Status"]}) 
+
   }, [])
   const publishedHandle = (eo ,id, visibility) => {
     // console.log(eo.target.className);
@@ -207,10 +209,10 @@ export default function Categories() {
                 <td>
                   <CheckBox onChange={() => selectItemHandle("selectAll")} name={"selectAll"} id="selectAll"/>
                 </td>
-                <td>IMAGE/ICON</td>
-                <td>NAME</td>
-                <td>PUBLISHED</td>
-                <td>ACTIONS</td>
+                <td>image/icon</td>
+                <td>name</td>
+                <td>published</td>
+                <td>actions</td>
               </tr>
             </thead>
             <tbody>
@@ -295,7 +297,7 @@ export default function Categories() {
 
 
 export function AddNewCategories({setAddNewProductSection , oldCategorie,setOldCategorie}) {
-  const {createCategoriesStatus,updateCategorieStatus} = useSelector(s => s.categories)
+  const {createCategoriesStatus,updateCategorieStatus , checkCategorySlug_Status} = useSelector(s => s.categories)
     const dispatch = useDispatch()
     const types = ["dropDown", "colorSpans", "checkBox"]
     const [description , setDescription] = useState({
@@ -303,6 +305,10 @@ export function AddNewCategories({setAddNewProductSection , oldCategorie,setOldC
       error: false
     })
     const [name , setName] = useState({
+      value: "",
+      error: false
+    })
+    const [slug , setSlug] = useState({
       value: "",
       error: false
     })
@@ -337,6 +343,7 @@ export function AddNewCategories({setAddNewProductSection , oldCategorie,setOldC
       let form = {
         description: description.value,
         name: name.value,
+        slug: slug.value,
         publish,
         image: imageShow.post,
         delete: !imageShow.src && !imageShow.post ? true : ""
@@ -376,6 +383,7 @@ export function AddNewCategories({setAddNewProductSection , oldCategorie,setOldC
       if(oldCategorie !== false){
         setDescription({value: oldCategorie.description,error: false})
         setName({value: oldCategorie.name,error: false})
+        setSlug({value: oldCategorie.slug,error: false})
         setPublish(oldCategorie.publish)
         setImageShow({src: oldCategorie.image , post: false})
       }
@@ -391,6 +399,26 @@ export function AddNewCategories({setAddNewProductSection , oldCategorie,setOldC
         }
         dispatch(action)
     }
+    const [activeCheckUrlKey , setActiveCheckUrlKey] = useState(true)
+    const checkUrlKeyHandle = (eo) => {
+      setSlug({value:eo.target.value, error:false})
+      if(activeCheckUrlKey){
+        setActiveCheckUrlKey(false)
+        setTimeout(() => {
+          // console.log(eo.target.value , activeCheckUrlKey)
+          setActiveCheckUrlKey(true)
+          if(oldCategorie?._id){
+            dispatch(checkCategorySlug({slug: eo.target.value , _id: oldCategorie?._id}))
+          }else {
+            dispatch(checkCategorySlug({slug: eo.target.value}))
+          }
+        }, 2000);
+      }
+    }
+    useEffect(() => {
+      // createCategoriesStatus,updateCategorieStatus
+      dispatch({type: "categories/states" , payload: ["checkCategorySlug_Status"]}) 
+    }, [])
   return (
     <>
     {createCategoriesStatus.error && (
@@ -407,6 +435,24 @@ export function AddNewCategories({setAddNewProductSection , oldCategorie,setOldC
             <SectionStructure title="New Categorie">
             <div className="form">
                 <InputBox error={name.error} onChange={(e) => setName({value:e.target.value, error:false})} value={name.value} required type="text" name="name" id="name" placeholder="Name" label="Name" />
+                <InputBox
+                      value={slug.value}
+                      // onChange={checkUrlKeyHandle}
+                      onChange={checkUrlKeyHandle}
+                      type="text"
+                      name="Slug"
+                      id="categorySlug"
+                      placeholder="Slug"
+                      label="Slug"
+                      leftSlug="http://localhost:3000/categories/"
+                      slugWrap={true}
+                      required
+                      checkValueInDB={{
+                        ...checkCategorySlug_Status.success ,
+                        isLoading:checkCategorySlug_Status.isLoading,
+                        pauseCheckingDuration:  !activeCheckUrlKey
+                      }}
+                    />
                 <TextAreaBox error={description.error} onChange={(e) => setDescription({value:e.target.value, error:false})} value={description.value} required type="text" name="description" id="description" placeholder="Description" label="Description" />
 
                 {/* <SelectBox onChange={(e) => {

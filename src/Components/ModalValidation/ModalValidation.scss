@@ -16,6 +16,14 @@
         height: auto !important;
         background: none !important;
     }
+    &.position-relative{
+        all: unset;
+        .modal-box{
+            background: none;
+            box-shadow: none;
+            margin: 90px auto;
+        }
+    }
     &.success{
         // main blue : #003b80
         // main green : #29a5a7

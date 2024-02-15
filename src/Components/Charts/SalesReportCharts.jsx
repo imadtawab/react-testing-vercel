@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 
 export default function SalesReportCharts({apiData = []}) {
-  console.log(apiData.map(d => d?.date));
+  // console.log(apiData.map(d => d?.date));
     
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 

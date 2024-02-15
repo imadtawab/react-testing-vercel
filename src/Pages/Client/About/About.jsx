@@ -30,9 +30,9 @@ export default function About() {
         }        
     ]
   return (
-    <div className='About'>
-        {data.map(sec => (
-        <ClientSectionStructure subTitle={sec.subTitle} title={sec.title} description={sec.description}/>
+    <div key={"about"} className='About'>
+        {data.map((sec , i) => (
+        <ClientSectionStructure keyy={i * 2} subTitle={sec.subTitle} title={sec.title} description={sec.description}/>
         ))}
     </div>
   )

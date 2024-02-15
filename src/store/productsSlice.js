@@ -2,6 +2,7 @@ import { createSlice , createAsyncThunk } from "@reduxjs/toolkit"
 import { adminAPI } from "../API/axios-global"
 import axios, { formToJSON } from "axios";
 import { BsWindowSidebar } from "react-icons/bs";
+import ClearStates from "../utils/ClearStates";
 
 export const newProduct = createAsyncThunk("newProduct",
 async (newProduct, thunkAPI) => {
@@ -13,7 +14,10 @@ async (newProduct, thunkAPI) => {
             `multipart/form-data;`,
         }
     }).then((docs) => {
-        return {docs ,mss:"added product successefully"}
+        if(!docs.data.success){
+            return rejectWithValue({message: docs.data.error})
+          }
+        return docs.data
     }).catch(err => rejectWithValue(err))
 
 })
@@ -28,16 +32,26 @@ async ({myId,data,oldImages,allImagesForDelete}, thunkAPI) => {
             `multipart/form-data;`,
         }
     }).then((docs) => {
+        if(!docs.data.success){
+            return rejectWithValue({message: docs.data.error})
+          }
         return {docs , mss:"update product successefully"}
     }).catch(err => rejectWithValue(err))
 
 })
 export const products = createAsyncThunk("products",
-async (controller, thunkAPI) => {
+async (pagination, thunkAPI) => {
     const {rejectWithValue} = thunkAPI
-    let count = controller?.count || false
-    let step = controller?.step || 5
-    return adminAPI.get(`/products${count ? `?count=${count}&step=${step}` : ""}`).then((docs) => {
+    // let count = controller?.count || false
+    // let step = controller?.step || 5
+    let paginationQuery = ""
+    await Object.keys(pagination).forEach((f , i) => {
+      paginationQuery = paginationQuery + (i === 0 ? window.location.search ? "&" : "?" : "&") + f + "=" + pagination[f]
+  })
+    return adminAPI.get(`/products${window.location.search}${paginationQuery}`).then((docs) => {
+        // if(!docs.data.success){
+        //     return rejectWithValue({message: docs.data.error})
+        //   }      
         return docs.data
     }).catch(err => rejectWithValue(err))
 
@@ -102,6 +116,17 @@ async (items, thunkAPI) => {
         return docs.data
     }).catch(err => rejectWithValue(err))
 })
+export const checkProductUrlKey = createAsyncThunk("checkProductUrlKey",
+async (body, thunkAPI) => {
+    const {rejectWithValue} = thunkAPI
+    return adminAPI.post("/products/check-url-key",body).then((docs) => {
+        if(!docs.data.success){
+            return rejectWithValue({message: docs.data.error})
+        }
+        console.log(docs.data);
+        return docs.data
+    }).catch(err => rejectWithValue(err))
+})
 
 const initState = {
     allProducts:[] ,
@@ -114,12 +139,17 @@ const initState = {
      addVariantsStatus:{isLoading: false , error: false , success: false},
      updateManyStatus_products_Status:{isLoading: false , error: false , success: false},
      deleteManyStatus_products_Status:{isLoading: false , error: false , success: false},
+     checkProductUrlKey_Status:{isLoading: false , error: false , success: false},
     }
-
+    const clearStatesReducer = (state=initState , action) => {
+        return ClearStates(state , initState , action)
+    }
 const productsSlice = createSlice({
     name: "porducts",
     initialState: initState,
-    reducers: {},
+    reducers: {
+        states: clearStatesReducer
+    },
     extraReducers: {
         // POST new product
         [newProduct.pending]: (state, action) => {
@@ -133,7 +163,7 @@ const productsSlice = createSlice({
             state.newProductStatus = {
                 ...state.newProductStatus,
                 isLoading: false,
-                success: action.payload
+                success: "added product successefully"
             }
         },
         [newProduct.rejected]: (state, action) => {
@@ -158,7 +188,7 @@ const productsSlice = createSlice({
             state.productsStatus = {
                 ...state.productsStatus,
                 isLoading: false,
-                success: action.payload.pagination
+                success: action.payload
             }
             console.log(action.payload);
         },
@@ -369,6 +399,31 @@ const productsSlice = createSlice({
                 error: action.payload.message
             }
         },
+                // check product url Key
+                [checkProductUrlKey.pending]: (state, action) => {
+                    console.log(action)
+                    state.checkProductUrlKey_Status = {
+                        isLoading: true,
+                        error: false,
+                        success: false
+                    }
+                },
+                [checkProductUrlKey.fulfilled]: (state, action) => {
+                    console.log(action)
+                    state.checkProductUrlKey_Status = {
+                        ...state.checkProductUrlKey_Status,
+                        isLoading: false,
+                        success: action.payload.data
+                    }
+                },
+                [checkProductUrlKey.rejected]: (state, action) => {
+                    console.log(action)
+                    state.checkProductUrlKey_Status = {
+                        ...state.checkProductUrlKey_Status,
+                        isLoading: false,
+                        error: action.payload.message
+                    }
+                },
     }
 })
 

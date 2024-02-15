@@ -1,6 +1,7 @@
 import { createSlice , createAsyncThunk } from "@reduxjs/toolkit"
 import { adminAPI } from "../API/axios-global"
 import undefined_avatar from "../assets/undefined_avatar.png"
+import ClearStates from "../utils/ClearStates"
 export const addAuthToState = createAsyncThunk("addAuthToState",
 async (_auth, thunkAPI) => {
   const {rejectWithValue} = thunkAPI
@@ -282,11 +283,17 @@ resendEmail_Status:{isLoading: false , error: false , success: false},
 forgotPassword_Status:{isLoading: false , error: false , success: false},
 forgotChangePassword_Status:{isLoading: false , error: false , success: false},
 }
+const clearStatesReducer = (state=initState , action) => {
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+    return ClearStates(state , initState , action)
+}
 
 const usersSlice = createSlice({
     name: "users",
     initialState: initState,
-    reducers: {},
+    reducers: {
+      states: clearStatesReducer
+      },
     extraReducers: {
         // Register user
         [addAuthToState.pending]: (state,action) => {

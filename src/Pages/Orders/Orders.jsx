@@ -61,7 +61,8 @@ const filteringHandle = (e) => {
     // setFilterProps(filterObject)
     dispatch(getOrders({count: 1, step: getOrdersStatus.success.pagination?.step}))
 }
-const filterProps = {activeFilter,setActiveFilter,dateFilter,setDateFilter,statusFilter,setStatusFilter,searchFilter,setSearchFilter,filteringHandle}
+
+    const filterProps = {activeFilter,setActiveFilter,dateFilter,setDateFilter,statusFilter,setStatusFilter,searchFilter,setSearchFilter,filteringHandle}
 // end filter
     // useEffect(() => {
     // //   dispatch(getOrders())
@@ -72,7 +73,9 @@ const filterProps = {activeFilter,setActiveFilter,dateFilter,setDateFilter,statu
     // //     step: getOrdersStatus?.success?.pagination?.step || 5
     // // }))
     // }, [dispatch])
-    
+    useEffect(() => {
+        dispatch({type: "orders/states" , payload: ["changeOrderStatus_Status","deleteOrder_Status" , "updateManyStatus_orders_Status" , "deleteManyStatus_orders_Status"]}) 
+      }, [])
   return (
 <>
 {getOrdersStatus.error && (
@@ -204,12 +207,15 @@ export function TableOrders({page,key , orders ,pagination, boxActiveHandle=fals
         }
     })
 }
-console.log(pagination);
+console.log(pagination,{count: (getOrdersStatus.success.pagination?.currentPagination || 1), step: (getOrdersStatus.success.pagination?.step || 5)});
     useEffect(() => {
-      dispatch(getOrders({count: getOrdersStatus.success.pagination?.currentPagination || 1, step: getOrdersStatus.success.pagination?.step || 5}))
-            setDateFilter({from:filterValues?.from, to:filterValues?.to})
-        setStatusFilter(filterValues?.status)
-        setSearchFilter(filterValues?.search)
+      dispatch(getOrders({count: (getOrdersStatus.success.pagination?.currentPagination || 1), step: (getOrdersStatus.success.pagination?.step || 5)})).then((docs) => {
+          if(docs.type === "getOrders/fulfilled") {
+            setDateFilter({from:docs.payload.filterValues?.from, to:docs.payload.filterValues?.to})
+            setStatusFilter(docs.payload.filterValues?.status)
+            setSearchFilter(docs.payload.filterValues?.search)
+          }
+      })
     }, [dispatch])
     //   useEffect(() => {
     //     if(boxActiveHandle !== false){
@@ -237,7 +243,26 @@ console.log(pagination);
         deleteManyStatus_orders_Status ,
       ]
 
-
+      const resetForm = () => {
+    
+        let filterObject = {}
+        if(searchFilter) filterObject.search = searchFilter
+        if(statusFilter !== "all" && statusFilter) filterObject.status = statusFilter
+        if(dateFilter.from) filterObject.from = dateFilter.from
+        if(dateFilter.to) filterObject.to = dateFilter.to
+    
+        if(Object.keys(filterObject).length !== 0){
+          window.history.replaceState(null, null, window.location.pathname);
+          dispatch(getOrders({count: 1, step: getOrdersStatus.success.pagination?.step})).then((docs) => {
+            if(docs.type === "getOrders/fulfilled") {
+            setDateFilter({from: "", to: ""})
+            setStatusFilter("all")
+            setSearchFilter("")
+            setActiveFilter(false)
+          }
+          })
+        }
+      }
 
   return (
     <>
@@ -307,7 +332,7 @@ console.log(pagination);
     </Btn>
     <Btn onClick={()=>setActiveFilter(e => !e)} element="button" btnStyle="bg" color="success"><div className="icon"><BiFilterAlt/></div>{
     // (!activeFilter && Object.keys(filterProps).length)
-    (sub_data?.numberTotal && window.location.search !== "" && !activeFilter) ? ` ( ${sub_data?.numberTotal} )` : ""}</Btn>
+    ((sub_data?.numberTotal || sub_data?.numberTotal === 0) && window.location.search !== "" && !activeFilter) ? ` ( ${sub_data?.numberTotal} )` : ""}</Btn>
         </div>
         {(page === "tableInPageOrders" && activeFilter) && (
         <SectionStructure>
@@ -315,23 +340,23 @@ console.log(pagination);
             <form onSubmit={filteringHandle} method='GET' className="Filter">
             <FlexSections direction="column">
             <FlexSections wrap={true}>
-            <InputBox value={dateFilter.from} onChange={(e) => setDateFilter(prev => {return {...prev , from: e.target.value}})} pd="none" label="from" type="date" name="from"/>
-            <InputBox value={dateFilter.to} onChange={(e) => setDateFilter(prev => {return {...prev , to: e.target.value}})} pd="none" label="to" type="date" name="to"/>
-            <SelectBox value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} pd="none" name="status" id="stautsSelect" label="Status">
+            <InputBox value={searchFilter} onChange={(e) => {
+                    setSearchFilter(e.target.value)
+                    filteringHandle()
+                    }} placeholder="Search ..." label="Search" pd="none" flex="1" type="search" />
+            <InputBox flex="1" value={dateFilter.from} onChange={(e) => setDateFilter(prev => {return {...prev , from: e.target.value}})} pd="none" label="from" type="date" name="from"/>
+            <InputBox flex="1" value={dateFilter.to} onChange={(e) => setDateFilter(prev => {return {...prev , to: e.target.value}})} pd="none" label="to" type="date" name="to"/>       
+            </FlexSections>
+            <FlexSections alignItems="end" wrap={true}>
+            <SelectBox flex="1" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} pd="none" name="status" id="stautsSelect" label="Status">
                 {["all" , "pending" , "confirmed" , "shipped" , "delivered" , "cancelled" , "on_hold" , "delayed" , "returned"].map(s => (
                     <option value={s}>{s}</option>
                 ))}
             </SelectBox>
-        
-            </FlexSections>
-            <FlexSections alignItems="end" wrap={true}>
-                <InputBox value={searchFilter} onChange={(e) => {
-                    setSearchFilter(e.target.value)
-                    filteringHandle()
-                    }} placeholder="Search ..." label="Search" pd="none" flex="2" type="search" />
-                <Btn type="submit" flex="1" width="full" btnStyle= "bg" color= "success" element="button">Filter{
+            <Btn flex="1" onClick={resetForm} width="full" btnStyle= "outline" color= "danger" element="div">Reset</Btn>
+                <Btn flex="1" type="submit" width="full" btnStyle= "bg" color= "success" element="button">Filter{
                 // (Object.keys(filterProps).length)
-                (sub_data?.numberTotal && window.location.search !== "") ? ` ( ${sub_data?.numberTotal} )` : ""}</Btn>
+                ((sub_data?.numberTotal || sub_data?.numberTotal === 0) && window.location.search !== "") ? ` ( ${sub_data?.numberTotal} )` : ""}</Btn>
             </FlexSections>
             </FlexSections>
             {/* <div className="filtering-button"> */}
@@ -350,13 +375,13 @@ console.log(pagination);
                     <td>
                         <CheckBox onChange={() => selectItemHandle("selectAll")}  name={"selectAll"} id="selectAll"/>
                     </td>
-                    <td>ORDER</td>
-                    <td>CUSTUMOR</td>
-                    <td>QUANTITE</td>
-                    <td>TOTAL</td>
-                    <td>DATE</td>
-                    <td>STATUS</td>
-                    <td>ACTIONS</td>
+                    <td>order</td>
+                    <td>customer</td>
+                    <td>quantity</td>
+                    <td>total</td>
+                    <td>date</td>
+                    <td>status</td>
+                    <td>actions</td>
                     {/* <td>PRODUCT NAME</td>
                     <td>CATEGORY</td>
                     <td>QUANTITE</td>

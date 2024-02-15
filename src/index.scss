@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    color: #1a1a1a;
+    // font-family: Mona-Sans,-apple-system,BlinkMacSystemFont,Lato,DroidKuffi,sans-serif;
+    font-size: 14px;
+    // line-height: 1.5;
+    // text-rendering: optimizeLegibility;
 }
 svg{
   height: auto;
@@ -40,7 +45,8 @@ a{
   --primary-color: #0d6efd!important;
   --secondary-color: #6c757d!important;
   // --success-color: #2cc36f!important;
-  --success-color: #198754!important;
+  --success-color: #1c99a3!important;
+  // --success-color: #198754!important;
   --danger-color: #dc3545!important;
   --warning-color: #ffc107!important;
   --info-color: #0dcaf0!important;
@@ -61,12 +67,19 @@ table{
   text-align: center; 
   border-collapse: collapse;
   thead{
-      background: #f5f3f3;
+      // background: #f5f3f3;
+      background-color: #e5e5e53d;
+  }
+  tbody{
+    tr{
+      border-top: 1px solid #e5e5e5;
+    }
   }
   tr{
-      border: 1px solid #dddddd;
-      border-left: none;
-      border-right: none;
+      // border: 1px solid #dddddd;
+      // border-left: none;
+      // border-right: none;
+      
   }
   th{
       opacity: 1;
@@ -300,7 +313,8 @@ table{
   }
 }
 .footer-buttons{
-  border-top: 2px solid #ddd;
+  // border-top: 2px solid #ddd;
+  border-top: 1px solid #e5e5e5;
   padding-top: var(--pd);
   display: flex;
   justify-content: space-between;

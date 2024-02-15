@@ -28,6 +28,8 @@ export default function Attributes() {
     const [itemsSelected , setItemsSelected] = useState([])
   useEffect(() => {
     dispatch(getAttributes())
+    dispatch({type: "attributes/states" , payload: ["createAttributesStatus","deleteAttributeStatus","changeAttributeVisibilityStatus","updateAttributeStatus" , "updateManyStatus_attributes_Status" , "deleteManyStatus_attributes_Status"]}) 
+
   }, [])
   const publishedHandle = (eo ,id, visibility) => {
     // console.log(eo.target.className);
@@ -203,11 +205,11 @@ export default function Attributes() {
                 <td>
                   <CheckBox onChange={() => selectItemHandle("selectAll")} name={"selectAll"} id="selectAll"/>
                 </td>
-                <td style={{textAlign: "initial"}}>UNIQUE NAME</td>
-                <td>NAME</td>
-                <td>TYPE</td>
-                <td>PUBLISHED</td>
-                <td>ACTIONS</td>
+                <td style={{textAlign: "initial"}}>unique name</td>
+                <td>name</td>
+                <td>type</td>
+                <td>published</td>
+                <td>actions</td>
               </tr>
             </thead>
             <tbody>

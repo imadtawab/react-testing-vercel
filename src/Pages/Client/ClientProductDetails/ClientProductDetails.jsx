@@ -10,11 +10,13 @@ import { useParams } from "react-router";
 import { addToCard } from "../../../store/usersSlice";
 import Alert from "../../../Components/Alert/Alert";
 import SecondCard from "../SecondCard/SecondCard";
+import { client_productDetails } from "../../../store/client_productsSlice";
+import Btn from "../../../Components/Btn/Btn";
 
 export default function ClientProductDetails() {
-  const {productDetailsStatus} = useSelector(s => s.products)
+  const {client_productDetailsStatus} = useSelector(s => s.client_products)
   // const [product , setProduct] = useState({})
-  console.log(productDetailsStatus,159);
+  console.log(client_productDetailsStatus,159);
   const dispatch = useDispatch()
   const params = useParams()
   // const [mainImage , setMainImage] = useState()
@@ -23,18 +25,34 @@ export default function ClientProductDetails() {
   // const [size , setSize] = useState(["x" , "xl" , "xxl"][0])
   // const [allImages , setAllImages] = useState([])
   useEffect(() => {
-    dispatch(productDetails(params.id))
+    dispatch(client_productDetails(params.urlKey))
     // .then(() => {
         // setProduct(productDetailsStatus.success)
         // setMainImage(productDetailsStatus.success.media.images[0])
         // setAllImages(productDetailsStatus.success.media.images)
       // })
-  },[dispatch,params.id])
+  },[dispatch,params.urlKey])
+
+  useEffect(() => {
+    dispatch({type: "users/states" , payload: "addToCardStatus"}) 
+  }, [])
+  
 
   return (
     <div className="ClientProductDetails">
-      <Loading status={productDetailsStatus}>
-          <ShowProduct userProduct={productDetailsStatus.success.product} userAttributes={productDetailsStatus.success.attributes} />
+      <Loading status={client_productDetailsStatus} showMessageError={<div className="empty-cart">
+                          <h1 className="title">404</h1>
+                          <p className="message">Page cannot be find.</p>
+                          <Btn
+                            btnStyle="bg"
+                            color="dark"
+                            element="a"
+                            to={"/"}
+                            >
+                            Back to home page
+                          </Btn>
+                        </div>}>
+          <ShowProduct userProduct={client_productDetailsStatus.success.product} userAttributes={client_productDetailsStatus.success.attributes} />
       </Loading>
   </div>
   );
@@ -56,19 +74,20 @@ export function ShowProduct({userProduct, userAttributes}) {
   useEffect(() => {
     let attChecked = []
     let attCheckedChecked = {}
-    console.log(userAttributes ,userProduct ,123);
+    // console.log(userAttributes ,userProduct ,123);
     userProduct.attributes.forEach(prodAtt => {
       userAttributes.forEach(att =>{
+        // console.log(prodAtt , "&&&" , att);
         if(att._id === prodAtt.attributeId){
           let attValues = att.values.filter(v => prodAtt.attributeValuesId.indexOf(v.id) !== -1)
           attChecked.push({...att , values: attValues})
-          attCheckedChecked[att._id] = attValues[0].id
+          attCheckedChecked[att._id] = attValues[0]?.id
         } 
       })
     })
 
     setAttributes(attChecked)
-    console.log(userAttributes,100000);
+    // console.log(userAttributes,100000);
     setAttributesChecked(attCheckedChecked)
     setProduct(userProduct.variants.length > 0 ? userProduct.variants[0] : {
       image: userProduct.media.images[0],
@@ -78,17 +97,17 @@ export function ShowProduct({userProduct, userAttributes}) {
       sku: userProduct.sku,
       variantId: userProduct._id
     })
-    console.log(userProduct.variants[0]);
+    // console.log(userProduct.variants[0]);
   }, [userAttributes,userProduct])
   
   const showVariantCheckedHandle = (attributesChecked) => {
     userProduct.variants.forEach(va => {
-      console.log(Object.keys(va.variantArr));
+      // console.log(Object.keys(va.variantArr));
       let result = Object.keys(va.variantArr).every(attId => attributesChecked[attId] === va.variantArr[attId])
       if (result) {
         setProduct(va)
         setMainImage(va.image)
-        console.log(va);
+        // console.log(va);
       }
     })
   }
@@ -105,13 +124,13 @@ export function ShowProduct({userProduct, userAttributes}) {
       name: userProduct.name,
       categorie: userProduct.categorie,
     }
-    console.log(userProduct);
+    // console.log(userProduct);
     let variant = {...product, quantiteUser: quantiteValue}
     dispatch(addToCard({finalyProduct1,variant}))
   }
   return (
             <>
-            {console.log(addToCardStatus.success)}
+            {/* {console.log(addToCardStatus.success)} */}
             {addToCardStatus.success && (
               // <Alert type={"success"}>{addToCardStatus.success}</Alert>
               <SecondCard product={addToCardStatus.success}/>
@@ -151,7 +170,7 @@ export function ShowProduct({userProduct, userAttributes}) {
         </div>
       </div>
       <div className="variants">
-        {console.log(attributes)}
+        {/* {console.log(attributes)} */}
         {attributes.map(att => (
           <div key={att._id } className={"variant " + att.type}>
             <div className="name">{att.public_name}</div>

@@ -10,9 +10,12 @@
     margin: auto;
     margin-top: 40px;
     position: relative;
-      @media (max-width:620px) {
-            // padding: 0px 0;
-        margin: 0;
+    //   @media (max-width:620px) {
+    //         // padding: 0px 0;
+    //     margin: 0;
+    // }
+    @media (max-width:800px) {
+        flex-direction: column-reverse;
     }
     .go-to-back{
         color: #5b87d7;
@@ -53,7 +56,7 @@
             flex: 6;
     border-right: 2px solid #eee;
         overflow: auto;
-    min-width: 500px;
+    // min-width: 500px;
     @media (max-width:620px) {
         border: none;
     }
@@ -242,7 +245,7 @@
     }
     .order-summary{
         flex: 4;
-    min-width: 290px;
+    // min-width: 290px;
         .content{
             opacity: 1;
             .content-head{

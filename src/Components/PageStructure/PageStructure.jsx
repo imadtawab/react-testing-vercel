@@ -3,7 +3,7 @@ import "./PageStructure.scss"
 import { NavLink } from 'react-router-dom'
 
 
-export default function PageStructure({children , title , button}) {
+export default function PageStructure({children , title , button , personelButton}) {
     // children = content
     // title = h1
     // button = {type, href, name}
@@ -14,6 +14,7 @@ export default function PageStructure({children , title , button}) {
             {button && (
                <Btn onClick={button.onClick} color="success" btnStyle="bg" element={button.type ? button.type : "a"} to={button.href}> {button.icon ? <div className="icon">{button.icon}</div> : ""} {button.name}</Btn>
             )}
+            {personelButton && (personelButton)}
         </div>
         {children}
     </div>

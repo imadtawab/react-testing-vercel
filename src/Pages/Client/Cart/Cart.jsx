@@ -6,8 +6,12 @@ import { changeQuantite, deleteProductFromCard, getShoppingCard } from '../../..
 import { BsTrash } from 'react-icons/bs';
 import Alert from '../../../Components/Alert/Alert';
 import CheckOutPage from '../CheckOutPage/CheckOutPage';
-import ModalValidation from '../../../Components/ModalValidation/ModalValidation';
+import ModalValidation, { ModalValidationStatic } from '../../../Components/ModalValidation/ModalValidation';
 import { NavLink } from 'react-router-dom';
+import Btn from '../../../Components/Btn/Btn';
+
+import React, { Component } from 'react'
+
 
 export default function Cart() {
   const {shoppingCard,deleteProductFromCardStatus} = useSelector(s => s.users)
@@ -35,15 +39,21 @@ export default function Cart() {
     setNumberOfCard([...shoppingCard.map(p => p.variants.length),0,0].reduce((a,b) => a + b))
     setTotalPrice([...shoppingCard.map(p => p.variants.map(v => v.quantiteUser * v.salePrice)).map(a => a.reduce((a,b) => a+b)),0,0].reduce((a,b) => a+b))
   }, [shoppingCard])
+  
+ 
+  
   const changeQuantiteHandle = (type, variantId) => {
     dispatch(changeQuantite({type, variantId}))
   }
   const checkOutHandle = () => {
     setShowCheckOutPage(true)
   }
+  useEffect(() => {
+    dispatch({type: "orders/states" , payload: "newOrderStatus"}) 
+  }, [])
   return (
     <>
-             <ModalValidation status={newOrderStatus.success} type="info"/>
+             {/* <ModalValidation status={newOrderStatus.success} type="info"/> */}
                 {/* {newOrderStatus.success && ( */}
       {/* // <Alert type="success">{newOrderStatus.success}</Alert> */}
     {/* )} */}
@@ -54,9 +64,10 @@ export default function Cart() {
               <Alert type={"danger"}>{deleteProductFromCardStatus.error}</Alert>
             )}
             
+            <div className='Cart'>
             {!showCheckOutPage ? (
                   shoppingCard.length > 0 ? (
-                    <div className='Cart'>
+ <div className='cart-container'>
                     <div className="shopping-cart">
                   <div className="head">
                   <div className='title'>Shopping Cart</div>
@@ -231,15 +242,29 @@ export default function Cart() {
                   <div onClick={checkOutHandle} className="checkout">Checkout</div>
                   </div>
                   </div>
-                  </div>
-                        ): <h3 style={{minHeight: "400px",
-                          display: "grid",
-                          placeContent: "center",
-                          padding: "10px"}}>Card Is Empty<NavLink to="/">Go to Shopping</NavLink></h3>
+              </div>
+                        ): 
+                        newOrderStatus.success ? (
+                        <ModalValidationStatic position="relative" type="success" title="Successfully Order" message="Your request has been successfully." path="/" btnContent="Continue Shopping"/>
+                        ) : (
+                        <div className="empty-cart">
+                          <h1 className="title">Oops,</h1>
+                          <p className="message">Your shopping card is empty.</p>
+                          <Btn
+                            btnStyle="bg"
+                            color="dark"
+                            element="a"
+                            to={"/"}
+                            >
+                            Back to home page
+                          </Btn>
+                        </div>
+                        )
                         
             ) :(
-            <CheckOutPage totalPrice={totalPrice} shoppingCard={shoppingCard} numberOfCard={numberOfCard} setShowCheckOutPage={setShowCheckOutPage}/>
-            )}
+              <CheckOutPage totalPrice={totalPrice} shoppingCard={shoppingCard} numberOfCard={numberOfCard} setShowCheckOutPage={setShowCheckOutPage}/>
+              )}
+              </div>
     </>
   )
 }

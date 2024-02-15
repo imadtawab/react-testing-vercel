@@ -12,7 +12,7 @@ export default function Btn({children ,element,to, type , onClick , btnStyle , c
     // color = danger || success || primary
     // style
   return (
-    <div style={flex ? {flex: +flex} : {}} className={`Btn ${btnStyle ? btnStyle : ''} ${color ? color : ""} ${width === "full" ? "width-full" : ''}`}>
+    <div style={flex ? {flex: +flex , ...style} : style} className={`Btn ${btnStyle ? btnStyle : ''} ${color ? color : ""} ${width === "full" ? "width-full" : ''}`}>
         {element === "a" && (
             <NavLink onClick={onClick} to={to}>{children}</NavLink>
         )}

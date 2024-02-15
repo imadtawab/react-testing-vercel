@@ -11,12 +11,17 @@ import { useSignIn } from 'react-auth-kit';
 import ModalValidation, { ModalValidationStatic } from '../../Components/ModalValidation/ModalValidation';
 import Loading from '../../Components/Loading/Loading'
 export default function Account({page , children}) {
+  const dispatch = useDispatch()
   const {registerUserStatus , loginUserStatus , addAuthToStateStatus} = useSelector(s => s.users)
   // const navigate = useNavigate()
   // if(registerUserStatus.success){
   //   navigate("/admin/account/login")
     
   // }
+  useEffect(() => {
+    dispatch({type: "users/states" , payload: ["registerUserStatus" , "loginUserStatus" , "addAuthToStateStatus"]}) 
+  }, [])
+  
   return (
     <>
             {registerUserStatus.isLoading && (
@@ -49,7 +54,6 @@ export default function Account({page , children}) {
 
 export function Login() {
   const navigate = useNavigate()
-  const {loginUserStatus} = useSelector(s => s.users)
   const dispatch = useDispatch()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -90,6 +94,9 @@ export function Register() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {registerUserStatus} = useSelector(s => s.users)
+  useEffect(() => {
+    dispatch({type: "users/states" , payload: "registerUserStatus"}) 
+  }, [])
 
   const [userName, setUserName] = useState("")
   const [email, setEmail] = useState("")

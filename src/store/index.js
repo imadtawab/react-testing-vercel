@@ -17,7 +17,7 @@ const store = configureStore({
         client_products: client_productsReducer,
         categories: categoriesReducer,
         attributes: attributesReducer,
-        modal: modalReducer
+        modal: modalReducer,
     },
 }) ; 
 export default store ;

@@ -22,6 +22,9 @@
     &.danger{
         --cl: #ef4444 !important;
     }
+    &.primary{
+        --cl: #4744ef !important;
+    }
     &:hover{
         animation-play-state: paused;
         &::before{

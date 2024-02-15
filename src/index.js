@@ -32,6 +32,8 @@ import Settings from './Pages/Settings/Settings';
 import Password from './Pages/Password/Password';
 import UserProfile from './Pages/UserProfile/UserProfile';
 import ModalValidation from './Components/ModalValidation/ModalValidation';
+import OrderTrackingDetails from './Pages/OrderTrackingDetails/OrderTrackingDetails';
+import Invoice from './Pages/Invoice/Invoice';
 // import {disableReactDevTools} from "@fvilers/disable-react-devtools"
 
 // if(process.env.NODE_ENV === "production") disableReactDevTools()
@@ -51,7 +53,7 @@ const routes = createBrowserRouter([
         element:  <ProductsPage/>
       },
       {
-        path: "products/:id",
+        path: "products/:urlKey",
         element: <ClientProductDetails/>
       },
       {
@@ -104,9 +106,18 @@ const routes = createBrowserRouter([
       element: <OrdersTracking/>
     },
     {
+      path:"orders-tracking/details",
+      element: <OrderTrackingDetails/>
+    },
+    {
+      path:"orders/invoice",
+      element: <Invoice/>
+    },
+    {
       path:"orders/:id",
       element: <OrderDetails/>
     },
+
     {
       path:"attributes",
       element: <Attributes/>

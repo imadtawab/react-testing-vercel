@@ -13,7 +13,7 @@ import InputBox, {
 } from "../../Components/InputBox/InputBox";
 import GridSections from "../../Components/GridSections/GridSections";
 import { useDispatch, useSelector } from "react-redux";
-import { newProduct, updateProduct } from "../../store/productsSlice";
+import { checkProductUrlKey, newProduct, updateProduct } from "../../store/productsSlice";
 import Alert from "../../Components/Alert/Alert";
 import ShadowLoading from "../../Components/ShadowLoading/ShadowLoading";
 import { useNavigate } from "react-router";
@@ -23,7 +23,7 @@ import CercleLoading from "../../Components/CercleLoading/CercleLoading";
 import ModalValidation from '../../Components/ModalValidation/ModalValidation'
 
 export default function NewProduct({ editProduct, productData }) {
-  const { newProductStatus, updateProductStatus } = useSelector(
+  const { newProductStatus, updateProductStatus , checkProductUrlKey_Status} = useSelector(
     (state) => state.products
   );
   const {getCategoriesStatus} = useSelector(s => s.categories)
@@ -143,6 +143,10 @@ export default function NewProduct({ editProduct, productData }) {
     console.log(allCatgs,2111);
     setCategories(allCatgs)
   }, [getCategoriesStatus])
+  useEffect(() => {
+    dispatch({type: "products/states" , payload: ["newProductStatus", "updateProductStatus" , "checkProductUrlKey_Status"]}) 
+    dispatch({type: "categories/states" , payload: "getCategoriesStatus"}) 
+  }, [])
   
   // api
   const showVariantsPageHandle = () => {
@@ -150,6 +154,9 @@ export default function NewProduct({ editProduct, productData }) {
   };
   const submitHandle = async (e) => {
     e.preventDefault();
+    // if(!activeCheckUrlKey || !checkProductUrlKey_Status.success || checkProductUrlKey_Status.isLoading || checkProductUrlKey_Status.error){
+    //   return false
+    // }
     function createFormData() {
       const formData = new FormData();
 
@@ -166,12 +173,12 @@ export default function NewProduct({ editProduct, productData }) {
     }
     if (!editProduct) {
       showModal(true, () => {
-        dispatch(newProduct(createFormData())).then((result) => {
+        dispatch(newProduct(createFormData())).then((docs) => {
           if (btnIsAddVariants) {
             setAddVariantsSection(true);
-            setProductForVariants(result.payload.docs.data)
+            setProductForVariants(docs.payload.data)
           } else {
-            if (result.type === "newProduct/fulfilled") {
+            if (docs.type === "newProduct/fulfilled") {
               navigate("/admin/products");
             }
           }
@@ -223,6 +230,23 @@ export default function NewProduct({ editProduct, productData }) {
     newProductStatus,
     updateProductStatus,
   ]
+  const [activeCheckUrlKey , setActiveCheckUrlKey] = useState(true)
+  const checkUrlKeyHandle = (eo) => {
+    changeFormHandle(eo)
+    // && eo.target.value.trim() !== productData?.product?.searchEngineOptimize?.urlKey.trim()
+    if(activeCheckUrlKey){
+      setActiveCheckUrlKey(false)
+      setTimeout(() => {
+        // console.log(eo.target.value , activeCheckUrlKey)
+        setActiveCheckUrlKey(true)
+        if(productData?.product?._id){
+          dispatch(checkProductUrlKey({urlKey: eo.target.value , _id: productData?.product?._id}))
+        }else {
+          dispatch(checkProductUrlKey({urlKey: eo.target.value}))
+        }
+      }, 2000);
+    }
+  }
   return (
       <>
                <ModalValidation status={{
@@ -335,6 +359,8 @@ export default function NewProduct({ editProduct, productData }) {
                         id="originalPrice"
                         placeholder="Original Price"
                         label="Original Price"
+                        rightSlug="Mad"
+                        borderSlug="none"
                       />
                       <InputBox
                         value={form.salePrice}
@@ -344,6 +370,8 @@ export default function NewProduct({ editProduct, productData }) {
                         id="salePrice"
                         placeholder="Sale Price"
                         label="Sale Price"
+                        rightSlug="Mad"
+                        borderSlug="none"
                       />
                       <InputBox
                         value={form.discount}
@@ -353,6 +381,8 @@ export default function NewProduct({ editProduct, productData }) {
                         id="discount"
                         placeholder="Discount"
                         label="Discount"
+                        rightSlug="%"
+                        borderSlug="none"
                       />
                     </GridSections>
                   </div>
@@ -394,12 +424,21 @@ export default function NewProduct({ editProduct, productData }) {
                   <div className="serch-engine-optimize">
                     <InputBox
                       value={form.urlKey}
-                      onChange={changeFormHandle}
+                      onChange={checkUrlKeyHandle}
+                      // onChange={changeFormHandle}
                       type="text"
                       name="urlKey"
                       id="urlKey"
                       placeholder="Url key"
                       label="Url key"
+                      leftSlug="http://localhost:3000/products/"
+                      slugWrap={true}
+                      required
+                      checkValueInDB={{
+                        ...checkProductUrlKey_Status.success ,
+                        isLoading:checkProductUrlKey_Status.isLoading,
+                        pauseCheckingDuration: !activeCheckUrlKey
+                      }}
                     />
                     <InputBox
                       value={form.metaTitle}
@@ -589,6 +628,7 @@ export default function NewProduct({ editProduct, productData }) {
                   btnStyle="bg"
                   color="primary"
                   element="button"
+                  // disabled={!activeCheckUrlKey || checkProductUrlKey_Status.isLoading || checkProductUrlKey_Status.error}
                 >
                   {editProduct ? "Edit Variants" : "Add Variants"}
                 </Btn>
@@ -601,6 +641,7 @@ export default function NewProduct({ editProduct, productData }) {
                   color="success"
                   element="button"
                   type="submit"
+                  // disabled={!activeCheckUrlKey || checkProductUrlKey_Status.isLoading || checkProductUrlKey_Status.error}
                 >
                   {editProduct ? "Edit product" : "Save"}
                 </Btn>

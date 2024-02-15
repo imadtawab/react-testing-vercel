@@ -112,16 +112,9 @@ export default function Profile() {
       }
       dispatch(action)
   }
-  // useEffect(() => {
-  //   const action = {
-  //     type : "modal/show" ,
-  //     payload : {
-  //         isLoading: updateProfile_settings_Status.isLoading
-  //       }
-  //     }
-  //     dispatch(action)
-  //     console.log("hello",22222222);
-  // },updateProfile_settings_Status)
+  useEffect(() => {
+    dispatch({type: "users/states" , payload:"updateProfile_settings_Status" }) 
+  }, [])
   
   return (
     // <PageStructure title="Profile">

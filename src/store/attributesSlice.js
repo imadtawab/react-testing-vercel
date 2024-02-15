@@ -1,5 +1,6 @@
 import { createSlice , createAsyncThunk } from "@reduxjs/toolkit"
 import { adminAPI } from "../API/axios-global"
+import ClearStates from "../utils/ClearStates"
 
 // ATTRIBUTES START
 export const createAttributes = createAsyncThunk("createAttributes" , 
@@ -84,12 +85,14 @@ const initState = {
   updateManyStatus_attributes_Status:{isLoading: false , error: false , success: false},
   deleteManyStatus_attributes_Status:{isLoading: false , error: false , success: false},
 }
-
+const clearStatesReducer = (state=initState , action) => {
+  return ClearStates(state , initState , action)
+}
 const attributesSlice = createSlice({
     name: "attributes",
     initialState: initState,
     reducers: {
-      
+      states: clearStatesReducer
     },
     extraReducers: {
         // create attribute
