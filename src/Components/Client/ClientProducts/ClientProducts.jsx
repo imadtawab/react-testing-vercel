@@ -1,14 +1,18 @@
 import { NavLink } from 'react-router-dom'
 import ClientSectionStructure from '../ClientSectionStructure/ClientSectionStructure'
 import './ClientProducts.scss'
-import FilterProductsSection from '../../FilterProductsSection/FilterProductsSection'
+import FilterProductsSection, {FilterProductsSection1} from '../../FilterProductsSection/FilterProductsSection'
 import Btn from '../../Btn/Btn'
+import { BsX } from 'react-icons/bs'
 
-export default function ClientProducts({products , filter ,setProducts}) {
+export default function ClientProducts({products , filter ,setProducts , key , filterss, setFilterss}) {
   return (
+    <div key={key} className="clientProducts">
+            {filter && <FilterProductsSection key="main filter" setProducts={setProducts}  filterss={filterss} setFilterss={setFilterss}/>}
     <ClientSectionStructure subTitle="Products" title="Our Popular Products">
+        {filter && <FilterProductsSection key="result filter" type="result-bar" setProducts={setProducts}  filterss={filterss} setFilterss={setFilterss}/>}
         <div className="ClientProducts">
-        {filter && <FilterProductsSection setProducts={setProducts}/>}
+        {/* {filter && <FilterProductsSection1 setProducts={setProducts}/>} */}
         <div className='products-section'>
             {products.map(prod => (
                 // <NavLink to={`/products/${prod._id}`} className="box-product">
@@ -35,5 +39,6 @@ export default function ClientProducts({products , filter ,setProducts}) {
         </div>
         </div>
     </ClientSectionStructure>
+    </div>
   )
 }

@@ -1,23 +1,39 @@
 .PriceProgress {
   color: var(--dark-color);
-  --color-bar: #7d7d7d;
+  // --color-bar: #7d7d7d;
+  --color-bar: #1c99a3;
+  padding: 20px 30px;
   .inputs-progress {
     display: flex;
     justify-content: center;
     gap: 20px;
+    align-items: center;
+
     .min,
     .max {
       display: flex;
       align-items: center;
       gap: 10px;
       input {
+        // padding: 10px;
+        // width: 60px;
+        // border-radius: 5px;
+        // outline: none;
+        // appearance: none;
+        // border: none;
+        // box-shadow: 0 0 3px 2px #d9d9d9;
         padding: 10px;
         width: 60px;
         border-radius: 5px;
         outline: none;
         appearance: none;
         border: none;
-        box-shadow: 0 0 3px 2px #d9d9d9;
+        /* box-shadow: 0 0 3px 2px #d9d9d97a; */
+        text-align: center;
+        background: #e3f3f4;
+        border-bottom: 2px solid var(--color-bar);
+        font-weight: bolder;
+    color: #4a4141;
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
           -moz-appearance: textfield;
@@ -25,6 +41,11 @@
           margin: 0;
         }
       }
+    }
+    .seperator {
+      width: 12px;
+      background: #696969;
+      height: 2px;
     }
   }
   .progress-bar {
@@ -80,6 +101,12 @@
     }
   }
   .result{
-    font-size: 15px;
+    background: #efefef;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 17px;
+    color: #393939;
   }
 }

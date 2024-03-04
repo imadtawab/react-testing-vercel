@@ -73,6 +73,7 @@ const valueToPercent = (value) => {
             <label htmlFor="minVal">Min</label>
             <input onChange={minValHandle} value={min_input} type="number" name="min" id="minVal"/>
         </div>
+        <div className="seperator"></div>
         <div className="max">
             <label htmlFor="maxVal">Max</label>
             <input onChange={maxValHandle} value={max_input} type="number" name="max" id="maxVal"/>
@@ -86,7 +87,7 @@ const valueToPercent = (value) => {
         <input onInput={minRangeHandle} step={100 / cielValue * step} min="0" max="100" value={min_percent} type="range" name="min-range" id="minRange"/>
         <input onInput={maxRangeHandle} step={100 / cielValue * step} min="0" max="100"  value={max_percent} type="range" name="max-range" id="maxRange"/>
     </div>
-    <div className="result">Price: {percentToValue(min_percent)} Dh - {percentToValue(max_percent)} Dh</div>
+    <div className="result">Price: {percentToValue(min_percent).toFixed(0)} Dh - {percentToValue(max_percent).toFixed(0)} Dh</div>
 </div>
   )
 }

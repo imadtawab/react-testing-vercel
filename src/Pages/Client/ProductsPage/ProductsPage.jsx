@@ -10,6 +10,7 @@ import ShadowLoading from '../../../Components/ShadowLoading/ShadowLoading'
 export default function ProductsPage() {
   const {client_getProductsStatus} = useSelector(s => s.client_products)
   const [products , setProducts] = useState([])
+  const [filterss , setFilterss] = useState({})
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(client_getProducts({filter: {},limit: null})).then(docs => {
@@ -22,7 +23,7 @@ export default function ProductsPage() {
   return (
     <div className='ProductsPage'>
       {client_getProductsStatus.isLoading && <ShadowLoading />}
-        <ClientProducts setProducts={setProducts} filter products={products}/>
+        <ClientProducts key={"12345800"} setProducts={setProducts} filter products={products} filterss={filterss} setFilterss={setFilterss}/>
     </div>
   )
 }

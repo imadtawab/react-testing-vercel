@@ -43,7 +43,7 @@ export default function OrderDetails() {
   )
 }
 
-export function OrderDetailsHandle({order}) {
+export function OrderDetailsHandle({order , setFullScreenForAfterPrint}) {
     const [statusArray , setStatusArray] = useState(["pending" , "confirmed" , "shipped" , "delivered" , "cancelled" , "on_hold" , "delayed" , "returned"])
     const [nextStatus , setNextStatus]  =useState("")
     const [backStatus , setBackStatus]  =useState("")
@@ -143,7 +143,13 @@ export function OrderDetailsHandle({order}) {
      {newPersonalNote_Status.error && (
         <Alert type="danger">{newPersonalNote_Status.error}</Alert>
     )}
-    <PageStructure title="Order Details" personelButton={<Btn style={{display: "inline-block"}} onClick={() => setPrintActive(true)} element="div" color="success" btnStyle="bg"><BsFillPrinterFill/> Print Invoice</Btn>}>
+    <PageStructure title="Order Details" personelButton={<Btn style={{display: "inline-block"}} onClick={() => {
+        if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+            setFullScreenForAfterPrint(true)
+            console.log(true , "on click in print btn");
+        }
+        setPrintActive(true)
+        }} element="div" color="success" btnStyle="bg"><BsFillPrinterFill/> Print Invoice</Btn>}>
             <div className='OrderDetails'>
                 <div className="left-section">
                 <SectionStructure pd="none">

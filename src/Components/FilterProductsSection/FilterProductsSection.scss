@@ -1,4 +1,249 @@
 .FilterProductsSection{
+    .filter-form {
+                /* box-shadow: 0 2px 4px -2px #cbcbcb; */
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                gap: 10px;
+                padding: 15px 25px;
+                background: #f5f5f591;
+            > .search, > .box,> button {
+                background: #ffffff;
+                height: 50px;
+                flex: 1;
+                font-size: 18px;
+                border: 1px solid #efefef;
+            }
+            > .search {
+                border-radius: 30px 0 0 30px;
+                input {
+                    border: none;
+            background: none;
+            padding: 10px 20px;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            font-size: inherit;
+                }
+            }
+            > .box {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                padding: 10px 15px;
+                cursor: pointer;
+                img {
+                    width: 30px;
+                }
+            }
+            > button {
+                border: none;
+                background: var(--success-color);
+                color: #fff;
+                border-radius: 0 30px 30px 0;
+                cursor: pointer;
+                &:hover{
+                    opacity: .8;
+                }
+            }
+            .section-filter{
+                background-color: #0000008a;
+                width: 0vw;
+                height: 0vh;
+                position: fixed;
+                z-index: 1111;
+                top: 0;
+                right: 0;
+                &.active {
+                    width: 100vw;
+                    height: 100vh;
+        
+                    .container-filter{
+                        right: 0;
+                    }
+                }
+                .container-filter{
+                    background: #fff;
+                    position: fixed;
+                    right: -100%;
+                    top: 0;
+                    height: 100vh;
+                    width: 450px;
+                    z-index: 11111111111;
+                    transition: right .5s;
+                    // box-shadow: -2px 0px 11px 1px #c7c7c7;
+                    h4 {
+                        padding: 30px;
+                        font-size: 20px;
+                        border-bottom: 2px solid #eee;
+                    }
+                    .categories {
+                        ul {
+                            padding: 20px;
+                            overflow: auto;
+                            height: calc(100vh - 75px - 92px);
+                            li {
+                                padding: 20px 20px;
+                                cursor: pointer;
+                                font-size: 15px;
+                                border-radius: 10px;
+                                text-transform: capitalize;
+                                display: flex;
+                                align-items: center;
+                                justify-content: start;
+                                gap: 15px;
+                                img {
+                                    width: 30px;
+                                }
+                                &:not(.active):hover {
+                                    background: #eeeeee91;
+                                }
+                                &.active{
+                                    background: #1c99a31f;
+                                }
+                            }
+                        }
+                    }
+                    .attributes {
+                        padding: 20px;
+                        overflow: auto;
+                        height: calc(100vh - 75px - 92px);
+                        .box {
+                            margin-bottom: 10px;
+                            &.open {
+                                .name {
+                                    svg {
+                                        transform: rotate(0);
+                                    }
+                                }
+                                .values {
+                                    height: calc(50px * var(--items-count));
+                                }
+                            }
+                            .name {
+                                padding: 25px 20px;
+                                cursor: pointer;
+                                font-size: 15px;
+                                border-radius: 10px;
+                                text-transform: capitalize;
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                gap: 15px;
+                                background: #e3f3f4;
+                                font-weight: bold;
+                                color: #494949;
+                                svg {
+                                    transform: rotate(-90deg);
+                                    transition: all .3s;
+                                }
+                            }
+                            .values {
+                                height: 0;
+                                overflow: hidden;
+                                transition: height .3s;
+                                > label {
+                                    display: flex;
+                                    gap: 5px;
+                                    margin: 0px 30px;
+                                    text-transform: capitalize;
+                                    align-items: center;
+                                    height: 50px;
+                                    input{
+                                        display: none;
+                                        & + label{
+                                            width: 20px;
+                                            height: 20px;
+                                            display: block;
+                                            border: 1px solid #aaa;
+                                            border-radius: 4px;
+                                            cursor: pointer;
+                                            color: transparent;
+                                            transition: all .3s;
+                                            transform: rotate(-90deg);
+                                            background-color: #fff;
+                                        }
+                                        &:checked{
+                                            & + label{
+                                            background-color: #2196f3;
+                                            color: #fff;
+                                            font-weight: bold;
+                                            border-color: #2196f3;
+                                            font-size: 16px;
+                                            opacity: 1;
+                                            transform: rotate(0);
+                                            display: grid;
+                                            place-content: center;
+                                            }
+                                        }
+                                    }
+                                    input {
+                                        cursor: pointer;
+                                    }
+                                    .val-name{
+                                        width: 100%;
+                                        padding: 15px 10px;
+                                        border-radius: 6px;
+                                        cursor: pointer;
+                                        &:hover {
+                                            background: #eeeeee91;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .footer {
+                        border-top: 2px solid #eee;
+                        padding: 20px;
+                        bottom: 0;
+                        right: 0;
+                        width: 100%;
+                        position: absolute;
+                        display: flex;
+                        justify-content: end;
+                        background: #fff;
+                        button {
+                            border: none;
+                            background: var(--success-color);
+                            color: #fff;
+                            cursor: pointer;
+                            font-size: 17px;
+                            padding: 15px 40px;
+                            font-weight: bold;
+                            border-radius: 30px;
+                            &:hover {
+                                opacity: .8;
+                            }
+                        }
+                    }
+                }
+            }
+    }
+    .filter-result {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
+        .result-name {
+            background: var(--success-color);
+            color: #fefefe;
+            padding: 8px 8px 8px 15px;
+            border-radius: 30px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            text-transform: capitalize;
+            font-weight: bold;
+            svg {
+                font-size: 23px;
+            }
+        }
+    }
+}
+.FilterProductsSection1{
     flex: 1 1;
     min-width: 250px;
     .one-section{

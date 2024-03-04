@@ -25,13 +25,13 @@ export default function ClientProductDetails() {
   // const [size , setSize] = useState(["x" , "xl" , "xxl"][0])
   // const [allImages , setAllImages] = useState([])
   useEffect(() => {
-    dispatch(client_productDetails(params.urlKey))
+    dispatch(client_productDetails(params.product_slug))
     // .then(() => {
         // setProduct(productDetailsStatus.success)
         // setMainImage(productDetailsStatus.success.media.images[0])
         // setAllImages(productDetailsStatus.success.media.images)
       // })
-  },[dispatch,params.urlKey])
+  },[dispatch,params.product_slug])
 
   useEffect(() => {
     dispatch({type: "users/states" , payload: "addToCardStatus"}) 

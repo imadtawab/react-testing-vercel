@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
@@ -49,11 +49,15 @@ const routes = createBrowserRouter([
         element:  <Home/>
       },
       {
-        path: "products",
-        element:  <ProductsPage/>
+        path: "collection/:collection_slug",
+        element: <div>Collection slug</div>,
       },
       {
-        path: "products/:urlKey",
+        path: "products",
+        element:  <ProductsPage/> // cancel this page and the path
+      },
+      {
+        path: "products/:product_slug",
         element: <ClientProductDetails/>
       },
       {
