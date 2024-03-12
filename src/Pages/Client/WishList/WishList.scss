@@ -1,0 +1,30 @@
+.WishList {
+    > .empty-cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 30px 25px;
+        img {
+            width: 90px;
+            opacity: .1;
+        }
+        > svg {
+            font-size: 170px;
+            color: #e5e5e5;
+        }
+        p {
+            font-size: 30px;
+        }
+        a {
+            color: #fff;
+background: #2e6bc6;
+display: block;
+padding: 14px;
+text-transform: uppercase;
+font-weight: 600;
+text-align: center;
+border-radius: 6px;
+        }
+    }
+}

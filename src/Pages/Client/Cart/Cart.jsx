@@ -21,7 +21,7 @@ export default function Cart() {
   const [showCheckOutPage , setShowCheckOutPage] = useState(false)
   const dispatch = useDispatch()
   // const [shoppingCard1, setShoppingCard1] = useState([])
-  const deleteProductFromHandle = (productId, variantId) => {
+  const deleteProductFromCardHandle = (productId, variantId) => {
     console.log(productId,variantId);
     dispatch(deleteProductFromCard({productId,variantId}))
   }
@@ -120,7 +120,7 @@ export default function Cart() {
                        </td>
                        <td>
                          <div className="delete">
-                           <BsTrash onClick={() => deleteProductFromHandle(prod.productId,prod.variants[0].variantId)} />
+                           <BsTrash onClick={() => deleteProductFromCardHandle(prod.productId,prod.variants[0].variantId)} />
                          </div>
                        </td>
                      </tr>
@@ -200,7 +200,7 @@ export default function Cart() {
                              </td>
                              <td>
                                <div className="delete">
-                                 <BsTrash onClick={() => deleteProductFromHandle(prod.productId,v.variantId)} />
+                                 <BsTrash onClick={() => deleteProductFromCardHandle(prod.productId,v.variantId)} />
                                </div>
                              </td>
                            </tr>

@@ -6,6 +6,7 @@ import client_productsReducer from './client_productsSlice';
 import categoriesReducer from './categoriesSlice';
 import attributesReducer from './attributesSlice';
 import modalReducer from './modalSlice';
+import cartReducer from './secondCartSlice';
 
 
 
@@ -18,6 +19,7 @@ const store = configureStore({
         categories: categoriesReducer,
         attributes: attributesReducer,
         modal: modalReducer,
+        cart: cartReducer,
     },
 }) ; 
 export default store ;

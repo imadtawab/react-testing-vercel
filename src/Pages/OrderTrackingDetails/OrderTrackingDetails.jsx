@@ -141,7 +141,7 @@ if (document.fullscreenEnabled) {
       {getOrderTrackingDetails_Status.error && <Alert type="danger">{getOrderTrackingDetails_Status.error}</Alert>}
         <div className="order-details-section">
         <Loading status={getOrderTrackingDetails_Status}>
-            {getOrderTrackingDetails_Status.success && (getOrderTrackingDetails_Status.success?.currentItem ? <OrderDetailsHandle setFullScreenForAfterPrint={setFullScreenForAfterPrint} order={getOrderTrackingDetails_Status.success?.currentItem}/> : <div className='empty-order'><EmptyErrorSection/></div>)}
+            {getOrderTrackingDetails_Status.success && (getOrderTrackingDetails_Status.success?.currentItem ? <OrderDetailsHandle key="tracking-order" setFullScreenForAfterPrint={setFullScreenForAfterPrint} order={getOrderTrackingDetails_Status.success?.currentItem}/> : <div className='empty-order'><EmptyErrorSection/></div>)}
         </Loading>
             {/* {getOrderTrackingDetails_Status.isLoading ? <ShadowLoading/> : (
               <OrderDetailsHandle order={currentItem}/>

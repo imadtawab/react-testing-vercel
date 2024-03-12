@@ -352,7 +352,6 @@ export default function NewProduct({ editProduct, productData }) {
                     <GridSections style={{ rowGap: "0px", margin: "0px" }}>
                       <InputBox
                         value={form.originalPrice}
-                        required
                         onChange={changeFormHandle}
                         type="number"
                         name="originalPrice"
@@ -364,6 +363,7 @@ export default function NewProduct({ editProduct, productData }) {
                       />
                       <InputBox
                         value={form.salePrice}
+                        required
                         onChange={changeFormHandle}
                         type="number"
                         name="salePrice"

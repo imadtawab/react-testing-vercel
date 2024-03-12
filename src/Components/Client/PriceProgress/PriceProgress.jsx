@@ -10,7 +10,7 @@ export default function PriceProgress({step , cielValue , min_input , setMin_inp
 // const cielValue = 5000
 {/* <PriceProgress step={500} maxValue={10000}/> */}
 // const step = 100
-const halfCircle = 20
+const halfCircle = 16
 // maxVal.value = cielValue
 // const cielValue = 5000
 const [min_percent , setMin_percent] = useState(0)
@@ -24,7 +24,6 @@ const minRangeHandle = (e) => {
     };
 }
 const maxRangeHandle = (e) => {
-    console.log(e.target.value);
     if (percentToValue(e.target.value) - step >= percentToValue(min_percent)) {
         setMax_percent(e.target.value);
         setMax_input(percentToValue(e.target.value))
@@ -87,7 +86,10 @@ const valueToPercent = (value) => {
         <input onInput={minRangeHandle} step={100 / cielValue * step} min="0" max="100" value={min_percent} type="range" name="min-range" id="minRange"/>
         <input onInput={maxRangeHandle} step={100 / cielValue * step} min="0" max="100"  value={max_percent} type="range" name="max-range" id="maxRange"/>
     </div>
-    <div className="result">Price: {percentToValue(min_percent).toFixed(0)} Dh - {percentToValue(max_percent).toFixed(0)} Dh</div>
+    <div className="progress-footer">
+        <div className="result">Price : <span>{percentToValue(min_percent).toFixed(0)} Dh</span> — <span>{percentToValue(max_percent).toFixed(0)} Dh</span></div>
+        <div className="filter-btn">filter</div>
+    </div>
 </div>
   )
 }

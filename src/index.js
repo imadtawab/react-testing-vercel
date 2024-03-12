@@ -34,6 +34,7 @@ import UserProfile from './Pages/UserProfile/UserProfile';
 import ModalValidation from './Components/ModalValidation/ModalValidation';
 import OrderTrackingDetails from './Pages/OrderTrackingDetails/OrderTrackingDetails';
 import Invoice from './Pages/Invoice/Invoice';
+import WishList from './Pages/Client/WishList/WishList';
 // import {disableReactDevTools} from "@fvilers/disable-react-devtools"
 
 // if(process.env.NODE_ENV === "production") disableReactDevTools()
@@ -67,6 +68,10 @@ const routes = createBrowserRouter([
       {
         path: "cart",
         element: <Cart/>
+      },
+      {
+        path: "wishlist",
+        element: <WishList/>
       }
     ]
   },

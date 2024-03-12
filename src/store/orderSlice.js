@@ -101,6 +101,7 @@ async (orderId,thunkAPI) => {
 
 export const getOrderDetails = createAsyncThunk("getOrderDetails",
 async (id, thunkAPI) => {
+  console.log(id, 88888888);
   const {rejectWithValue} = thunkAPI
   return adminAPI.get("/orders/"+id).then((docs) => {
     if(!docs.data.success){
@@ -111,6 +112,7 @@ async (id, thunkAPI) => {
 })
 export const getOrderTrackingDetails = createAsyncThunk("getOrderTrackingDetails",
 async (id, thunkAPI) => {
+  console.log(id,777777);
   const {rejectWithValue} = thunkAPI
   return adminAPI.get("/orders/orders-tracking/details/"+id+window.location.search).then((docs) => {
     console.log(docs);
@@ -186,14 +188,14 @@ const initState = {
   statusSelectInFilter : {status: false , time: false},
   getOrdersTrackingStatus_Status : {status: false , time: false},
   getOrdersStatus :{isLoading: false, error:false , success:false},
-  getOrderDetailsStatus : {isLoading: false, error:false , success: {
-currentIndex: null,
-currentItem: null,
-nextItem: null,
-numberOfItems: null,
-previousItem: null
-  }},
-  getOrderTrackingDetails_Status :{isLoading: false, error:false , success:false},
+  getOrderDetailsStatus : {isLoading: false, error:false , success: false},
+  getOrderTrackingDetails_Status :{isLoading: false, error:false , success:{
+    currentIndex: null,
+    currentItem: null,
+    nextItem: null,
+    numberOfItems: null,
+    previousItem: null
+      }},
   changeOrderStatus_Status :{isLoading: false, error:false , success:false},
   deleteOrderStatus_Status :{isLoading: false, error:false , success:false},
   newPersonalNote_Status :{isLoading: false, error:false , success:false},

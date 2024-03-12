@@ -216,7 +216,7 @@ export default function FilterProductsSection({setProducts , type ,  filterss , 
   return (
     <div key={type === "result-bar" ? type : "filters"} className='FilterProductsSection'>
         {type === "result-bar" ? (
-            (categorieSelect || Object.keys(attributesSelect).length) && (
+            (categorieSelect || Object.keys(attributesSelect).length) ? (
             <div className="filter-result">
                 {categorieSelect && <div className="result-name">{categories.find(c => c._id === categorieSelect).name}<BsX/></div>}
                 {
@@ -226,7 +226,7 @@ export default function FilterProductsSection({setProducts , type ,  filterss , 
                 }
                 {(min_input || max_input) && <div className="result-name">price<BsX/></div>}
             </div>
-            )
+            ) : null
         ) : (
             <div className="filter-form">
                 <div className="search">
@@ -287,7 +287,7 @@ export default function FilterProductsSection({setProducts , type ,  filterss , 
   )
 }
 
-export function FilterProductsSection1({setProducts}) {
+export function FilterProductsSection1({setProducts , openFilter , setOpenFilter}) {
     const [attributes , setAttributes] = useState([])
     const [categories , setCategories] = useState([])
     const dispatch = useDispatch()
@@ -341,6 +341,7 @@ export function FilterProductsSection1({setProducts}) {
     const [min_input , setMin_input] = useState(0)
     const [max_input , setMax_input] = useState()
 
+
     useEffect(() => {
         let filterObject = {}
         if (categorieSelect) filterObject.categorie = categorieSelect
@@ -388,42 +389,53 @@ export function FilterProductsSection1({setProducts}) {
           })
     }
   return (
-    <div className='FilterProductsSection1'>
+    <div data-close="true" onClick={(e) => e.target.dataset.close ? setOpenFilter(false) : null} className={`FilterProductsSection1${openFilter ? "" : " closed"}`}>
+<div className="filter-container">
+    <div className="top-filter">
+        <div onClick={() => setOpenFilter(false)} className="close-btn"><BsX/> Fermer</div>
+    </div>
+<div className="one-section price">
+            <h4>Filter By Price</h4>
+            <PriceProgress step={100} cielValue={1000} min_input={min_input} setMin_input={setMin_input} max_input={max_input} setMax_input={setMax_input}/>
+        </div>
         <div className="one-section row">
-            <h4>Categories</h4>
+            <h4>Filter By Categories</h4>
             <ul>
-            <li className={!categorieSelect ? "active" : ""} onClick={() => categorieHandle(null)}>all products</li>
+                <label key={'all-categories'} htmlFor={'all-categories'}>
+                    <input onChange={() => categorieHandle(null)} checked={!categorieSelect ? true : false} type="checkbox" name={"all-categories"} id={'all-categories'} />
+                    <label htmlFor={'all-categories'}><BsCheckLg/></label>
+                    <div className="val-name">All categories</div>
+                </label>
                 {categories.map(catg => (
-                    <li className={categorieSelect === catg._id ? "active" : ""} onClick={() => categorieHandle(catg._id)} key={catg._id}>{catg.name} ({catg.number})</li>
+                 <label key={catg._id} htmlFor={catg._id}>
+                    <input onChange={() => categorieHandle(catg._id)} checked={categorieSelect === catg._id ? true : false} type="checkbox" name={catg.name} id={catg._id} />
+                    <label htmlFor={catg._id}><BsCheckLg/></label>
+                    <div className="val-name">{catg.name} <span>{catg.number}</span></div>
+                </label>
+                    // <li className={categorieSelect === catg._id ? "active" : ""} onClick={() => categorieHandle(catg._id)} key={catg._id}>{catg.name} ({catg.number})</li>
                ))}
             </ul>
         </div>
+  
             {attributes.map(att => (
-                        // <div key={att._id} className={`one-section ${att.type === "dropDown" ? "drop-down" : "box"}`}>
                         <div key={att._id} className={`one-section box`}>
-                        <h4>{att.public_name}</h4>
-                        {/* {att.type === "dropDown" ? (
-                            <select name={att.public_name} id={att._id}>
-                                    {att.values.map(v => (
-                                            <option key={v.id} value={v.id}>{v.name}</option>
-
-                                        ))}
-                            </select>
-                        ) : ( */}
+                        <h4>Filter By {att.public_name}</h4>
                         <ul>
                         {att.values.map(v => (
-                            <li className={attributesSelect[att._id] ? attributesSelect[att._id].indexOf(v.id) !== -1 ? "active" : "" : ""} onClick={() => attributesHandle(att._id , v.id)} key={v.id}>{v.name}</li>
-
+                            <label key={v.id} htmlFor={v.id}>
+                                <input onChange={() => attributesHandle(att._id , v.id)} checked={attributesSelect[att._id] ? attributesSelect[att._id].indexOf(v.id) !== -1 ? true : false : false} type="checkbox" name={v.name} id={v.id} />
+                                <label htmlFor={v.id}><BsCheckLg/></label>
+                                <div className="val-name">{v.name}</div>
+                            </label>
+                            // <li className={attributesSelect[att._id] ? attributesSelect[att._id].indexOf(v.id) !== -1 ? "active" : "" : ""} onClick={() => attributesHandle(att._id , v.id)} key={v.id}>{v.name}</li>
                         ))}
                     </ul>
                         {/* )} */}
                     </div>
             ))}
-        <div className="one-section price">
-            <h4>Price</h4>
-            <PriceProgress step={100} cielValue={1000} min_input={min_input} setMin_input={setMin_input} max_input={max_input} setMax_input={setMax_input}/>
-        </div>
-        <Btn onClick={filterHandle} width="full" color="dark" element="button" btnStyle="bg">Filter</Btn>
+     
+        {/* <Btn onClick={filterHandle} width="full" color="dark" element="button" btnStyle="bg">Filter</Btn> */}
+</div>
     </div>
   )
 }

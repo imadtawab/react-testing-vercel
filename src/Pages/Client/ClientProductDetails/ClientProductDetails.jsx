@@ -1,4 +1,4 @@
-import { BsHeartArrow } from "react-icons/bs";
+import { BsHeart, BsHeartArrow } from "react-icons/bs";
 import InputBox, { SelectBox } from "../../../Components/InputBox/InputBox";
 import "./ClientProductDetails.scss";
 import { BiHeart, BiHeartCircle, BiMinus, BiPlus, BiSolidHeart } from "react-icons/bi";
@@ -9,7 +9,7 @@ import { productDetails } from "../../../store/productsSlice";
 import { useParams } from "react-router";
 import { addToCard } from "../../../store/usersSlice";
 import Alert from "../../../Components/Alert/Alert";
-import SecondCard from "../SecondCard/SecondCard";
+import SecondCard, {SecondCard1} from "../SecondCard/SecondCard";
 import { client_productDetails } from "../../../store/client_productsSlice";
 import Btn from "../../../Components/Btn/Btn";
 
@@ -87,7 +87,6 @@ export function ShowProduct({userProduct, userAttributes}) {
     })
 
     setAttributes(attChecked)
-    // console.log(userAttributes,100000);
     setAttributesChecked(attCheckedChecked)
     setProduct(userProduct.variants.length > 0 ? userProduct.variants[0] : {
       image: userProduct.media.images[0],
@@ -111,38 +110,52 @@ export function ShowProduct({userProduct, userAttributes}) {
       }
     })
   }
+  const openCart = (status) => {
+    const action = {
+      type : "cart/show" ,
+      payload : status
+      }
+      dispatch(action)
+      // console.log("dima maghrib",modalActions.show(action));
+    
+  }
   const addToCardHandle = () => {
     // let finalyProduct = {
     //   product: userProduct,
     //   variant: product,
     //   quantite: quantiteValue
     // }
+
     let finalyProduct1 = {
       userId: userProduct.userId,
       productId: userProduct._id,
       image: userProduct.media.images[0],
       name: userProduct.name,
+      slug: userProduct.searchEngineOptimize.urlKey,
       categorie: userProduct.categorie,
     }
     // console.log(userProduct);
     let variant = {...product, quantiteUser: quantiteValue}
-    dispatch(addToCard({finalyProduct1,variant}))
+    dispatch(addToCard({finalyProduct1,variant})).then((docs) => {
+      if(docs.type === "addToCard/fulfilled") {
+        openCart(true)
+      }
+    })
   }
   return (
             <>
-            {/* {console.log(addToCardStatus.success)} */}
-            {addToCardStatus.success && (
-              // <Alert type={"success"}>{addToCardStatus.success}</Alert>
-              <SecondCard product={addToCardStatus.success}/>
-            )}
                 {addToCardStatus.error && (
               <Alert type={"danger"}>{addToCardStatus.error}</Alert>
             )}
     <div className="parent">
     <div className="catalogue">
       <div className="main-image">
-        <span className='kanba'></span>
-        <div className="promo">-{userProduct.prices.discount}%</div>
+        {userProduct.prices.discount ? (
+          <>
+          <span className='kanba'></span>
+          <div className="promo">-{userProduct.prices.discount}%</div>
+          </>
+        ) : null}
         {userProduct.media.images.map(img => (
           <img className={img === mainImage ? "active" : ""} src={"http://localhost:3500/media/"+img} alt="" />
         ))}
@@ -160,11 +173,13 @@ export function ShowProduct({userProduct, userAttributes}) {
       <div className="category">
         {userProduct.categorie.name}
       </div>
-      <h1>{userProduct.name.toUpperCase()}</h1>
+      <h1>{userProduct.name}</h1>
       <div className="price">
-      <div className="originalPrice">
-          {product.originalPrice} <span>mad</span>
-        </div>
+        {product.originalPrice ? (
+          <div className="originalPrice">
+              {product.originalPrice} <span>mad</span>
+            </div>
+        ) : null}
         <div className="salePrice">
           {product.salePrice} <span>mad</span>
         </div>
@@ -173,7 +188,7 @@ export function ShowProduct({userProduct, userAttributes}) {
         {/* {console.log(attributes)} */}
         {attributes.map(att => (
           <div key={att._id } className={"variant " + att.type}>
-            <div className="name">{att.public_name}</div>
+            <div className="name">{att.public_name} :</div>
             <div className="parent-variants">
               {att.type === "colorSpans" ? (
                 att.values.map((v, index )=> (
@@ -182,7 +197,8 @@ export function ShowProduct({userProduct, userAttributes}) {
                       showVariantCheckedHandle({...prev, [att._id]: v.id})
                       return {...prev, [att._id]: v.id}
                     })
-                  }} className={v.id === attributesChecked[att._id] ? "active" : ""} style={{background: v.color}}></span>
+                  }} className={v.id === attributesChecked[att._id] ? "active" : ""} style={{background: v.color}}>
+                  </span>
                 ))
               ) :att.type === "checkBox" ? (
                 att.values.map((v, index )=> (
@@ -209,20 +225,26 @@ export function ShowProduct({userProduct, userAttributes}) {
             </div>
           </div>
         ))}
-          <div className="controller">
-            <button disabled={quantiteValue === 1} onClick={() => setQuantiteValue(prev => prev > 1 ? --prev : prev)} className="minus"> <BiMinus/> </button>
-            <input type="text" disabled value={quantiteValue} />
-            <button disabled={quantiteValue === 10} onClick={() => setQuantiteValue(prev => prev < 10 ? ++prev : prev)} className="plus"> <BiPlus/> </button>
-          </div>
+        <div className="variant">
+          <div className="name">Quantite :</div>
+            <div className="controller">
+              <button disabled={quantiteValue === 1} onClick={() => setQuantiteValue(prev => prev > 1 ? --prev : prev)} className="minus"> <BiMinus/> </button>
+              <input type="text" disabled value={quantiteValue} />
+              <button disabled={quantiteValue === 10} onClick={() => setQuantiteValue(prev => prev < 10 ? ++prev : prev)} className="plus"> <BiPlus/> </button>
+            </div>
+        </div>
       </div>
       <div className="footer">
         <div className="btns">
-          <div className="buy">Buy it now</div>
-          <div onClick={addToCardHandle} className="add-to-card">Add to card</div>
+          <div className="buy">Commander Maintenant</div>
+          <div className="btns-container">
+            <div onClick={addToCardHandle} className="add-to-card">Ajouter au panier</div>
+            <div className="favorate"><BsHeart/></div>
+          </div>
         </div>
-        <div className="favorate">
-          <BiSolidHeart/>
-        </div>
+        {/* <div className="favorate">
+          <BsHeart/>
+        </div> */}
       </div>
       <div className="parent-description">
         <h5>Description :</h5>

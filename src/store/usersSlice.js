@@ -1,4 +1,4 @@
-import { createSlice , createAsyncThunk } from "@reduxjs/toolkit"
+import { createSlice , createAsyncThunk, current } from "@reduxjs/toolkit"
 import { adminAPI } from "../API/axios-global"
 import undefined_avatar from "../assets/undefined_avatar.png"
 import ClearStates from "../utils/ClearStates"
@@ -97,6 +97,8 @@ async () => {
     // }).catch(err => rejectWithValue(err))
     return true
 })
+
+// Shopping Cart
 export const addToCard = createAsyncThunk("addToCard",
 async ({finalyProduct1,variant}, thunkAPI) => {
   const {rejectWithValue} = thunkAPI
@@ -199,6 +201,93 @@ async ({productId,variantId}, thunkAPI) => {
   // return cardArray
   return newArray
 })
+// Wish List
+export const addToWishList = createAsyncThunk("addToWishList",
+async (_id, thunkAPI) => {
+  const {rejectWithValue} = thunkAPI
+  console.log(_id);
+  if(localStorage.getItem("WISH_LIST")) {
+    let currentArray = JSON.parse(localStorage.getItem("WISH_LIST"))
+    let itemExist = currentArray.filter(i => i === _id)[0]
+    if (!itemExist) {
+      localStorage.setItem("WISH_LIST" , JSON.stringify([...currentArray,_id]))
+    }
+  }else{
+    localStorage.setItem("WISH_LIST" , JSON.stringify([_id]))
+  }
+  return JSON.parse(localStorage.getItem("WISH_LIST"))
+    // async function newShoppingCard(){
+      // if(localStorage.getItem("shoppingCard")){
+      //   let cardArray = JSON.parse(localStorage.getItem("shoppingCard"))
+      //   let productExist = await cardArray.find(prod => prod.productId === finalyProduct1.productId)
+      //   if(productExist){
+      //     let variantExist = await productExist.variants.find(v => v.variantId === variant.variantId)
+      //     let newProduct
+      //     if (variantExist) {
+      //       newProduct = {
+      //         ...productExist,
+      //         variants: productExist.variants.map(v => {
+      //           if(v.variantId === variant.variantId){
+      //             return variant
+      //           }
+      //           return v
+      //         })
+      //       }
+      //     }else{
+      //       newProduct = {
+      //         ...productExist,
+      //         variants: [...productExist.variants , variant]
+      //       }
+      //     }
+          
+      //     console.log(newProduct);
+      //     let newArray = cardArray.map(prod => {
+      //       if (prod.productId === finalyProduct1.productId) {
+      //         return newProduct
+      //       }
+      //       return prod
+      //     })
+      //     localStorage.setItem("shoppingCard", JSON.stringify(newArray))
+      //     console.log(newArray);
+      //     return newArray
+      //   }else{
+      //     let newProduct = {
+      //       ...finalyProduct1,
+      //       variants: [variant]
+      //     }
+      //     localStorage.setItem("shoppingCard", JSON.stringify([...JSON.parse(localStorage.getItem("shoppingCard")),newProduct]))
+      //     return JSON.parse(localStorage.getItem("shoppingCard"))
+      //   }
+      // }else{
+      //     let newProduct = {
+      //       ...finalyProduct1,
+      //       variants: [variant]
+      //     }
+      //     localStorage.setItem("shoppingCard", JSON.stringify([newProduct]))
+      //     return [newProduct]
+      // }
+    // }
+})
+export const getWishList = createAsyncThunk("getWishList",
+async (_, thunkAPI) => {
+  const {rejectWithValue} = thunkAPI
+  if(localStorage.getItem("WISH_LIST")){
+    
+    return JSON.parse(localStorage.getItem("WISH_LIST"))
+  }else{
+    return []
+  }
+})
+export const deleteProductWishList = createAsyncThunk("deleteProductWishList",
+async ({_id , products}, thunkAPI) => {
+  const {rejectWithValue} = thunkAPI
+  let newProducts = products.filter(prod => prod._id !== _id)
+  let newWishList = await JSON.parse(localStorage.getItem("WISH_LIST")).filter(item => item !== _id)
+  localStorage.setItem("WISH_LIST" , JSON.stringify(newWishList))
+  return {newProducts , newWishList}
+})
+
+
 export const changeQuantite = createAsyncThunk("changeQuantite",
 async ({type, variantId}, thunkAPI) => {
   const {rejectWithValue} = thunkAPI
@@ -266,7 +355,7 @@ async (formObj, thunkAPI) => {
     return docs.data
 }).catch(err => rejectWithValue(err))
 })
-const initState = {user: null, shoppingCard: [],
+const initState = {user: null, shoppingCard: [], wishList: [],
   registerUserStatus: {isLoading: false, error:false , success:false},
   loginUserStatus: {isLoading: false, error:false , success:false},
   addAuthToStateStatus: {isLoading: false, error:false , success:false},
@@ -536,7 +625,7 @@ const usersSlice = createSlice({
           state.addToCardStatus = {
             ...state.addToCardStatus,
             isLoading: false,
-            success : action.payload.product
+            success : action.payload.shoppingCard
           }
         },
         [addToCard.rejected]: (state , action) => {
@@ -547,6 +636,84 @@ const usersSlice = createSlice({
             error : action.payload.message || "Failed To Add Product"
           }
         },
+                // WISH LIST
+                [getWishList.pending]: (state , action) => {
+                  // console.log(action);
+                  // state.addToCardStatus = {
+                  //   isLoading: true,
+                  //   error:false,
+                  //   success : false
+                  // }
+                },
+                [getWishList.fulfilled]: (state , action) => {
+                  // console.log(action.payload,55555555);
+                  state.wishList = action.payload
+                  // state.addToCardStatus = {
+                  //   ...state.addToCardStatus,
+                  //   isLoading: false,
+                  //   success : action.payload
+                  // }
+                },
+                [getWishList.rejected]: (state , action) => {
+                  console.log(action);
+                  // state.addToCardStatus = {
+                  //   ...state.addToCardStatus,
+                  //   isLoading: false,
+                  //   error : action.payload.message || "Failed To Add Product"
+                  // }
+                },
+                                // WISH LIST
+                                [addToWishList.pending]: (state , action) => {
+                                  // console.log(action);
+                                  // state.addToCardStatus = {
+                                  //   isLoading: true,
+                                  //   error:false,
+                                  //   success : false
+                                  // }
+                                },
+                                [addToWishList.fulfilled]: (state , action) => {
+                                  // console.log(action.payload,55555555);
+                                  state.wishList = action.payload
+                                  // state.addToCardStatus = {
+                                  //   ...state.addToCardStatus,
+                                  //   isLoading: false,
+                                  //   success : action.payload
+                                  // }
+                                },
+                                [addToWishList.rejected]: (state , action) => {
+                                  console.log(action);
+                                  // state.addToCardStatus = {
+                                  //   ...state.addToCardStatus,
+                                  //   isLoading: false,
+                                  //   error : action.payload.message || "Failed To Add Product"
+                                  // }
+                                },
+                                                                // WISH LIST
+                                                                [deleteProductWishList.pending]: (state , action) => {
+                                                                  // console.log(action);
+                                                                  // state.addToCardStatus = {
+                                                                  //   isLoading: true,
+                                                                  //   error:false,
+                                                                  //   success : false
+                                                                  // }
+                                                                },
+                                                                [deleteProductWishList.fulfilled]: (state , action) => {
+                                                                  // console.log(action.payload,55555555);
+                                                                  state.wishList = action.payload.newWishList
+                                                                  // state.addToCardStatus = {
+                                                                  //   ...state.addToCardStatus,
+                                                                  //   isLoading: false,
+                                                                  //   success : action.payload
+                                                                  // }
+                                                                },
+                                                                [deleteProductWishList.rejected]: (state , action) => {
+                                                                  console.log(action);
+                                                                  // state.addToCardStatus = {
+                                                                  //   ...state.addToCardStatus,
+                                                                  //   isLoading: false,
+                                                                  //   error : action.payload.message || "Failed To Add Product"
+                                                                  // }
+                                                                },
 
         // delete product from card
         [deleteProductFromCard.pending]: (state , action) => {

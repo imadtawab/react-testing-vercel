@@ -1,14 +1,8 @@
 .PriceProgress {
-  color: var(--dark-color);
-  // --color-bar: #7d7d7d;
-  --color-bar: #1c99a3;
-  padding: 20px 30px;
+  --color-bar: #2e6bc6;
+  padding: 20px 0px;
   .inputs-progress {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    align-items: center;
-
+    display: none;
     .min,
     .max {
       display: flex;
@@ -51,13 +45,12 @@
   .progress-bar {
     background: #e7e7e7;
     border-radius: 10px;
-    height: 10px;
+    height: 4px;
     position: relative;
-    margin: 25px 0;
+    margin: 10px 0 30px 0;
     .progress-truck {
       position: absolute;
       background: var(--color-bar);
-      // background: #009688;
       top: 0;
       height: 100%;
       left: 0%;
@@ -82,8 +75,8 @@
         /* Styles for the thumb in WebKit browsers */
         -webkit-appearance: none;
         appearance: none;
-        width: 20px; /* Set the width of the thumb */
-        height: 20px; /* Set the height of the thumb */
+        width: 16px; /* Set the width of the thumb */
+        height: 16px; /* Set the height of the thumb */
         background: var(--color-bar); /* Set the background color of the thumb */
         border-radius: 50%; /* Make the thumb circular */
         cursor: pointer; /* Set the cursor to a pointer */
@@ -92,21 +85,153 @@
       }
       &:-moz-range-thumb {
         /* Styles for the thumb in Firefox */
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
         background: var(--color-bar);
         border-radius: 50%;
         cursor: pointer;
       }
     }
   }
-  .result{
-    background: #efefef;
-    padding: 12px;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 17px;
-    color: #393939;
+  .progress-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    .result{
+      font-weight: 300;
+      font-size: 14px;
+      color: #777;
+      span {
+        font-weight: bold;
+        color: #424242;
+      }
+    }
+    .filter-btn {
+      cursor: pointer;
+      background: #f1f1f1;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 13px;
+    border-radius: 4px;
+    transition: background .3s;
+    &:hover {
+      background: #d9d8d8;
+    }
+    }
   }
 }
+// .PriceProgress {
+//   color: var(--dark-color);
+//   // --color-bar: #7d7d7d;
+//   --color-bar: #1c99a3;
+//   padding: 20px 30px;
+//   .inputs-progress {
+//     display: flex;
+//     justify-content: center;
+//     gap: 20px;
+//     align-items: center;
+
+//     .min,
+//     .max {
+//       display: flex;
+//       align-items: center;
+//       gap: 10px;
+//       input {
+//         // padding: 10px;
+//         // width: 60px;
+//         // border-radius: 5px;
+//         // outline: none;
+//         // appearance: none;
+//         // border: none;
+//         // box-shadow: 0 0 3px 2px #d9d9d9;
+//         padding: 10px;
+//         width: 60px;
+//         border-radius: 5px;
+//         outline: none;
+//         appearance: none;
+//         border: none;
+//         /* box-shadow: 0 0 3px 2px #d9d9d97a; */
+//         text-align: center;
+//         background: #e3f3f4;
+//         border-bottom: 2px solid var(--color-bar);
+//         font-weight: bolder;
+//     color: #4a4141;
+//         &::-webkit-outer-spin-button,
+//         &::-webkit-inner-spin-button {
+//           -moz-appearance: textfield;
+//           -webkit-appearance: none;
+//           margin: 0;
+//         }
+//       }
+//     }
+//     .seperator {
+//       width: 12px;
+//       background: #696969;
+//       height: 2px;
+//     }
+//   }
+//   .progress-bar {
+//     background: #e7e7e7;
+//     border-radius: 10px;
+//     height: 10px;
+//     position: relative;
+//     margin: 25px 0;
+//     .progress-truck {
+//       position: absolute;
+//       background: var(--color-bar);
+//       // background: #009688;
+//       top: 0;
+//       height: 100%;
+//       left: 0%;
+//       right: 0%;
+//       border-radius: 10px;
+//     }
+//     input[type="range"] {
+//       position: absolute;
+//       width: 100%;
+//       height: 0;
+//       top: 50%;
+//       appearance: none;
+//       margin: 0;
+//       pointer-events: none;
+//       &[name="min-range"] {
+//         left: -10px;
+//       }
+//       &[name="max-range"] {
+//         right: -10px;
+//       }
+//       &::-webkit-slider-thumb {
+//         /* Styles for the thumb in WebKit browsers */
+//         -webkit-appearance: none;
+//         appearance: none;
+//         width: 20px; /* Set the width of the thumb */
+//         height: 20px; /* Set the height of the thumb */
+//         background: var(--color-bar); /* Set the background color of the thumb */
+//         border-radius: 50%; /* Make the thumb circular */
+//         cursor: pointer; /* Set the cursor to a pointer */
+//         pointer-events: auto;
+//         cursor: pointer;
+//       }
+//       &:-moz-range-thumb {
+//         /* Styles for the thumb in Firefox */
+//         width: 20px;
+//         height: 20px;
+//         background: var(--color-bar);
+//         border-radius: 50%;
+//         cursor: pointer;
+//       }
+//     }
+//   }
+//   .result{
+//     background: #efefef;
+//     padding: 12px;
+//     border-radius: 10px;
+//     text-align: center;
+//     font-weight: bold;
+//     font-size: 17px;
+//     color: #393939;
+//   }
+// }

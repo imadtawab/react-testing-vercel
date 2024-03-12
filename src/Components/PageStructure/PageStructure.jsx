@@ -3,12 +3,12 @@ import "./PageStructure.scss"
 import { NavLink } from 'react-router-dom'
 
 
-export default function PageStructure({children , title , button , personelButton}) {
+export default function PageStructure({key , children , title , button , personelButton}) {
     // children = content
     // title = h1
     // button = {type, href, name}
   return (
-    <div className="PageStructure">
+    <div key={key} className="PageStructure">
         <div className="head">
             <h1>{title}</h1>
             {button && (

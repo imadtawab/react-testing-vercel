@@ -15,7 +15,7 @@ export default function Home() {
   const { client_getProductsStatus , allProducts } = useSelector(state => state.client_products)
   console.log(client_getProductsStatus);
   useEffect(() => {
-    dispatch(client_getProducts({filter: {},limit: 8})).then(docs => {
+    dispatch(client_getProducts({filter: {},limit: null})).then(docs => {
       if(docs.type === "client_getProducts/fulfilled"){
         setProducts(docs.payload.data)
       }
@@ -28,7 +28,6 @@ export default function Home() {
         <CategoriesSection/>
         <ClientProducts products={products} />
         <Btn style={{margin: "80px auto 10px" ,width: "fit-content"}} element="a" to="/products" btnStyle="bg" color="dark">All products</Btn>
-        {/* <MasterCleanse/> */}
       </Loading>
     </div>
   )

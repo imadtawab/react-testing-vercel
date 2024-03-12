@@ -6,10 +6,10 @@ import ClearStates from "../utils/ClearStates";
 
 
 export const client_getProducts = createAsyncThunk("client_getProducts",
-async ({filter,limit}, thunkAPI) => {
+async ({filter,limit , specialItems}, thunkAPI) => {
     const {rejectWithValue} = thunkAPI
     console.log(limit ? limit : "");
-    return clientAPI.post(`/products${limit ? "?limit="+limit : ""}` ,filter).then((docs) => {
+    return clientAPI.post(`/products${limit ? "?limit="+limit : ""}` ,{reqFilters: filter , specialItems}).then((docs) => {
         return docs.data
     }).catch(err => rejectWithValue(err))
 

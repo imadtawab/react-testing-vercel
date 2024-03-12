@@ -8,7 +8,6 @@ export default function ClientSectionStructure({keyy , subTitle, title , childre
             <h2>{title}</h2>
             {description && <p>{description}</p>}
         </div>
-
         {children && (
                   <div className="content">
                   {children}

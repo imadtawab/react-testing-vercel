@@ -1,8 +1,9 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  //   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  //   sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
     color: #1a1a1a;
@@ -28,14 +29,38 @@ a{
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: sans-serif;
 }
 
 :root{
-  
-  --main-color:#6366f1;
+  --brend-color: #166fab;
+  --second-color: #0d2c47;
+  // --text-color
+  // --bg-color
+  // --border
+--brend-color: #007BFF;
+--brend-color: #4CAF50;
+--brend-color: #3498db;
+--brend-color: #3498db;
+--brend-color: #e74c3c;
+--brend-color: #f5f5f5;
+--brend-color: #333333;
+--brend-color: #27ae60;
+--brend-color: #f39c12;
+--brend-color: #ecf0f1;
+--brend-color: #9b59b6;
+--brend-color: #555555;
+--brend-color: #e67e22;
+--brend-color: #2ecc71;
+--brend-color: #ff6f61;
+--brend-color: #8e44ad;
+--brend-color: #349e9e;
+--brend-color: #ffcc29;
+--brend-color: #ff5e62;
+
+  // --main-color:#6366f1;
+  // --main-color: #3498db;
   --third-color:#75815b;
-  --second-color:#dbc0a4;
+  --second-colorr:#dbc0a4;
   --main-color:#414141;
   // --main-color:#008060;
   --pd: 20px;
@@ -132,6 +157,9 @@ table{
           h4{
               font-weight: 600;
               text-transform: capitalize;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              max-width: 160px;
           }
           .info{
             display: flex;

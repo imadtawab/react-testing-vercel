@@ -7,27 +7,50 @@ import { BiCart, BiMenu } from 'react-icons/bi'
 import { useEffect, useState } from 'react'
 import logoImg from "../../../assets/371ea0d5-6da8-45d8-a97b-0742ae669c82.jpg"
 import { useDispatch, useSelector } from 'react-redux'
-import { getShoppingCard } from '../../../store/usersSlice'
-import { BsCart, BsCart3 } from 'react-icons/bs'
+import { getShoppingCard, getWishList } from '../../../store/usersSlice'
+import { BsCart, BsCart3, BsHeart } from 'react-icons/bs'
+import SecondCard from '../../../Pages/Client/SecondCard/SecondCard'
 export default function ClientLayout() {
   const [showMenuBar, setShowMenuBar] = useState(false)
   const dispatch = useDispatch()
-  const {shoppingCard , getShoppingCardStatus} = useSelector(s => s.users)
-  const [numberOfCard , setNumberOfCard] = useState([...shoppingCard.map(p => p.variants.map(v => v.quantiteUser)).map(a => a.reduce((a,b) => a+b)),0,0].reduce((a,b) => a+b))
+  const {shoppingCard , wishList} = useSelector(s => s.users)
+  const [numberOfCard , setNumberOfCard] = useState(0)
+  const [numberOfWishList , setnumberOfWishList] = useState(0)
 
-  useEffect(() => {
-    dispatch(getShoppingCard())
-    // setNumberOfCard([...shoppingCard.map(p => p.variants.length),0,0].reduce((a,b) => a + b))
-  }, [dispatch])
-
-  useEffect(() => {
-    console.log(shoppingCard,96);
-        setNumberOfCard([...shoppingCard.map(p => p.variants.map(v => v.quantiteUser)).map(a => a.reduce((a,b) => a+b)),0,0].reduce((a,b) => a+b))
-  }, [shoppingCard])
+  // useEffect(() => {
+  //   dispatch(getShoppingCard())
+  //   // setNumberOfCard([...shoppingCard.map(p => p.variants.length),0,0].reduce((a,b) => a + b))
+  // }, [dispatch])
   
+  useEffect(() => {
+    setNumberOfCard([...shoppingCard.map(p => p.variants.map(v => v.quantiteUser)).map(a => a.reduce((a,b) => a+b)),0,0].reduce((a,b) => a+b))
+}, [shoppingCard])
+useEffect(() => {
+  console.log(wishList);
+  setnumberOfWishList(wishList.length)
+}, [wishList])
 
+  
+  // const openCart = (status) => {
+  //   const action = {
+  //     type : "cart/show" ,
+  //     payload : status
+  //     }
+  //     dispatch(action)
+  //     // console.log("dima maghrib",modalActions.show(action));
+    
+  // }
+  const openCartHandle = (status) => {
+    if(window.location.pathname !== '/cart') {
+      dispatch({
+        type : "cart/show" ,
+        payload : status
+        })
+    }
+  }
   return (
     <div className='ClientLayout'>
+      <SecondCard/>
       <div className="header">
       <div className="container">
       <div className="menu-icon">
@@ -95,10 +118,14 @@ export default function ClientLayout() {
               <h1>Evershop</h1>
             </div>
             <div className="menu-icon">
-              <NavLink to="cart"><BsCart3/>
+              <NavLink to="/wishlist" className="cart-icon">
+                <BsHeart/>
+                {numberOfWishList > 0 ? <div className="numberOfCard">{numberOfWishList}</div> : false}
+              </NavLink>
+              <div onClick={() => openCartHandle(true)} className='cart-icon'><BsCart3/>
             {numberOfCard > 0 ? <div className="numberOfCard">{numberOfCard}</div> : false}
             {/* {shoppingCard.length > 0 ? <div className="numberOfCard">({shoppingCard.length})</div> : false} */}
-              </NavLink>
+              </div>
               
               {/* <BiMenu onClick={() => setShowMenuBar(!showMenuBar)} /> */}
             </div>
@@ -117,14 +144,18 @@ export default function ClientLayout() {
                 </li>
               </ul>
               <div className="right-section">
-                <NavLink to="cart"><BsCart3/>
+              <NavLink to="wishlist" className="cart-icon">
+                <BsHeart/>
+                {numberOfWishList > 0 ? <div className="numberOfCard">{numberOfWishList}</div> : false}
+              </NavLink>
+                <div onClick={() => openCartHandle(true)} className='cart-icon'><BsCart3/>
                        {/* {localStorage.getItem("shoppingCard") ? (
                               <div className="numberOfCard">({JSON.parse(localStorage.getItem("shoppingCard")).length})
                             </div>
               ): false
               } */}
               {numberOfCard > 0 ? <div className="numberOfCard">{numberOfCard}</div> : false}
-              </NavLink>
+              </div>
                 {/* <NavLink to="cart">Go to Cart <FaArrowRight/></NavLink> */}
               </div>
         </div>

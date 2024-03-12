@@ -24,10 +24,10 @@ export default function OrderDetails() {
     useEffect(() => {
         dispatch(getOrderDetails(params.id)).then((docs) => {
             if(docs.type === "getOrderDetails/fulfilled"){
-                // setOrder(docs.payload.data)
+                console.log(docs);
             }
         })
-            dispatch({type: "orders/states" , payload: ["changeOrderStatus_Status" , "deleteOrderStatus_Status" , "newPersonalNote_Status"]}) 
+        dispatch({type: "orders/states" , payload: ["changeOrderStatus_Status" , "deleteOrderStatus_Status" , "newPersonalNote_Status"]}) 
     },[dispatch])
     // useEffect(() => {
     //     dispatch(getOrderDetails(itemId ? itemId : params.id))
@@ -37,13 +37,14 @@ export default function OrderDetails() {
   return (
     <>
         <Loading status={getOrderDetailsStatus}>
-            {getOrderDetailsStatus.success && <OrderDetailsHandle order={getOrderDetailsStatus.success.data}/>}
+            {console.log(getOrderDetailsStatus)}
+            {getOrderDetailsStatus.success && <OrderDetailsHandle key="not-tracking-order" order={getOrderDetailsStatus.success.data}/>}
         </Loading>
     </>
   )
 }
 
-export function OrderDetailsHandle({order , setFullScreenForAfterPrint}) {
+export function OrderDetailsHandle({order , setFullScreenForAfterPrint , key}) {
     const [statusArray , setStatusArray] = useState(["pending" , "confirmed" , "shipped" , "delivered" , "cancelled" , "on_hold" , "delayed" , "returned"])
     const [nextStatus , setNextStatus]  =useState("")
     const [backStatus , setBackStatus]  =useState("")
@@ -143,7 +144,7 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint}) {
      {newPersonalNote_Status.error && (
         <Alert type="danger">{newPersonalNote_Status.error}</Alert>
     )}
-    <PageStructure title="Order Details" personelButton={<Btn style={{display: "inline-block"}} onClick={() => {
+    <PageStructure key={key} title="Order Details" personelButton={<Btn style={{display: "inline-block"}} onClick={() => {
         if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
             setFullScreenForAfterPrint(true)
             console.log(true , "on click in print btn");
@@ -164,7 +165,6 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint}) {
                                 </tr>
                             </thead>
                             <tbody>
-                            
                                 {/**************************/}
                                 {order.shoppingCard.map((prod , ind) => (
                                     <>

@@ -1,4 +1,244 @@
-.SecondCard{
+.SecondCard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000000b3;
+    width: 100vw;
+    height: 100vh;
+    z-index: 11111111111111;
+    transition: all .3s;
+    &.closed {
+        transition: all .3s .15s;
+        visibility: hidden;
+        opacity: 0;
+        .card-container {
+            right: -100% !important;
+        }
+    }
+    .card-container {
+        background: #fff;
+        width: 340px;
+        position: fixed;
+        right: 0;
+        top: 0;
+        --border-card: 1px solid #0000001b;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        max-width: 100%;
+        transition: all .3s;
+        // animation: SecondCard .3s ease 1 forwards;
+        // @keyframes SecondCard {
+        //     0%{
+        //         right: -100%;
+        //     }
+        //     100%{
+        //         right: 0;
+        //     }
+        // }
+        @media (max-width: 512px) {
+            width: 300px;
+        }
+        .top-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: var(--border-card);
+            > h2 {
+                font-weight: 600;
+                font-size: 18px;
+            }
+            .close-btn {
+                display: flex;
+                align-items: center;
+                font-weight: 600;
+                font-size: 14px;
+                cursor: pointer;
+                svg {
+                    font-size: 23px;
+                }
+            }
+        }
+        .content-card {
+            overflow: auto;
+            scrollbar-width: thin;
+            flex: 1;
+            .card {
+                padding: 15px;
+                display: flex;
+                justify-content: space-between;
+                transition: background .3s;
+                &:not(:last-child) {
+                    border-bottom: var(--border-card);
+                }
+                &:hover {
+                    background: #f7f7f7;
+                    .text-info {
+                        h3 {
+                            color: #888;
+                        }
+                    }
+                }
+                &.multi-variants {
+                    .mulit-cart {
+                        flex: 1;
+                        .card-info {
+                            .image {
+                                img {
+
+                                }
+                            }
+                            .text-info {
+                                flex: 1;
+                                .sub-card {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    .sub-container {
+                                        display: flex;
+                                        gap: 5px;
+                                        &:not(:last-child) {
+                                            margin-bottom: 10px;
+                                        }
+                                        .image {
+                                            width: 45px !important;
+        height: 45px !important;
+                                            img {
+                                                max-height: 45px !important;
+                                            }
+                                        }
+                                        .text-info {
+                                            .price-qty {
+            
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+                .card-info {
+                    display: flex;
+                    gap: 10px;
+                    .image {
+                        width: 65px;
+                        height: 65px;
+                        display: grid;
+                        place-content: center;
+                        flex: none;
+                        img {
+                            max-height: 65px;
+                        }
+                    }
+                    .text-info {
+                        opacity: 1;
+                        .variant {
+                            margin-bottom: 5px;
+                            color: #9d9d9d;
+                            font-weight: 600;
+                            text-transform: capitalize;
+                            font-size: 13px;
+                        }
+                        h3 {
+                            font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+    transition: background .3s;
+    text-transform: capitalize;
+                        }
+                        .price-qty {
+                            font-weight: 400;
+                            color: #bbb;
+                            span {
+                                // color: #2e6bc6;
+                                color: var(--brend-color);
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                }
+                .delete-card {
+                    font-size: 20px;
+    background: #fff;
+    height: fit-content;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    color: #676464;
+        padding: 2px;
+                }
+            }
+        }
+        .bottom-card {
+            padding: 20px;
+            border-top: var(--border-card);
+            .sub-total {
+                font-weight: 600;
+                font-size: 18px;
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+                span {
+                    color: #2e6bc6;
+                    color: var(--brend-color);
+                }
+            }
+            .btns-card {
+                opacity: 1;
+                a {
+                    display: block;
+                    padding: 14px;
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    text-align: center;
+                    border-radius: 6px;
+                    &:nth-child(1) {
+                        margin: 20px 0 10px 0;
+                        background: #ededed;
+                        color: #333;
+                    }
+                    &:nth-child(2) {
+                        color: #fff;
+                        background: #2e6bc6;
+                        background: var(--brend-color);
+                    }
+                }
+            }
+        }
+        > .empty-cart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 30px 25px;
+            img {
+                width: 90px;
+                opacity: .1;
+            }
+            p {
+                font-size: 16px;
+            }
+            a {
+                color: #fff;
+    // background: #2e6bc6;
+    background: var(--brend-color);
+    display: block;
+    padding: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 6px;
+    width: 100%;
+            }
+        }
+    }
+}
+.SecondCard1{
     // .box-card{
     background: #fff;
     box-shadow: 0 0 10px #b7b7b7;
@@ -10,8 +250,8 @@
     padding: 5px 20px;
     width: 350px;
     transform: translateX(1000px);
-    animation: secondCard .5s ease 1 forwards;
-    @keyframes secondCard {
+    animation: SecondCard1 .5s ease 1 forwards;
+    @keyframes SecondCard1 {
         0%{
             transform: translateX(1000px);
         }
@@ -26,8 +266,8 @@
         }
     }
     &.close-card{
-        animation: closeSecondCard .5s ease 1 forwards;
-        @keyframes closeSecondCard {
+        animation: closeSecondCard1 .5s ease 1 forwards;
+        @keyframes closeSecondCard1 {
             0%{
                 transform: translateX(0);
             }

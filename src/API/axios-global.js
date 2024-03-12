@@ -1,13 +1,14 @@
 import axios from 'axios'
 
-// http://localhost:3500
+// const apiUrl = "192.168.0.111:3500"
+const apiUrl = "http://localhost:3500"
 const adminAPI = axios.create({
-    baseURL: "http://localhost:3500/admin",
+    baseURL: `${apiUrl}/admin`,
 })
 
 adminAPI.defaults.withCredentials = true
 
 const clientAPI = axios.create({
-    baseURL: "http://localhost:3500/client",
+    baseURL: `${apiUrl}/client`,
 })
 export {adminAPI , clientAPI}

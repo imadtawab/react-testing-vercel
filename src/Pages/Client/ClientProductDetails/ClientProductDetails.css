@@ -233,7 +233,7 @@
   max-width: 80%;
 }
 .ClientProductDetails .parent .info .variants .controller .minus, .ClientProductDetails .parent .info .variants .controller .plus {
-  background: var(--second-color);
+  background: var(--second-colorr);
   width: 40px;
   height: 40px;
   display: grid;
@@ -288,7 +288,7 @@
   cursor: pointer;
 }
 .ClientProductDetails .parent .info .footer .btns .add-to-card {
-  --main: var(--second-color);
+  --main: var(--second-colorr);
 }
 .ClientProductDetails .parent .info .footer .favorate {
   color: var(--main-color);
