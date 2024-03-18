@@ -13,6 +13,8 @@ import Loading from '../../Loading/Loading'
 import CercleLoading from '../../CercleLoading/CercleLoading'
 import { SelectBox } from '../../InputBox/InputBox'
 import { RiHeartAddLine } from "react-icons/ri";
+import { TbEyeHeart } from "react-icons/tb";
+
 
 export default function ClientProducts({products , filter ,setProducts , key , filterss, setFilterss , wishLists}) {
     let productss = [
@@ -235,16 +237,28 @@ export default function ClientProducts({products , filter ,setProducts , key , f
                             <BsX/>
                             </span>
                             ) : (
-                            <span className={wishList.indexOf(prod._id) !== -1 ? "active" : null} onClick={() => addToWishListHandle(prod._id)} data-content="Ajouter aux favories">
-                            {/* <BsHeart/> */}
+                            // <span className={wishList.indexOf(prod._id) !== -1 ? "active" : null} onClick={() => addToWishListHandle(prod._id)} data-content={wishList.indexOf(prod._id) !== -1 ? "Parcourir mes favories" : "Ajouter aux favories"}>
+                            // {/* <BsHeart/> */}
+                            // <RiHeartAddLine/>
+                            // <NavLink to="/wishlist" className="fill">
+                            //   {/* <BsHeartFill/> */}
+                            //   <TbEyeHeart/>
+                            //   </NavLink>
+                            // </span>
+                            wishList.indexOf(prod._id) === -1 ? (
+                           <span onClick={() => addToWishListHandle(prod._id)} data-content="Ajouter aux favories">
                             <RiHeartAddLine/>
-                            <div className="fill"><BsHeartFill/></div>
                             </span>
+                            ) : (
+                          <NavLink to="/wishlist" className='fill' onClick={() => addToWishListHandle(prod._id)} data-content="Parcourir mes favories">
+                              <TbEyeHeart/>
+                            </NavLink>
+                            )
                             )}
                         </div>
                         <div className="image">
-                            <img src={"http://localhost:3500/media/"+prod.media.images[0]} alt={prod.name} />
-                            {/* <img src={prod.image} alt={prod.name} /> */}
+                            <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.media.images[0]}`} alt={prod.name} />
+                            {/* <img loading='lazy' src={prod.image} alt={prod.name} /> */}
                         <div onClick={(e) => addToCartHandle(e,prod.variants.length > 0 , prod)} className="buy"><span>{prod.variants.length > 0 ? "Choix des options" : "Ajouter au panier"}</span><span>{client_productDetailsStatus.isLoading ? <CercleLoading type="btn"/> : <BsCart3/>}</span></div>
                         </div>
                         <p>{prod.categorie.name}</p>

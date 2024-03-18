@@ -232,17 +232,17 @@ export default function FilterProductsSection({setProducts , type ,  filterss , 
                 <div className="search">
                     <input type="text" name="" id="" placeholder='Search ...'/>
                 </div>
-                <div onClick={() => setOpenCategories(true)} className="box"><img src={categories_icon} alt="" /> categorie</div>
-                <div onClick={() => setOpenAttributes(true)} className="box"><img src={attributes_icon} alt="" /> Plus options</div>
+                <div onClick={() => setOpenCategories(true)} className="box"><img loading='lazy' src={categories_icon} alt="" /> categorie</div>
+                <div onClick={() => setOpenAttributes(true)} className="box"><img loading='lazy' src={attributes_icon} alt="" /> Plus options</div>
                 <button type='submit'>Search</button>
                 <div onClick={closeFilter} data-close={"categories"} className={`section-filter${openCategories ? " active" : ""}`}>
                     <div className={`container-filter`}>
                     <h4>Select Categories</h4>
                         <div className="categories">
                             <ul>
-                            <li className={!categorieSelect ? "active" : ""} onClick={() => categorieHandle(null)}><img src={categories_icon} alt="" />all products</li>
+                            <li className={!categorieSelect ? "active" : ""} onClick={() => categorieHandle(null)}><img loading='lazy' src={categories_icon} alt="" />all products</li>
                                 {categories.map(catg => ( // ({catg.number})
-                                    <li className={categorieSelect === catg._id ? "active" : ""} onClick={() => categorieHandle(catg._id)} key={catg._id}><img src={categories_icon} alt="" />{catg.name} </li>
+                                    <li className={categorieSelect === catg._id ? "active" : ""} onClick={() => categorieHandle(catg._id)} key={catg._id}><img loading='lazy' src={categories_icon} alt="" />{catg.name} </li>
                             ))}
                             </ul>
                         </div>
@@ -394,7 +394,8 @@ export function FilterProductsSection1({setProducts , openFilter , setOpenFilter
     <div className="top-filter">
         <div onClick={() => setOpenFilter(false)} className="close-btn"><BsX/> Fermer</div>
     </div>
-<div className="one-section price">
+    <div className="content-filter">
+    <div className="one-section price">
             <h4>Filter By Price</h4>
             <PriceProgress step={100} cielValue={1000} min_input={min_input} setMin_input={setMin_input} max_input={max_input} setMax_input={setMax_input}/>
         </div>
@@ -433,6 +434,7 @@ export function FilterProductsSection1({setProducts , openFilter , setOpenFilter
                         {/* )} */}
                     </div>
             ))}
+    </div>
      
         {/* <Btn onClick={filterHandle} width="full" color="dark" element="button" btnStyle="bg">Filter</Btn> */}
 </div>

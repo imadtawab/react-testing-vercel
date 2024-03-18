@@ -8,7 +8,7 @@ export default function EmptyErrorSection() {
         height: "330px",
         overflow: "hidden",
         background: "#fff"}} className="EmptyErrorSection">
-      <img style={{width: "400px", maxWidth: "100%",
+      <img loading='lazy' style={{width: "400px", maxWidth: "100%",
     height: "auto"}} src={emptySvg} alt="" />
     </div>
   );

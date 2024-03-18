@@ -128,7 +128,7 @@ export default function NewProduct({ editProduct, productData }) {
       setSrcImages((prev) =>
         productData.product.media.images.map((img) => {
           return {
-            src: "http://localhost:3500/media/" + img,
+            src: `${process.env.REACT_APP_SERVER_DOMAINE}/media/${img}`,
             srcApi: img,
             id: Math.random() * 50 + "_" + img,
           };
@@ -319,7 +319,7 @@ export default function NewProduct({ editProduct, productData }) {
                       ))}
                     </SelectBox>
                     {/* {categories.length === 0 && ( */}
-                      <a target="_blank" className="add-categories" href="http://localhost:3000/admin/categories" rel="noreferrer">+ Add Categories</a>
+                      <a target="_blank" className="add-categories" href={`${process.env.REACT_APP_SERVER_DOMAINE}/admin/categories`} rel="noreferrer">+ Add Categories</a>
                     {/* )} */}
                    
                       </>
@@ -414,7 +414,7 @@ export default function NewProduct({ editProduct, productData }) {
                               x
                             </span>
                           </div>
-                          <img src={img.src} alt="product img" />
+                          <img loading='lazy' src={img.src} alt="product img" />
                         </div>
                       ))}
                     </div>
@@ -431,7 +431,7 @@ export default function NewProduct({ editProduct, productData }) {
                       id="urlKey"
                       placeholder="Url key"
                       label="Url key"
-                      leftSlug="http://localhost:3000/products/"
+                      leftSlug={`${process.env.REACT_APP_SERVER_DOMAINE}/products/`}
                       slugWrap={true}
                       required
                       checkValueInDB={{

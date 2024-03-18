@@ -397,9 +397,9 @@ s
 //                                 height: order.shoppingCard.length > 1 ? "25px" : "50px",
 //                                 display: "grid",
 //                                 placeContent: "center",}} className="img">
-//                                     <img style={{    maxWidth: "100%",
+//                                     <img loading='lazy' style={{    maxWidth: "100%",
 //                                     // ${p.media.images[0]} for delete
-//                                     maxHeight: order.shoppingCard.length > 1 ? "25px" : "50px",}} src={`http://localhost:3500/media/${p.main_image}`} alt="" />
+//                                     maxHeight: order.shoppingCard.length > 1 ? "25px" : "50px",}} src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${p.main_image}`} alt="" />
 //                             </div>
 //                                 ))}
 //                             </div>
@@ -506,7 +506,7 @@ s
 //                     <td>
 //                         <div className="product-name">
 //                             <div className="img">
-//                                 <img src={productImg} alt="" />
+//                                 <img loading='lazy' src={productImg} alt="" />
 //                             </div>
 //                             <h4>product</h4>
 //                         </div>

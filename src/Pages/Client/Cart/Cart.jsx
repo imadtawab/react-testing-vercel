@@ -88,7 +88,7 @@ export default function Cart() {
                        <td>
                          <div className="product-details">
                            <div className="image">
-                             <img src={`http://localhost:3500/media/${prod.variants[0].image}`} alt="" />
+                             <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.variants[0].image}`} alt="" />
                            </div>
                            <div className="info">
                              <div className="title">{prod.name}</div>
@@ -130,7 +130,7 @@ export default function Cart() {
                        <td>
                          <div className="product-details">
                            <div className="image">
-                             <img src={`http://localhost:3500/media/${prod.image}`} alt="" />
+                             <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.image}`} alt="" />
                            </div>
                            <div className="info">
                              <div className="title">{prod.name}</div>
@@ -170,7 +170,7 @@ export default function Cart() {
                                <div className="product-details">
                                <div className="info sub-variants">
                                      <div className="sub-image">
-                                       <img src={`http://localhost:3500/media/${v.image}`} alt="" />
+                                       <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${v.image}`} alt="" />
                                      </div>
                                      <div className="variants">{v.variantName}</div>
                                    </div>

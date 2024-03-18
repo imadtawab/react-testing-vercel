@@ -15,7 +15,8 @@ export default function CategoriesSection() {
   useEffect(() => {
     dispatch(client_getCategories()).then(docs => {
       if (docs.type === "client_getCategories/fulfilled") {
-        setCategories(docs.payload.data)
+        console.log(docs);
+        if(docs.payload?.data) setCategories(docs.payload?.data)
       }
     })
   }, [])
@@ -163,8 +164,8 @@ export default function CategoriesSection() {
   }
   return (
     <>
-    {/* <Loading status={client_getCategories_Status}> */}
         <ClientSectionStructure subTitle="Categories" title="Our Popular Categories">
+    <Loading status={client_getCategories_Status}>
             <div className="CategoriesSection">
               <div className="coursel-container">
                 <div onClick={scrollToLeftBtnHandle} className="left-arrow"><BiChevronLeft/></div>
@@ -175,11 +176,11 @@ export default function CategoriesSection() {
                         <div className="categorie-image">
                           {catg.image ? (
                             <>
-                            {/* <img src={`${catg.image}`} alt="" draggable="false"/> */}
-                            <img src={`http://localhost:3500/media/${catg.image}`} alt="" draggable="false"/>
+                            {/* <img loading='lazy' src={`${catg.image}`} alt="" draggable="false"/> */}
+                            <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${catg.image}`} alt="" draggable="false"/>
                             </>
                             ) : (
-                              <img src={default_category} alt="" draggable="false"/>
+                              <img loading='lazy' src={default_category} alt="" draggable="false"/>
                               )}
                         </div>
                         <div className="categorie-info">
@@ -187,20 +188,14 @@ export default function CategoriesSection() {
                           <p>{catg.number} product{catg.number > 1 ? "s" : ""}</p>
                         </div>
                       </NavLink>
-                      // <NavLink to={`/categories/${catg.slug}`} key={catg._id} className="box-category">
-                      //   <div style={{backgroundImage: `url(http://localhost:3500/media/${catg.image})`}} className="image"></div>
-                      //   <div className="name">
-                      //     <h2>{catg.name}</h2>
-                      //   </div>
-                      // </NavLink>
                     ))}
                   </div>
                 </div>
                 <div onClick={scrollToRightBtnHandle} className="right-arrow"><BiChevronRight/></div>
               </div>
             </div>
+    </Loading>
         </ClientSectionStructure>
-    {/* </Loading> */}
     </>
   )
 }

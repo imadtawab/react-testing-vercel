@@ -9,6 +9,7 @@ export default function Auth_admin({children}) {
   const {user} = useSelector(s => s.users)
   const [cookies , setCookies] = useCookies()
   const navigate = useNavigate()
+  console.log(cookies , 777777);
   // adminAPI.get()
   // const changeDirection = () => {
   //   navigate("/admin/account/login")

@@ -43,8 +43,9 @@ export default function Header({setSideBarShow,sideBarShow}) {
             <BiBell/>
           </div>
           <div   className="profile" onClick={()=> setProfileMenu(!profileMenu)}   ref={dropdownRef}>
+            {console.log(user)}
             <div style={{backgroundImage: `url(${user?.avatar})`}} className="img">
-              {/* <img src={user?.avatar} alt="" /> */}
+              {/* <img loading='lazy' src={user?.avatar} alt="" /> */}
             </div>
             <div className="info">
               <p>Admin</p>

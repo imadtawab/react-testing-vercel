@@ -157,13 +157,13 @@ export function ShowProduct({userProduct, userAttributes}) {
           </>
         ) : null}
         {userProduct.media.images.map(img => (
-          <img className={img === mainImage ? "active" : ""} src={"http://localhost:3500/media/"+img} alt="" />
+          <img loading='lazy' className={img === mainImage ? "active" : ""} src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${img}`} alt="" />
         ))}
       </div>
       <div className="all-images">
       {userProduct.media.images.map(img => (
         <div className={`box ${img === mainImage ? "active" : ""}`}>
-          <img onClick={(eo) => setMainImage(img)} src={"http://localhost:3500/media/"+img} alt="" />
+          <img loading='lazy' onClick={(eo) => setMainImage(img)} src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${img}`} alt="" />
         </div>
       ))}
 

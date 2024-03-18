@@ -232,7 +232,7 @@ export default function CheckOutPage({shoppingCard,numberOfCard,setShowCheckOutP
                        <td>
                          <div className="product-details">
                            <div className="image">
-                             <img src={`http://localhost:3500/media/${prod.variants[0].image}`} alt="" />
+                             <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.variants[0].image}`} alt="" />
                            </div>
                            <div className="info">
                              <div className="title">{prod.name}</div>
@@ -274,7 +274,7 @@ export default function CheckOutPage({shoppingCard,numberOfCard,setShowCheckOutP
                        <td>
                          <div className="product-details">
                            <div className="image">
-                             <img src={`http://localhost:3500/media/${prod.image}`} alt="" />
+                             <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.image}`} alt="" />
                            </div>
                            <div className="info">
                              <div className="title">{prod.name}</div>
@@ -302,7 +302,7 @@ export default function CheckOutPage({shoppingCard,numberOfCard,setShowCheckOutP
                                <div className="product-details">
                                <div className="info sub-variants">
                                      <div className="sub-image">
-                                       <img src={`http://localhost:3500/media/${v.image}`} alt="" />
+                                       <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${v.image}`} alt="" />
                                      </div>
                                      <div className="variants">{v.variantName}</div>
                                    </div>
@@ -367,7 +367,7 @@ export default function CheckOutPage({shoppingCard,numberOfCard,setShowCheckOutP
             <div className="product-box">
                 <div className="product-info">
                   <div className="info-image">
-                    <img src={`http://localhost:3500/media/${prod.image}`}  alt="" />
+                    <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.image}`}  alt="" />
                     <div className="quantite">{prod.variants.map(v => v.quantiteUser).reduce((a,b) => a + b)}</div>
                   </div>
                   <div className="info-text">

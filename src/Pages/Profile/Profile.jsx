@@ -132,7 +132,7 @@ export default function Profile() {
           <InputBox mx_width label="Avatar" personelInput={
             <div className='avatar'>
               <div style={{backgroundImage: `url(${avatarImg ? avatarImg : undefined_avatar})`}} className="avatar-container">
-              {/* <img src={avatarImg ? avatarImg : undefined_avatar} alt=""/> */}
+              {/* <img loading='lazy' src={avatarImg ? avatarImg : undefined_avatar} alt=""/> */}
               </div>
               <label htmlFor='addAvatar' className="add-avatar">
                 <input ref={addFileInput} onChange={addAvatar} type="file" name="addAvatar" id="addAvatar" />

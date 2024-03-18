@@ -7,7 +7,7 @@ export default function UserProfile() {
     <div className='UserProfile'>
         <div className="couverture-picture">
             <div className="avatar">
-                <img src={user?.avatar} alt="" />
+                <img loading='lazy' src={user?.avatar} alt="" />
             </div>
         </div>
 

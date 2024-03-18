@@ -51,8 +51,8 @@ export default function SecondCard({products}) {
                       <NavLink to={`/products/${prod.slug}`} className="card">
                       <div className="card-info">
                         <div className="image">
-                        <img src={"http://localhost:3500/media/"+prod.variants[0].image} alt={prod.name} />
-                          {/* <img src={prod.image} alt="" /> */}
+                        <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.variants[0].image}`} alt={prod.name} />
+                          {/* <img loading='lazy' src={prod.image} alt="" /> */}
                         </div>
                         <div className="text-info">
                           <h3>{prod.name}</h3>
@@ -72,8 +72,8 @@ export default function SecondCard({products}) {
                         <div className="mulit-cart">
                           <div className="card-info">
                             <div className="image">
-                              <img src={"http://localhost:3500/media/"+prod.image} alt={prod.name} />
-                              {/* <img src={prod.image} alt="" /> */}
+                              <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.image}`} alt={prod.name} />
+                              {/* <img loading='lazy' src={prod.image} alt="" /> */}
                             </div>
                             <div className="text-info">
                               <h3>{prod.name}</h3>
@@ -82,7 +82,7 @@ export default function SecondCard({products}) {
                                 <div className="sub-card">
                                   <div className="sub-container">
                                     <div className="image">
-                                      <img src={`http://localhost:3500/media/${v.image}`} alt="" />
+                                      <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${v.image}`} alt="" />
                                     </div>
                                     <div className="text-info">
                                       <div className="variant">{v.variantName}</div>
@@ -104,8 +104,8 @@ export default function SecondCard({products}) {
                     // <NavLink to={`/products/${prod.slug}`} className="card">
                     //   <div className="card-info">
                     //     <div className="image">
-                    //     <img src={"http://localhost:3500/media/"+prod.image} alt={prod.name} />
-                    //       {/* <img src={prod.image} alt="" /> */}
+                    //     <img loading='lazy' src={"${process.env.REACT_APP_SERVER_DOMAINE}/media/"+prod.image} alt={prod.name} />
+                    //       {/* <img loading='lazy' src={prod.image} alt="" /> */}
                     //     </div>
                     //     <div className="text-info">
                     //       <h3>{prod.name}</h3>
@@ -130,7 +130,7 @@ export default function SecondCard({products}) {
                 </>
           ) : (
             <div className="empty-cart">
-              <img src={empty_card} alt="" />
+              <img loading='lazy' src={empty_card} alt="" />
               <p>Votre panier est vide.</p>
               <NavLink onClick={() => openCart(false)} to="/products">Continue Shopping</NavLink>
             </div>
@@ -155,7 +155,7 @@ export function SecondCard1({product}) {
             <div className="product">
               <div className="info">
                 <div className="image">
-                  <img src={`http://localhost:3500/media/${product.variant.image}`} alt="" />
+                  <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${product.variant.image}`} alt="" />
                 </div>
                 <div className="info-text">
                   <div className="name">{product.name}</div>

@@ -277,7 +277,7 @@
             height: 100%;
             max-width: 100%;
             transition: all .3s;
-            padding: 25px;
+            // padding: 25px;
             overflow: auto;
             scrollbar-width: thin;
             @media (max-width: 512px) {
@@ -285,6 +285,9 @@
             }
             .top-filter {
                 display: flex !important;
+            }
+            .content-filter {
+                padding: 30px 25px;
             }
         }
     }
@@ -295,7 +298,8 @@
             align-items: center;
             padding-bottom: 20px;
             border-bottom: 1px solid #0000001b;
-            margin-bottom: 20px;
+            // margin-bottom: 20px;
+            padding: 20px;
             .close-btn {
                 display: flex;
                 align-items: center;

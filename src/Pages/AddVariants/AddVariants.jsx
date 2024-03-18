@@ -413,7 +413,7 @@ export default function AddVariants({
                         )
                       )}
                     </div>
-                                <a target="_blank" className="add-categories" href="http://localhost:3000/admin/attributes" rel="noreferrer">+ Add Attributes</a>
+                                <a target="_blank" className="add-categories" href={`${process.env.REACT_APP_SERVER_DOMAINE}/admin/attributes`} rel="noreferrer">+ Add Attributes</a>
 </>
                     ) : (
                       <>

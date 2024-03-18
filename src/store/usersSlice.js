@@ -398,7 +398,7 @@ const usersSlice = createSlice({
           state.user = {
             userName: action.payload.user.userName,
             email: action.payload.user.email,
-            avatar: action.payload?.user?.avatar ? "http://localhost:3500/media/"+action.payload?.user?.avatar : undefined_avatar,
+            avatar: action.payload?.user?.avatar ? `${process.env.REACT_APP_SERVER_DOMAINE}/media/${action.payload?.user?.avatar}` : undefined_avatar,
             token: action.payload.token,
             phone: action.payload.user.phone,
           }
@@ -589,7 +589,7 @@ const usersSlice = createSlice({
           state.user = {
             userName: action.payload.user.userName,
             email: action.payload.user.email,
-            avatar: action.payload?.user?.avatar ? "http://localhost:3500/media/"+action.payload?.user?.avatar : undefined_avatar,
+            avatar: action.payload?.user?.avatar ? `${process.env.REACT_APP_SERVER_DOMAINE}/media/${action.payload?.user?.avatar}` : undefined_avatar,
             token: action.payload.token,
             phone: action.payload.user.phone,
           }
@@ -852,12 +852,12 @@ const usersSlice = createSlice({
             // phone: action.payload.user.phone,
           }
           // if (action.payload.avatar !== state.user.avatar){
-          // state.user.avatar= action.payload?.data?.avatar ? "http://localhost:3500/media/"+action.payload?.user?.avatar : undefined_avatar
+          // state.user.avatar= action.payload?.data?.avatar ? "${process.env.REACT_APP_SERVER_DOMAINE}/media/"+action.payload?.user?.avatar : undefined_avatar
           // }
           // dont complited
           if(action.payload.data.avatar){
             console.log(8888888);
-            state.user.avatar= "http://localhost:3500/media/"+action.payload.data.avatar
+            state.user.avatar= `${process.env.REACT_APP_SERVER_DOMAINE}/media/${action.payload.data.avatar}`
             return
           }
           if (action.payload.data.emptyAvatar) {

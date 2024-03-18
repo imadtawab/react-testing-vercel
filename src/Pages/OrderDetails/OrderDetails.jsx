@@ -174,7 +174,7 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint , key}) {
                                             <div className="product-name">
                                                 <div className="img">
                                                     {/* ${prod.media.images[0]} */}
-                                                    <img src={`http://localhost:3500/media/${prod.main_image}`} alt="" />
+                                                    <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.main_image}`} alt="" />
                                                 </div>
                                                 <div className="info">
                                                     <h4>{prod?.name}</h4>
@@ -206,7 +206,7 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint , key}) {
                                                 <td>
                                                     <div className="product-name">
                                                         <div className="img">
-                                                            <img src={`http://localhost:3500/media/${v.image}`} alt="" />
+                                                            <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${v.image}`} alt="" />
                                                         </div>
                                                         <div className="info">
                                                             <h4>{prod?.name}</h4>
@@ -243,7 +243,7 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint , key}) {
                                                     <td>
                                                         <div className="product-name">
                                                             <div className="img">
-                                                                <img src={`http://localhost:3500/media/${prod.main_image}`} alt="" />
+                                                                <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.main_image}`} alt="" />
                                                             </div>
                                                             <div className="info">
                                                                 <h4>{prod?.name}</h4>
@@ -277,7 +277,7 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint , key}) {
                                                         <div className="product-name">
                                                             <div className="sub-variants">
                                                                 <div className="sub-image">
-                                                                <img src={`http://localhost:3500/media/${v.image}`} alt="" />
+                                                                <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${v.image}`} alt="" />
                                                                 </div>
                                                             
                                                                 {/* <h4>{prod.name}</h4> */}
@@ -312,7 +312,7 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint , key}) {
                                                         <div className="product-name">
                                                             <div className="sub-variants">
                                                                 <div className="sub-image">
-                                                                <img src={`http://localhost:3500/media/${v.image}`} alt="" />
+                                                                <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${v.image}`} alt="" />
                                                                 </div>
                                                                 <div className="variants">
                                                                 {v.variantName}
@@ -483,7 +483,7 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint , key}) {
 //       <td>
 //         <div className="product-details">
 //           <div className="image">
-//             <img src={`http://localhost:3500/media/${prod.variants[0].image}`} alt="" />
+//             <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.variants[0].image}`} alt="" />
 //           </div>
 //           <div className="info">
 //             <div className="title">{prod.name}</div>
@@ -525,7 +525,7 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint , key}) {
 //       <td>
 //         <div className="product-details">
 //           <div className="image">
-//             <img src={`http://localhost:3500/media/${prod.image}`} alt="" />
+//             <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.image}`} alt="" />
 //           </div>
 //           <div className="info">
 //             <div className="title">{prod.name}</div>
@@ -565,7 +565,7 @@ export function OrderDetailsHandle({order , setFullScreenForAfterPrint , key}) {
 //               <div className="product-details">
 //               <div className="info sub-variants">
 //                     <div className="sub-image">
-//                       <img src={`http://localhost:3500/media/${v.image}`} alt="" />
+//                       <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${v.image}`} alt="" />
 //                     </div>
 //                     <div className="variants">{v.variantName}</div>
 //                   </div>

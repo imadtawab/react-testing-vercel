@@ -229,7 +229,7 @@ export default function Categories() {
                     <td>
                       <div style={{justifyContent: "center"}} className="product-name">
                         <div className="img">
-                          <img src={catg.image ?`http://localhost:3500/media/${catg.image}` : default_product_img} alt="" />
+                          <img loading='lazy' src={catg.image ?`${process.env.REACT_APP_SERVER_DOMAINE}/media/${catg.image}` : default_product_img} alt="" />
                         </div>
                       </div>
                     </td>
@@ -444,7 +444,7 @@ export function AddNewCategories({setAddNewProductSection , oldCategorie,setOldC
                       id="categorySlug"
                       placeholder="Slug"
                       label="Slug"
-                      leftSlug="http://localhost:3000/categories/"
+                      leftSlug={`${process.env.REACT_APP_SERVER_DOMAINE}/categories`}
                       slugWrap={true}
                       required
                       checkValueInDB={{
@@ -479,7 +479,7 @@ export function AddNewCategories({setAddNewProductSection , oldCategorie,setOldC
             <SectionStructure title={"Image & Icon"}>
               <div className="image-and-icon">
                 <div className={"image_show" + (imageShow.src ? " no-border" : "")}>
-                      <img src={(imageShow.post ? imageShow.src : imageShow.src ? `http://localhost:3500/media/${imageShow.src}` : default_product_img)} alt=""/>
+                      <img loading='lazy' src={(imageShow.post ? imageShow.src : imageShow.src ? `${process.env.REACT_APP_SERVER_DOMAINE}/media/${imageShow.src}` : default_product_img)} alt=""/>
                 </div>
                 <div className="controlles">
                     <>

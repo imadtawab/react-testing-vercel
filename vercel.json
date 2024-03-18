@@ -1,0 +1,26 @@
+{
+    "env": {
+        "PORT": "3500",
+        "DB": "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/ecommerce-store?retryWrites=true&w=majority",
+        "PASSWORD_KEY": "1274599365220005554785525668875",
+        "JWT_SECRET": "hhsdkdff4s56f6f5f5451cf4ssjdd4d41",
+        "CLIENT_DOMAINE": "https://react-testing-vercel-six.vercel.app"
+    },
+    "routes": [
+      { "handle": "filesystem" },
+      {
+        "src": "/(.*)",
+        "dest": "https://node-testing-vercel.vercel.app/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "https://react-testing-vercel-six.vercel.app/$1"
+      }
+    ],
+    "build": {
+      "env": {
+        "REACT_APP_API_URL": "https://node-testing-vercel.vercel.app"
+      }
+    }
+  }
+  

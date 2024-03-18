@@ -366,7 +366,7 @@ export default function Products() {
                           <td>
                             <div className="product-name">
                               <div className="img">
-                                <img src={"http://localhost:3500/media/"+prod.media.images[0]} alt="" />
+                                <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.media.images[0]}`} alt="" />
                               </div>
                               <h4>{prod.name}</h4>
                             </div>

@@ -114,7 +114,7 @@ useEffect(() => {
               </defs>
               </svg> */}
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-              {/* <img style={{width: "125px"}} src={logoImg} alt="" /> */}
+              {/* <img loading='lazy' style={{width: "125px"}} src={logoImg} alt="" /> */}
               <h1>Evershop</h1>
             </div>
             <div className="menu-icon">
@@ -168,7 +168,7 @@ useEffect(() => {
               <div className="box">
                   <div className="logo">
                 {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg> */}
-                  <img src="../../../assets/371ea0d5-6da8-45d8-a97b-0742ae669c82.jpg" alt="" />
+                  <img loading='lazy' src="../../../assets/371ea0d5-6da8-45d8-a97b-0742ae669c82.jpg" alt="" />
                   <h1>Evershop</h1>
                 </div>
                   </div>

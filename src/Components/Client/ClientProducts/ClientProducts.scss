@@ -495,7 +495,7 @@ text-transform: uppercase;
                         opacity: 0;
                         transition: all .3s ease;
                         color: #424242;
-                        span {
+                        a , span {
                             width: 50px;
                             height: 45px;
                             display: grid;
@@ -504,36 +504,24 @@ text-transform: uppercase;
                             position: relative;
                             cursor: pointer;
                             transition: all .3s;
-                            &.delete {
-                                font-size: 35px;
-                                padding: 0 !important;
-                            }
-                            .fill {
-                                position: absolute;
-                                display: grid;
-                                place-content: center;
-                                width: 100%;
-                                height: 100%;
-                                font-size: 0;
-                                color: #e74c3c;
-                            }
-                            &.active {
-                                font-size: 0;
-                                .fill {
-                                    animation: wishAnim .3s forwards;
-                                    @keyframes wishAnim {
-                                        0% {
-                                            font-size: 0;
-                                        }
-                                        40% {
-                                            font-size: 28px;
-                                        }
-                                        100% {
-                                            font-size: 18px;
-                                        }
-                                    } 
-                                }
-                            }
+    
+                            // &.active {
+                            //     font-size: 0;
+                            //     .fill {
+                            //         animation: wishAnim .3s forwards;
+                            //         @keyframes wishAnim {
+                            //             0% {
+                            //                 font-size: 0;
+                            //             }
+                            //             40% {
+                            //                 font-size: 28px;
+                            //             }
+                            //             100% {
+                            //                 font-size: 18px;
+                            //             }
+                            //         } 
+                            //     }
+                            // }
                             &:hover {
                                 background: #edecec85;
                                 &::before {
@@ -577,6 +565,37 @@ text-transform: uppercase;
                                 clip-path: polygon(0px 0%, 0px 100%, 100% 50%);
                             }
                         
+                        }
+                        span {
+                            &.delete {
+                                font-size: 35px;
+                                padding: 0 !important;
+                            }
+                        }
+                        a {
+                            
+                            &.fill {
+                                // position: absolute;
+                                // display: grid;
+                                // place-content: center;
+                                // width: 100%;
+                                // height: 100%;
+                                font-size: 0;
+                                // // color: #e74c3c;
+                                // color: #ff5e62;
+                                animation: wishAnim .3s forwards;
+                                @keyframes wishAnim {
+                                    0% {
+                                        font-size: 0;
+                                    }
+                                    40% {
+                                        font-size: 28px;
+                                    }
+                                    100% {
+                                        font-size: 18px;
+                                    }
+                                } 
+                            }
                         }
                     }
                     @media (max-width: 768px) {

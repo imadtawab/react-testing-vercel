@@ -70,7 +70,7 @@ export default function VariantsTable({productForVariants , mainData , setMainDa
                 <div className="catalogue">
                     {productForVariants.media.images.map((img , ind) => (
                         <div className="img">
-                        <img onClick={() => imgSelectedHAndle(img)} key={ind+"catalogue"} src={`http://localhost:3500/media/${img}`} alt="" />
+                        <img loading='lazy' onClick={() => imgSelectedHAndle(img)} key={ind+"catalogue"} src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${img}`} alt="" />
                     </div>
                     ))}
                 </div>
@@ -101,7 +101,7 @@ export default function VariantsTable({productForVariants , mainData , setMainDa
                          <td>
                              <div className="product-name">
                                  <div className="img">
-                                     <img src={`http://localhost:3500/media/${variant.image}`} alt="" />
+                                     <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${variant.image}`} alt="" />
                                  </div>
                                  <h4><BiEdit onClick={() => changeImageHandle(variant.variantId)}/></h4>
                                  
