@@ -15,7 +15,7 @@ export default function CategoriesSection() {
   useEffect(() => {
     dispatch(client_getCategories()).then(docs => {
       if (docs.type === "client_getCategories/fulfilled") {
-        console.log(docs);
+        // console.log(docs);
         if(docs.payload?.data) setCategories(docs.payload?.data)
       }
     })
@@ -54,6 +54,7 @@ export default function CategoriesSection() {
     startX = pageX
     // startScrollLeft = coursel.scrollLeft
     startScrollLeft = +coursel.dataset.scrollx
+    coursel.style.transition = "transform 0s"
     console.log(pageX , "start scroll");
   }
   const mouseDownHandle = (e) => {
@@ -65,6 +66,7 @@ export default function CategoriesSection() {
   }
   function endScrollFunc(pageX) {
     mouseDown = false
+    coursel.style.transition = null
     let widthItem = coursel.querySelector(".categorie").offsetWidth
     let widthAllItems  = widthItem * coursel.children.length
     let widthCoursel = coursel.offsetWidth
@@ -81,8 +83,18 @@ export default function CategoriesSection() {
       coursel.setAttribute("data-scrollx" , newScrollRound)
       coursel.style.transform = `translateX(${-newScrollRound}px)`
     } 
-    console.log(pageX , "end Scroll");
-   
+    // handle overflow scroll
+    if(newScroll < 0) {
+      coursel.setAttribute("data-scrollx" , 0)
+      coursel.style.transform = `translateX(${0}px)`
+      return
+    }
+    if (newScroll + widthCoursel > widthAllItems) {
+      coursel.setAttribute("data-scrollx" , widthAllItems - widthCoursel)
+      coursel.style.transform = `translateX(${-(widthAllItems - widthCoursel)}px)`
+      return
+    }
+    
   }
   const mouseUpHandle = (e) => {
     coursel.style.cursor = "default"
@@ -101,13 +113,30 @@ export default function CategoriesSection() {
       let widthAllItems  = widthItem * coursel.children.length
       let widthCoursel = coursel.offsetWidth
       let newScroll = (startScrollLeft - (pageX - startX))
-      if(widthAllItems <= widthCoursel) return
+      // console.log(newScroll , "widthAllItems");
+      // if(widthAllItems <= widthCoursel) return
       // console.log(e.pageX , "move")
       // coursel.scrollLeft = startScrollLeft - (e.pageX - startX)
-      if(-newScroll <= 0 && newScroll + widthCoursel <= widthAllItems){
+      // if(-newScroll <= 0 && newScroll + widthCoursel <= widthAllItems){
+            // handle overflow scroll
+    if(newScroll < 0) {
+      coursel.setAttribute("data-scrollx" , newScroll * .25)
+      coursel.style.transform = `translateX(${-(newScroll * .25)}px)`
+      // coursel.style.transition = null
+      return
+    }
+    if (newScroll + widthCoursel > widthAllItems) {
+      // coursel.setAttribute("data-scrollx" , widthAllItems - widthCoursel)
+      // coursel.style.transform = `translateX(${-(widthAllItems - widthCoursel)}px)`
+      coursel.setAttribute("data-scrollx" , (newScroll + widthCoursel) * .25)
+      coursel.style.transform = `translateX(${-(newScroll + widthCoursel) * .25}px)`
+      // coursel.style.transition = null
+      return
+    }
         coursel.setAttribute("data-scrollx" , newScroll)
         coursel.style.transform = `translateX(${-newScroll}px)`
-      } 
+        // coursel.style.transition = "transform 0"
+      // } 
     coursel.style.cursor = "grabbing"
     }
   }
@@ -117,8 +146,9 @@ export default function CategoriesSection() {
   const touchMoveHandle = (e) => {
     moveScrollFunc(e.touches[0].pageX)
   }
-  const blurHandle = () => {
-    mouseDown = false
+  const blurHandle = (e) => {
+  //   mouseDown = false
+  mouseDown && mouseUpHandle(e)
   }
   const scrollToLeftBtnHandle = () => {
     startScrollLeft = +coursel.dataset.scrollx
@@ -172,7 +202,7 @@ export default function CategoriesSection() {
                 <div className="coursel-hidden">
                   <div data-scrollx="0" onMouseLeave={blurHandle} onMouseMove={mouseMoveHandle} onTouchMove={touchMoveHandle} onMouseDown={mouseDownHandle} onTouchStart={touchStartHandle} onMouseUp={mouseUpHandle} onTouchEnd={touchEndHandle} id='coursel' className="coursel">
                     {categories.map(catg => (
-                        <NavLink draggable="false" to={`/collection/${catg.slug}`} key={catg._id} className="categorie">
+                        <NavLink onClick={e => e.preventDefault()} draggable="false" to={`/collection/${catg.slug}`} key={catg._id} className="categorie">
                         <div className="categorie-image">
                           {catg.image ? (
                             <>
