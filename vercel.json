@@ -8,10 +8,9 @@
     },
     "routes": [
       { "handle": "filesystem" },
-
       {
         "src": "/(.*)",
-        "dest": "https://react-testing-vercel-five.vercel.app/$1"
+        "dest": "https://node-testing-vercel.vercel.app/$1"
       }
     ],
     "build": {
