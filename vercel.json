@@ -7,7 +7,7 @@
         "CLIENT_DOMAINE": "https://react-testing-vercel-five.vercel.app"
     },
     "routes": [
-      { "handle": "filesystem" },
+      { "handle": "filesystem" }
     ],
     "build": {
       "env": {
