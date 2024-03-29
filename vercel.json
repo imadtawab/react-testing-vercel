@@ -8,10 +8,6 @@
     },
     "routes": [
       { "handle": "filesystem" },
-      {
-        "src": "/(.*)",
-        "dest": "https://node-testing-vercel.vercel.app/$1"
-      }
     ],
     "build": {
       "env": {
