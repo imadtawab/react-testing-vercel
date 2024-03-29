@@ -12,10 +12,6 @@
         "src": "^/(.*)",
         "dest": "https://node-testing-vercel.vercel.app/$1"
       },
-      {
-        "src": "^/(.*)",
-        "dest": "https://react-testing-vercel-five.vercel.app/$1"
-      }
     ],
     "build": {
       "env": {
