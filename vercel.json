@@ -10,7 +10,7 @@
       { "handle": "filesystem" },
 
       {
-        "src": "^/(.*)",
+        "src": "/(.*)",
         "dest": "https://react-testing-vercel-five.vercel.app/$1"
       }
     ],
