@@ -1,0 +1,41 @@
+.SettingStructure {
+    // padding: 10px 10px 0;
+    padding-top: 10px;
+    .setting-structure-navbar {
+        // margin-bottom: 15px;
+        ul{
+            display: flex;
+            justify-content: start;
+            border-bottom: 1px solid #ddd;
+            overflow: auto;
+            &::-webkit-scrollbar{
+                height: 0;
+            }
+            li{
+                color: #6b7280;
+                transition: all .3s;
+                border-bottom: 2px solid transparent;
+                a{
+                    color: inherit;
+                    font-weight: 500;
+                    font-size: 15px;
+                    padding: 15px 20px;
+                    display: block;
+                }
+                &:has(a.active){
+                    border-color: var(--main-color);
+                    color: var(--main-color);
+                }
+            }
+        }
+    }
+    .setting-structure-content {
+        padding: 0 20px;
+        .SectionStructure {
+            border: none;
+            background: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+    }
+}

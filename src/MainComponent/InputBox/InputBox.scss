@@ -1,0 +1,167 @@
+.InputBox,.TextAreaBox,.SelectBox{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    // padding-bottom: 15px;
+    // padding-top: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 100%;
+    flex: 1;
+    min-width: 150px;
+    .input-slug{
+        --slug-bg: #e3e8ef;
+        display: flex;
+        align-items: center;
+        // gap: 10px;
+        // border: 1px solid #e3e8ef;
+        border-radius: 8px;
+        padding: 5px 10px;
+        flex-wrap: nowrap;
+        input{
+            flex: 1;
+            width: 0;
+        }
+        &.border-none{
+            padding-top: 0;
+            padding-bottom: 0;
+            // background: #f8f8f8;
+            overflow: hidden;
+            padding: 0;
+            &:has(input:focus){
+                    box-shadow: 0px 0px 0px 3px rgba(69, 143, 255, 0.7294117647);
+                    border-color: rgba(69, 143, 255);
+            }
+            > label{
+                min-width: 50px;
+                text-align: center;
+                color: var(--slug-cl);
+                height: 100%;
+                display: grid;
+                place-content: space-evenly;
+                background-color: var(--slug-bg);
+            }
+            &:has(.left-slug) {
+                input {
+                    border-left: none;
+                    border-radius: 0 8px 8px 0;
+                }
+            }
+            &:has(.right-slug) {
+                input {
+                    border-right: none;
+                    border-radius: 8px 0 0 8px;
+                }
+            }
+            input{
+                border: 1px solid #e3e8ef;
+                &:focus{
+                    // box-shadow: 0px 0px 0px 3px #458fffba;
+                    box-shadow: none;
+                    border-color: none;
+                }
+            }
+        }
+        &.slug-wrap{
+            flex-wrap: wrap;
+        }
+    }
+    .sub-label{
+        display: flex;
+        justify-content: space-between;
+    }
+    label{
+        // color: #222;
+        // color: #6b7280;
+        color: #1a1a1a;
+        // font-weight: bold;
+        font-size: 14px;
+        // &:after{
+        //     content:" :"
+        // }
+        display: flex;
+        .required{
+            display: inline-block;
+            color: red;
+            font-size: 18px;
+            height: 0;
+        }
+    }
+    &.error{
+        input,textarea,select{
+            box-shadow: 0px 0px 0px 3px #ff3935a3 !important;
+            border-color: #ef53508a;
+        } 
+    }
+    &.mx_width{
+        max-width: 500px;
+    margin: auto;
+    }
+    &.pd-none{
+        padding: 0 !important;
+    }
+    input,textarea,select{
+        // outline: none;
+        // border: 1px solid #c9cccf;
+        // padding: 10px;
+        // color: #222;
+        // border-radius: 5px;
+        // font-size: 15px;
+        outline: none;
+    font-size: 15px;
+    border: 1px solid #e3e8ef;
+    border-radius: 8px;
+    padding: 10px 15px;
+    text-transform: inherit;
+        // text-transform: capitalize;
+        &::placeholder{
+            color: #717171c7;
+    // font-weight: bold;
+    // font-size: 13px ;
+        }
+        &:focus{
+            // box-shadow: 0px 0px 0px 3px #458fffba;
+            box-shadow: 0px 0px 0px 3px rgba(69, 143, 255, 0.7294117647);
+            border-color: rgba(69, 143, 255);
+        }
+    }
+    .error-span{
+        color: #EF5350;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        position: relative;
+        top: -5px;
+    }
+    .checking-message{
+        > div {
+            font-size: 13px;
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+            &.success{
+                color: #3fb950;
+            }
+            &.error{
+                color: #f85149;
+            }
+            &.loading{
+                color: #7d8590;
+            }
+        }
+    }
+    input{
+        
+    }
+    textarea{
+      resize: none;
+      height: 150px;
+    }
+    select{
+        option{
+            padding: 1px;
+        }
+    }
+  }

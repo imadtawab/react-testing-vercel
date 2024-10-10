@@ -1,0 +1,54 @@
+.OrderTrackingDetails{
+        padding-bottom: 10px;
+        background-color: #fcfcfc;
+        &.full-screen {
+            overflow: auto;
+            padding-bottom: 80px !important;
+            .tracking-controllers{
+                width: 100% !important;
+            }
+        }
+    .order-details-section{
+        .empty-order{
+            height: calc(100vh - 155px);
+        }
+    }
+    .tracking-controllers{
+        border-top: 1px solid #e5e5e5;
+        box-shadow: 0 -5px 20px #0000000d;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 40px;
+        position: fixed;
+        width: 100%;
+        right: 0;
+        bottom: 0;
+        transition: width .3s;
+        @media (min-width: 650px) {
+            width: calc(100% - 70px);
+        }
+        .full-screen-btn {
+            font-size: 18px;
+            transition: transform .3s;
+            &:hover{
+                transform: scale(1.2);
+            }
+        }
+        button {
+            svg {
+                font-size: 25px;
+            }
+        }
+    }
+}
+.main-container.sideBarShow{
+    .OrderTrackingDetails{
+        .tracking-controllers{
+            @media (min-width: 650px) {
+                width: calc(100% - 250px);
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+.Logo{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1vw;
+    flex-direction: column;
+    svg{
+        width: 12vw;
+        height: auto;
+    }
+    h1{
+        font-weight: bold;
+        font-size: 3vw;
+        text-transform: uppercase;
+        color: #0c767d;
+    }
+    p{
+        text-align: center;
+        padding: 6px 3vw;
+        font-size: 1.5vw;
+        color: #616161;
+        span{
+            display: block;
+        }
+    }
+}

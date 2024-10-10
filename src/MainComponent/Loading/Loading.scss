@@ -1,0 +1,24 @@
+.Loading {
+    padding: 90px 20px;
+    height: 100%;
+    display: grid;
+    place-content: center;
+    .circle{
+        border: 4px solid #bbb;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    animation: loading .6s linear infinite;
+    @keyframes loading {
+        0% {
+            transform: rotate(0);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    }
+}

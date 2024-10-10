@@ -1,0 +1,16 @@
+.AccountAdminLayout{
+    display: flex;
+    height: 100vh;
+    background: var(--bg);
+    > article {
+        flex: 1;
+    }
+    .left-account {
+        display: grid;
+        place-content: center;
+    }
+    .right-account {
+        background: #fff;
+        overflow-x: hidden;
+    }
+}

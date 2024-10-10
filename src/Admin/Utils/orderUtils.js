@@ -1,0 +1,1 @@
+export const statusArray = ["pending" , "confirmed" , "shipped" , "delivered" , "cancelled" , "on_hold" , "delayed" , "returned"]

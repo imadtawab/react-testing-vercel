@@ -1,0 +1,70 @@
+.Switcher {
+    display: grid;
+    .switcher-btn{
+        // background: #ef4444;
+        width: 46px;
+        height: 24px;
+        border-radius: 20px;
+        position: relative;
+        cursor: pointer;
+        margin: auto;
+        background: #ef4444;
+        display: inline-block;
+
+        &:hover{
+            opacity: .8;
+        }
+        &.active{
+            background: #10b981;
+            &::before{
+                // left: 24px;
+                animation: switcherIn .3s ease-in-out forwards;
+                @keyframes switcherIn {
+                    50% {
+                        width: calc(100% - 4px);
+                        border-radius: 20px;
+                    }
+                    100% {
+                        left: initial;
+                        right: 2px;
+                    }
+                }
+            }
+        }
+        &::before{
+            content: "";
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            background: #fff;
+            //   transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: switcherOut .3s ease-in-out forwards;
+            @keyframes switcherOut {
+                0% {
+                    left: initial;
+                    right: 2px;
+                }
+                50% {
+                    width: calc(100% - 4px);
+                    border-radius: 20px;
+                }
+            }
+            &.loading{
+              background: none;
+              border-left-color: transparent;
+              animation: loadingCheck .4s infinite linear;
+              @keyframes loadingCheck {
+                  0%{
+                      transform: rotate(0deg);
+                  }
+                  100%{
+                      transform:rotate(360deg);
+                  }
+              }
+            }
+        }
+    }
+}

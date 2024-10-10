@@ -1,0 +1,45 @@
+.Input{
+    position: relative;
+    margin-bottom: 25px;
+    --main: var(--main-color);
+    &.error{
+        --main: var(--danger-color);
+        input{
+            background-color: #fff;
+        }
+    }
+    label{
+        color: var(--main);
+        font-weight: 600;
+        background: #fff;
+        position: absolute;
+        left: 15px;
+        top: 0;
+        transform: translateY(-62%);
+        padding: 0px 4px;
+        border-radius: 8px;
+    }
+    input{
+        border: 1px solid var(--main);
+        border-radius: 8px;
+        background: var(--main-bg);
+        padding: 11px;
+        width: 100%;
+        font-size: 16px;
+    }
+    .required{
+        color: var(--danger-color)
+    }
+    .error{
+        color: var(--danger-color);
+        font-size: 11px;
+        display: block;
+    }
+    .link {
+        color: var(--blue-color);
+        font-weight: 500;
+        margin-top: 5px;
+        display: inline-block;
+        text-decoration: underline;
+    }
+}

@@ -1,0 +1,11 @@
+.PageNotFound{
+    display: grid;
+    place-content: center;
+    height: -webkit-fill-available;
+    padding: var(--pd);
+    img{
+        max-width: 430px;
+        width: 45vw;
+        min-width: 300px;
+    }
+}

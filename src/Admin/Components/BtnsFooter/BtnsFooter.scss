@@ -1,0 +1,16 @@
+.BtnsFooter{
+    border-top: 1px solid #e5e5e5;
+    padding-top: var(--pd);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    // padding-bottom: var(--pd);
+    margin: var(--pd) 0;
+    .box{
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}
