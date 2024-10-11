@@ -4,6 +4,10 @@
     justify-content: start;
     gap: 1vw;
     flex-direction: column;
+    @media (max-width:700px) {
+        flex-direction: row;
+        gap: 15px;
+    }
     svg{
         width: 12vw;
         height: auto;
@@ -13,12 +17,18 @@
         font-size: 3vw;
         text-transform: uppercase;
         color: #0c767d;
+        @media (max-width:700px) {
+            font-size: 25px;
+        }
     }
     p{
         text-align: center;
         padding: 6px 3vw;
         font-size: 1.5vw;
         color: #616161;
+        @media (max-width:700px) {
+            display: none;
+        }
         span{
             display: block;
         }
