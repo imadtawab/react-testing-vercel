@@ -2,15 +2,30 @@
     display: flex;
     height: 100vh;
     background: var(--bg);
+    @media (max-width:700px) {
+        flex-direction: column;
+        background: #fff;
+    }
     > article {
         flex: 1;
+        @media (max-width:700px) {
+            flex: none;
+        }
     }
     .left-account {
         display: grid;
         place-content: center;
+        @media (max-width:700px) {
+    justify-content: flex-start;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+        }
     }
     .right-account {
         background: #fff;
         overflow-x: hidden;
+        @media (max-width:700px) {
+            overflow: initial;
+        }
     }
 }
